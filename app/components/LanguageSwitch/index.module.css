@@ -1,0 +1,18 @@
+.language {
+  padding-left: .5rem;
+  padding-right: .5rem;  
+  font-weight: var(--font-weight-normal);
+}
+.language,
+.language:active,
+.language:visited {
+  font: inherit;
+  text-decoration: none;
+  color: inherit;
+}
+.language.active {
+  text-decoration: underline;
+}
+.language:not(:last-child) {
+  border-right: 1.5px solid;
+}

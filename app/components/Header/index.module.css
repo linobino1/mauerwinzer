@@ -1,0 +1,131 @@
+.header {
+  background-color: var(--color-white);
+  width: 100%;
+  color: var(--color-font-light);
+  text-transform: uppercase;
+}
+/** MAIN HEADER  ********************************************/
+.mainHeader {
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  width: 100%;
+  padding: 0 10%;
+  font-size: var(--font-size-small);
+}
+.mainHeader > * {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-self: flex-end;
+  width: fit-content;
+  padding: .5rem;
+  border-right: 1px solid var(--color-light-grey);
+  grid-row: 1;
+}
+.mainHeader > *:first-child {
+  justify-self: start;
+  padding-left: 0;
+}
+.mainHeader > *:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+.mainLogo {
+  width: 8rem;
+  height: auto;
+}
+.navMain {
+  justify-self: flex-end;
+}
+@media (max-width: 768px) {
+  .mainHeader {
+    font-size: var(--font-size-normal);
+  }
+  .mainHeader {
+    padding: 0 1rem;;
+  }
+  .mainHeader > * {
+    border-right: 0;
+  }
+  .mainHeader > *:last-child {
+    padding-left: 0;
+    grid-column: 2;
+  }
+  .mainHeader > *:last-child > * {
+    padding-left: 0;
+  }
+}
+
+/** MOBILE MENU    ******************************************/
+.menuOpen,
+.menuClose {
+  cursor: pointer;
+}
+.menuOpen {
+  display: none !important;
+  appearance: none;
+  border: 0;
+  font-size: 4rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-theme);
+  background: transparent;
+  padding: 0.5rem 1rem;
+  padding-right: 0 !important;
+}
+.menuOpen::before {
+  content: "\2261";
+}
+.menuClose {
+  display: none !important;
+  appearance: none;
+  appearance: none;
+  border: 0;
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  background: transparent;
+  padding: 0.5rem 1rem;
+  color: var(--color-theme);
+}
+.menuClose::before {
+  content: "\2715";
+}
+.navMain {
+  display: flex;
+  flex-direction: row;
+}
+@media (max-width: 768px) {
+  .menuOpen,
+  .menuClose {
+    display: block !important;
+  }
+  .navMainContainer {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    max-width: 100vw;
+    font-size: var(--font-size-xxx-big);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+    letter-spacing: var(--letter-spacing-big);
+    background-color: var(--color-white);
+    display: flex;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    padding: 2rem 1rem !important;
+    row-gap: 1em !important;
+    transition: transform 0.2s ease-in-out;
+    transform: translateX(100%);
+  }
+  .navMainContainer.visible {
+    transform: translateX(0);
+  }
+  .navMain {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    border: 0 !important;
+    row-gap: 1em;
+  }
+}

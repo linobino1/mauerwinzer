@@ -1,0 +1,19 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-theme);
+  min-height: 100vh;
+  width: 100%;
+}
+main {
+  width: min(80vw, var(--page-max-width));
+  margin: 0 auto;
+  color: var(--color-white);
+  padding: 3rem 1rem 3rem 1rem;
+}
+@media (max-width: 700px) {
+  main {
+    width: 100%;
+  }
+}

@@ -1,0 +1,92 @@
+.load-module {
+  /* this is just a dummy class to add to the body in order that cssBundler
+   * loads this module.
+   * The rule defined below is to satisfay CSS linter "no empty ruleset"
+   */
+  font: inherit;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --page-max-width: 1000px;
+
+  --color-theme: #283587;
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-theme-contrast: #F6CD03;
+  --color-theme-contrast-strong: #F1FF00;
+  --color-theme-contrast-light: #FF9EE6;
+  --color-theme-contrast-light-2: #62B9A6;
+  --color-theme-contrast-dark: #D63312;
+  --color-light-grey: #dcdcdc;
+  --color-light-grey-readable: #C1C1C1;
+
+  --color-font-light: rgb(132, 132, 132);
+
+  --font-size-xxx-big: 2.5rem;
+  --font-size-xx-big: 1.9rem;
+  --font-size-x-big: 1.7rem;
+  --font-size-big: 1.25rem;
+  --font-size-normal: 1rem;
+  --font-size-small: .9rem;
+  --font-size-x-small: .8rem;
+
+  --font-weight-bold: 600;
+  --font-weight-semi-bold: 500;
+  --font-weight-normal: 400;
+  --font-weight-light: 200;
+
+  --line-height-xxx-big: 2em;
+  --line-height-big: 1.5em;
+  --line-height-normal: 1.4em;
+
+  --letter-spacing-big: .1em;
+  --letter-spacing-x-big: .11em;
+}
+@media (max-width: 768px) {
+  :root {
+    --font-size-xxx-big: 1.9rem;
+    --font-size-big: 1.25rem;
+    --font-size-normal: 1rem;
+    --font-size-small: .9rem;
+    --font-size-x-small: .8rem;
+  }
+}
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+html {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-transform: capitalize;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--color-white);
+  outline: 0;
+  margin-block: 3em;
+}
+.link-theme,
+.link-theme a {
+  text-decoration: none;
+  color: inherit;
+}
