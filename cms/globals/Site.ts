@@ -17,8 +17,8 @@ export const Site: GlobalConfig = {
       required: true,
     },
     {
-      name: 'address',
-      label: t('Address'),
+      name: 'footerContent',
+      label: t('Footer Content'),
       type: 'richText',
     },
     {
