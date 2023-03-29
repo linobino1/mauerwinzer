@@ -41,7 +41,7 @@ export default function Layout({
 
   return (
     <>
-      <div className={classes.page}>
+      <div className={classes.aboveFooter}>
         <Header
           site={site}
           navigations={navigations}

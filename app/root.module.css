@@ -6,12 +6,12 @@
   font: inherit;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
-
 :root {
-  --page-max-width: 1000px;
+  --page-margin: 3vw;
 
   --color-theme: #283587;
+  --color-bg: #FFFFFF;
+  --color-bg-dark: #414040;
   --color-white: #FFFFFF;
   --color-black: #000000;
   --color-theme-contrast: #F6CD03;
@@ -22,20 +22,25 @@
   --color-light-grey: #dcdcdc;
   --color-light-grey-readable: #C1C1C1;
 
-  --color-font-light: rgb(132, 132, 132);
+  --color-font: #000000;
+  --color-font-light: #9A9391;
+  --color-font-bright: #FFFFFF;
+  --color-font-bright-2: #ECE9E6;
 
   --font-size-xxx-big: 2.5rem;
   --font-size-xx-big: 1.9rem;
   --font-size-x-big: 1.7rem;
-  --font-size-big: 1.25rem;
+  --font-size-big: 1.3rem;
   --font-size-normal: 1rem;
   --font-size-small: .9rem;
-  --font-size-x-small: .8rem;
+  --font-size-x-small: .8remj;
 
+  --font-family-sans-serif: 'Quicksand', sans-serif;
+  --font-family-serif: 'PT Serif', serif;
   --font-weight-bold: 600;
   --font-weight-semi-bold: 500;
   --font-weight-normal: 400;
-  --font-weight-light: 200;
+  --font-weight-light: 400;
 
   --line-height-xxx-big: 2em;
   --line-height-big: 1.5em;
@@ -58,7 +63,7 @@
   -webkit-font-smoothing: antialiased;
 }
 html {
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-family-sans-serif);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);
 }
@@ -67,6 +72,10 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+}
+body {
+  background-color: var(--color-bg);
+  color: var(--color-font);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -89,4 +98,8 @@ hr {
 .link-theme a {
   text-decoration: none;
   color: inherit;
+}
+/* improve readablity */
+p {
+  max-width: min(70vw, 1100px);
 }

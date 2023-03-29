@@ -1,0 +1,24 @@
+button.button {
+    appearance: none;
+    border: 0;
+    outline: 1px solid;
+    width: fit-content;
+    background: none;
+    color: var(--color-font-light);
+    font: inherit;
+    font-family: var(--font-family-sans-serif);
+    font-weight: var(--font-weight-light);
+    cursor: pointer;
+}
+button.button:hover {
+    background-color: var(--color-font-light);
+    color: var(--color-bg);
+}
+button.button[data-layout="big"] {
+    padding: 1em;
+}
+
+/** COLOR THEME    ******************************************/
+button.button[data-color="white"] {
+    color: var(--color-font-bright-2);
+}

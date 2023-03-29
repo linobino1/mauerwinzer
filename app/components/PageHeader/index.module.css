@@ -5,12 +5,14 @@
 /** IMAGE HEADER   ******************************************/
 .imageHeader {
   width: 100vw;
-  height: 48vh;
+  height: 75vh;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  padding-left: var(--page-margin);
+  padding-right: var(--page-margin);
 }
 img.headerImage {
   width: 100%;
@@ -18,67 +20,4 @@ img.headerImage {
   object-fit: cover;
   object-position: center;
   min-height: 2rem;
-}
-/** IMAGE HEADER OVERLAY  ***********************************/
-.imageHeaderOverlay {
-  position: absolute;
-  top: 2rem;
-  width: 100%;
-  padding: 0 10%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.navSocial {
-  justify-self: flex-end;
-}
-.backButton {
-  appearance: none;
-  border: none;
-  background: none;
-  color: var(--color-white);
-  font-family: sans-serif;
-  font-size: 2rem;
-}
-.backButton:hover {
-  cursor: pointer;
-  filter: brightness(0.5);
-  transition: filter 0.4s;
-}
-.backButton::before {
-  content: '\003C';
-}
-
-/* prettify hover */
-.imageHeader button:hover,
-.imageHeader a:hover {
-  cursor: pointer;
-  filter: brightness(0.5);
-  transition: filter 0.4s;
-}
-
-@media (max-width: 1024px) {
-  .imageHeader {
-    height: 320px;
-  }
-}
-@media (max-width: 768px) {
-  .imageHeader {
-    height: 275px;
-  }
-}
-/** TITLE HEADER   ******************************************/
-.titleHeader {
-  width: 100%;
-  color: var(--color-black);
-  background: var(--color-white);
-  text-align: center;
-  margin: 0;
-  font-size: var(--font-size-xxx-big);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-normal);
-  letter-spacing: var(--letter-spacing-big);
-  text-transform: uppercase;
-  padding: 1rem;
 }

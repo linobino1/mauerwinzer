@@ -3,6 +3,7 @@ import { Navigation } from '../Navigation';
 import RichText from '../RichText';
 import type { Navigation as NavigationType, Site } from 'payload/generated-types';
 import classes from './index.module.css';
+import Button from '../Button';
 
 export type Props = {
   site: Site
@@ -14,16 +15,22 @@ export const Footer: React.FC<Props> = ({
 }) => {
   return (
     <footer className={classes.footer}>
-      <RichText content={site.address} className={classes.address} />
       <Navigation
         navigation={navigations.find((x) => x.type === 'footer')}
         className={classes.navFooter}
       />
+      <div className={classes.copyright}>© 2023 Mauerwinzer GbR</div>
       <Navigation
         navigation={navigations.find((x) => x.type === 'socialMedia')}
         className={classes.navSocial}
       />
-      <div className={classes.newsletter}>newsletter</div>
+      <RichText content={site.footerContent} className={classes.footerContent} />
+      <Button
+        className={classes.newsletterButton}
+        label="Newsletter abonnieren"
+        layout="big"
+        color="white"
+      />
     </footer>
   )
 };

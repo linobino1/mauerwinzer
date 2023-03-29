@@ -4,11 +4,11 @@ import type {
   Media,
 } from "payload/generated-types";
 import { Navigation } from '../Navigation';
-import { UserStatus } from '../UserStatus';
 import { Link } from '@remix-run/react';
 import { Image } from '~/components/Image';
 import type { Site, Navigation as NavigationType } from 'payload/generated-types';
 import classes from './index.module.css';
+import Button from '../Button';
 
 type Props = {
   site: Site
@@ -29,23 +29,8 @@ const Header: React.FC<Props> = ({
   };
 
   return (
-    <header className={classes.header}>
+    <header>
       <div className={classes.mainHeader}>
-        <Link to="/">
-          {site.logo as Media && (
-            <Image
-              className={classes.mainLogo}
-              image={site.logo as Media}
-              width={200}
-              height={50}
-            />
-          )}
-        </Link>
-        <button
-          onClick={menuOpen}
-          type="button"
-          className={classes.menuOpen}
-        />
         <div className={`${classes.navMainContainer} ${menuVisible && classes.visible}`}>
           <button
             onClick={menuClose}
@@ -57,7 +42,24 @@ const Header: React.FC<Props> = ({
             className={classes.navMain}
           />
         </div>
-        <UserStatus />
+        <Link to="/">
+          {site.logo as Media && (
+            <Image
+              image={site.logo as Media}
+              width={350}
+              height={125}
+            />
+          )}
+        </Link>
+        <button
+          onClick={menuOpen}
+          type="button"
+          className={classes.menuOpen}
+        />
+        <Button
+          layout='big'
+          label='Tisch reservieren'
+        />
       </div>
       {content}
     </header>

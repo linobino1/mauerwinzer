@@ -3,20 +3,20 @@ import Image from "../Image";
 import classes from "./index.module.css";
 import type { Media } from "payload/generated-types";
 
-export default function PageHeader() {
+export default function PageFooter() {
   const data = useMatches();
   const page = data.find((x) => x.id === 'routes/__main/$page/index')?.data.page;
 
   return (
-    <header className={classes.pageHeader}>
-      { page?.image as Media && (
-        <div className={classes.imageHeader}>
+    <div className={classes.pageFooter}>
+      { page?.footerImage as Media && (
+        <div className={classes.imageFooter}>
           <Image
-            className={classes.headerImage}
-            image={page.image as Media}
+            className={classes.footerImage}
+            image={page.footerImage as Media}
           />
         </div>
       )}
-    </header>
+    </div>
   )
 }

@@ -6,6 +6,7 @@ import { useLoaderData } from '@remix-run/react';
 import PageHeader from '~/components/PageHeader';
 import classes from './index.module.css';
 import i18next from "~/i18next.server";
+import PageFooter from '~/components/PageFooter';
 
 export const loader = async ({ request, params, context: { payload }}: LoaderArgs) => {
   const locale = await i18next.getLocale(request);
@@ -33,14 +34,15 @@ export const PageComponent: React.FC = () => {
   const { page } = useLoaderData<typeof loader>();
 
   return (
-    <div className={classes.page}>
+    <>
       <PageHeader />
       <main>
         <Blocks
           layout={page?.layout}
         />
       </main>
-    </div>
+      <PageFooter />
+    </>
   );
 };
 

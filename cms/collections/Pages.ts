@@ -36,6 +36,12 @@ const Pages: CollectionConfig = {
       relationTo: 'media',
     },
     {
+      name: 'footerImage',
+      label: t('Header Image Bottom'),
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
       name: 'layout',
       label: t('Content'),
       type: 'blocks',

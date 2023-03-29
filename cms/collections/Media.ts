@@ -29,6 +29,16 @@ export const Media: CollectionConfig = {
         width: 1024,
         height: 576,
       },
+      {
+        name: 'header_1024w',
+        width: 1024,
+        height: 576,
+      },
+      {
+        name: 'header_2560w',
+        width: 2560,
+        height: 1280,
+      },
     ],
   },
   fields: [

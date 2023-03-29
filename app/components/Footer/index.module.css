@@ -1,11 +1,17 @@
 .footer {
   width: 100%;
-  background-color: var(--color-black);
-  color: var(--color-white);
-  padding: 2% 10%;
+  background-color: var(--color-bg-dark);
+  color: var(--color-font-bright);
+  padding: var(--page-margin);
   display: grid;
   grid-template-columns: 25% 50% 25%;
   row-gap: 1rem;
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-big);
+  line-height: 1.3em;
+}
+.footer > * {
+  align-self: flex-start;
 }
 .navFooter,
 .navSocial {
@@ -21,35 +27,34 @@
   transition: filter 0.4s;
 }
 /** Grid Layout ************************************************************************/
-.address {
-  grid-column: 1;
+.footerContent {
+  grid-column: 2;
   grid-row: 1 / span 2;
+  text-align: center;
 }
-.address * {
+.footerContent * {
   margin-top: 0;
   margin-bottom: 0;
   line-height: inherit;
 }
 
-.navFooter,
-.navSocial {
-  justify-self: center;
-}
-.navSocial {
-  grid-column: 2;
+.copyright {
+  grid-column: 1;
   grid-row: 1;
-  align-self: flex-start;
 }
 .navFooter {
   grid-column: 2;
   grid-row: 2;
-  align-self: flex-end;
 }
 
-.newsletter {
+.navSocial {
   grid-column: 3;
   grid-row: 1;
-  display: flex;
+  justify-self: flex-end;
+}
+.newsletterButton {
+  grid-column: 3;
+  grid-row: 2;
   justify-self: flex-end;
 }
 
@@ -63,7 +68,7 @@
     grid-column: 1 !important;
     justify-self: center;
   }
-  .newsletter {
+  .newsletterButton {
     grid-row: 1;
   }
   .navSocial {
