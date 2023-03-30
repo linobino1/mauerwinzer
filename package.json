@@ -4,7 +4,7 @@
   "scripts": {
     "build": "remix build && run-s \"build:*\"",
     "build:copyfiles": "copyfiles -u 1 \"cms/**/*.{html,css,scss,ttf,woff,woff2,eot,svg,jpg,png}\" dist/",
-    "build:payload": "cross-env payload build",
+    "build:payload": "run-s \"generate:types\" && cross-env payload build",
     "build:remix": "remix build",
     "build:server": "tsc -p tsconfig.server.json",
     "dev": "remix build && run-p \"dev:*\"",
