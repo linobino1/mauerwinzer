@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
   app:
-    container_name: app
+    depends_on:
+      - db
   
   db:
-    container_name: db
     image: mongo:latest
     ports:
       - 27017:27017
