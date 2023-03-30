@@ -7,11 +7,8 @@ services:
       dockerfile: Dockerfile
     expose:
       - 3000
-    working_dir: /app
-    command: sh -c "yarn && yarn dev"
     volumes:
-      - ./:/app
-      - /app/node_modules
+      - ./media:/media
     environment:
       PAYLOAD_SECRET:
       PAYLOAD_PUBLIC_SERVER_URL: http://${DOMAIN}
