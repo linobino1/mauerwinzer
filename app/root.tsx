@@ -31,7 +31,7 @@ export const links: LinksFunction = () => {
       : []),
     {
       rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=PT+Serif&family=Quicksand:wght@100;300;400;500&display=swap',
+      href: 'https://fonts.googleapis.com/css2?family=Mulish:wght@100;300;400;500&display=swap',
     },
   ];
 };

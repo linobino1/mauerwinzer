@@ -24,7 +24,6 @@
   padding: .5rem 1rem;
   position: relative;
   overflow-wrap: anywhere;
-  text-align: end;
 }
 .navItem:hover {
   color: var(--color-theme-contrast);

@@ -1,13 +1,12 @@
 .footer {
   width: 100%;
   background-color: var(--color-bg-dark);
-  color: var(--color-font-bright);
-  padding: var(--page-margin);
+  color: var(--color-font-bright-2);
+  padding: max(5em, 3vw) var(--page-margin);
   display: grid;
   grid-template-columns: 25% 50% 25%;
   row-gap: 1rem;
   font-weight: var(--font-weight-light);
-  font-size: var(--font-size-big);
   line-height: 1.3em;
 }
 .footer > * {
@@ -23,8 +22,12 @@
 }
 .footer a:hover {
   cursor: pointer;
-  filter: brightness(0.5);
+  filter: brightness(0.7);
   transition: filter 0.4s;
+}
+a[href^="mailto:"],
+a[href^="tel:"] {
+  text-decoration: underline;
 }
 /** Grid Layout ************************************************************************/
 .footerContent {
@@ -41,10 +44,17 @@
 .copyright {
   grid-column: 1;
   grid-row: 1;
+  color: var(--color-font-bright-3);
 }
 .navFooter {
-  grid-column: 2;
+  grid-column: 1;
   grid-row: 2;
+  justify-self: flex-start;
+  align-self: flex-end;
+  flex-direction: column;
+}
+.navFooter a {
+  padding-left: 0;
 }
 
 .navSocial {
@@ -56,6 +66,7 @@
   grid-column: 3;
   grid-row: 2;
   justify-self: flex-end;
+  align-self: flex-end;
 }
 
 /** Mobile Grid Layout *****************************************************************/

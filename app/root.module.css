@@ -10,8 +10,8 @@
   --page-margin: 3vw;
 
   --color-theme: #283587;
-  --color-bg: #FFFFFF;
-  --color-bg-dark: #414040;
+  --color-bg: #EBEBEB;
+  --color-bg-dark: #2C2A2D;
   --color-white: #FFFFFF;
   --color-black: #000000;
   --color-theme-contrast: #F6CD03;
@@ -25,7 +25,8 @@
   --color-font: #000000;
   --color-font-light: #9A9391;
   --color-font-bright: #FFFFFF;
-  --color-font-bright-2: #ECE9E6;
+  --color-font-bright-2: #E8E8E8;
+  --color-font-bright-3: #9A969B;
 
   --font-size-xxx-big: 2.5rem;
   --font-size-xx-big: 1.9rem;
@@ -35,12 +36,12 @@
   --font-size-small: .9rem;
   --font-size-x-small: .8remj;
 
-  --font-family-sans-serif: 'Quicksand', sans-serif;
-  --font-family-serif: 'PT Serif', serif;
+  --font-family-sans-serif: 'Mulish', 'Helvetica', sans-serif;
+  --font-family-serif: 'Times', serif;
   --font-weight-bold: 600;
   --font-weight-semi-bold: 500;
   --font-weight-normal: 400;
-  --font-weight-light: 400;
+  --font-weight-light: 200;
 
   --line-height-xxx-big: 2em;
   --line-height-big: 1.5em;
