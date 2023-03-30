@@ -9,7 +9,7 @@ import Users from './cms/collections/Users';
 import Site from './cms/globals/Site';
 
 export default buildConfig({
-  serverURL: 'http://localhost:3000',
+  serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
   admin: {
     user: Users.slug,
   },

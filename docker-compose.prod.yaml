@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - 3000
+    working_dir: /app
+    command: sh -c "yarn && yarn dev"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      PAYLOAD_SECRET:
+      PAYLOAD_PUBLIC_SERVER_URL: http://${DOMAIN}
+      MONGODB_URI: mongodb://db:27017/app
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.pma.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.pma.entrypoints=web
+  
+  traefik:
+    image: traefik
+    command:
+      - --api.insecure=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --entrypoints.web.address=:80
+    ports:
+      - 80:80
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+  
+volumes:
+  data:
