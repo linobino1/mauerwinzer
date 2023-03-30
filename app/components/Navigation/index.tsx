@@ -18,7 +18,7 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
   // each item renders as either an internal link, an external link with an icon or text, or another navigation
   return navigation ? (
     <nav className={`${classes.nav} ${classes[navigation.type]} ${className}`}>
-      {navigation?.items.map(({
+      {navigation?.items?.map(({
         id, icon, subnavigation, page, url, name, type,
       }) => {
         if (type === 'language') {
@@ -44,7 +44,7 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
 
         // subnavigation or link
         return (
-          <div key={id}>
+          <div key={id} style={{display: 'contents'}}>
             { subnavigation ? (
               <Navigation
                 navigation={subnavigation as NavigationType}

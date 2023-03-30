@@ -74,22 +74,29 @@ a[href^="tel:"] {
   .footer {
     grid-template-columns: 1fr;
     row-gap: 2rem;
+    padding-top: 3em;
   }
   .footer > * {
     grid-column: 1 !important;
     justify-self: center;
   }
   .newsletterButton {
-    grid-row: 1;
+    grid-row: 3;
   }
   .navSocial {
     grid-row: 2;
   }
-  .address {
-    grid-row: 3;
+  .footerContent {
+    grid-row: 1;
     text-align: center;
   }
   .navFooter {
     grid-row: 4;
+  }
+  .copyright {
+    grid-row: 5;
+  } 
+  .navFooter {
+    flex-direction: row;
   }
 }

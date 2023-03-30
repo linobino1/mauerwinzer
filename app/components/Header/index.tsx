@@ -42,9 +42,10 @@ const Header: React.FC<Props> = ({
             className={classes.navMain}
           />
         </div>
-        <Link to="/">
+        <Link to="/" className={classes.logoContainer}>
           {site.logo as Media && (
             <Image
+              className={classes.logo}
               image={site.logo as Media}
               width={350}
               height={125}
@@ -57,6 +58,7 @@ const Header: React.FC<Props> = ({
           className={classes.menuOpen}
         />
         <Button
+          className={classes.reservationButton}
           layout='big'
           label='Tisch reservieren'
         />

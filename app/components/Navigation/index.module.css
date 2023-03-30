@@ -2,7 +2,6 @@
   display: flex;
 }
 .nav.socialMedia {
-  height: 1.8rem;
   column-gap: .5rem;
 }
 
