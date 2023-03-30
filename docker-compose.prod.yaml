@@ -18,8 +18,8 @@ services:
       MONGODB_URI: mongodb://db:27017/app
     labels:
       - traefik.enable=true
-      - traefik.http.routers.pma.rule=Host(`${DOMAIN}`)
-      - traefik.http.routers.pma.entrypoints=web
+      - traefik.http.routers.app.rule=Host(`${DOMAIN}`)
+      - traefik.http.routers.app.entrypoints=web
   
   traefik:
     image: traefik
