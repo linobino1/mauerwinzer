@@ -35,6 +35,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
   
   db:
+    image: mongo:4.4.18 # last version running without CPU flag AVX
     volumes:
       - data:/data/db
       - ./dump:/dump
