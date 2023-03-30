@@ -25,6 +25,7 @@ COPY package*.json  ./
 RUN yarn install --production
 COPY --from=build-stage /app/dist ./dist
 COPY --from=build-stage /app/build ./build
+COPY --from=build-stage /app/public ./public
 
 EXPOSE 3000
 
