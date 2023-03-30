@@ -8,6 +8,7 @@ ENV PAYLOAD_PUBLIC_SERVER_URL=${PAYLOAD_PUBLIC_SERVER_URL}
 
 WORKDIR /app
 COPY package*.json ./
+COPY yarn.lock ./
 
 COPY . .
 RUN yarn install
@@ -27,4 +28,4 @@ COPY --from=build-stage /app/build ./build
 
 EXPOSE 3000
 
-CMD ["node", "dist/server.js"]
+CMD ["npm", "run", "start"]
