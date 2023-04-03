@@ -21,3 +21,9 @@ img.headerImage {
   object-position: center;
   min-height: 2rem;
 }
+
+@media screen and (max-width: 768px) {
+  .imageHeader {
+    height: 50vh;
+  }
+}

@@ -15,14 +15,6 @@ const mediaCollections: {
     slug: 'media',
     relDir: '',
   },
-  {
-    slug: 'posters',
-    relDir: '/posters',
-  },
-  {
-    slug: 'filmStills',
-    relDir: '/filmstills',
-  },
 ];
 
 const regenerateMediaSizes = async () => {
@@ -97,7 +89,7 @@ const regenerateMediaSizes = async () => {
    }));
 
   console.log('Media size regeneration completed!');
-  // process.exit(0);
+  process.exit(0);
 };
 
 regenerateMediaSizes();

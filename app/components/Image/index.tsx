@@ -3,9 +3,9 @@ import React from "react"
 import { mediaUrl } from "~/util/mediaUrl"
 
 export type ImageResponsive = {
-  // size: { width: number, height: number }
-  size: keyof Media['sizes']
-  maxWidth: string
+  size: keyof Required<Media>['sizes']
+  screenWidth: number
+  renderedWidth: string
 }
 
 export type Props = {
@@ -17,19 +17,23 @@ export type Props = {
   fill?: boolean
 }
 
-// export const imageUrl = (image: Media, width: number, height: number): string => mediaUrl(`${image.sizes.card.}`)
 export const Image: React.FC<Props> = ({
   width, height, className, image, responsive,
 }) => {
-  let srcset, sizes;
-  if (responsive) {
-    srcset = responsive.map((item) => (
-      `${mediaUrl(image.sizes[item.size].filename as string)} ${image.sizes[item.size].width}w`
-    )).join(', ');
-    sizes = responsive.map((item) => (
-      `${item.maxWidth} ${image.sizes[item.size].width}px`
-    )).join(', ');
-  }
+  let srcSet: string[] = []
+  let sizes: string[] = [];
+  responsive?.forEach((item) => {
+    if (image.sizes === undefined || image.sizes[item.size] === undefined) {
+      return undefined;
+    }
+    srcSet.push(
+      `${mediaUrl(image.sizes[item.size]?.filename as string)} ${image.sizes[item.size]?.width}w`
+    );
+    sizes.push(
+      `(max-width: ${item.screenWidth}px) ${item.renderedWidth}`
+    );
+  });
+
   return (
     <img
       src={mediaUrl(image.filename as string)}
@@ -37,8 +41,8 @@ export const Image: React.FC<Props> = ({
       width={width}
       height={height}
       className={className}
-      srcSet={srcset}
-      sizes={sizes}
+      srcSet={srcSet.join(', ')}
+      sizes={sizes.join(', ')}
     />
   )
 }

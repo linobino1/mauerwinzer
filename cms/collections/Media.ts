@@ -20,22 +20,22 @@ export const Media: CollectionConfig = {
     staticURL,
     imageSizes: [
       {
-        name: 'card',
-        width: 640,
-        height: 480,
+        name: 'header-square-512w',
+        width: 512,
+        height: 512,
       },
       {
-        name: 'feature',
+        name: 'header-square-768w',
+        width: 768,
+        height: 768,
+      },
+      {
+        name: 'header-landscape-1024w',
         width: 1024,
-        height: 576,
+        height: 682,
       },
       {
-        name: 'header_1024w',
-        width: 1024,
-        height: 576,
-      },
-      {
-        name: 'header_2560w',
+        name: 'header-landscape-2560w',
         width: 2560,
         height: 1280,
       },
