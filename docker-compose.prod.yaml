@@ -39,6 +39,7 @@ services:
       - --certificatesresolvers.letsencrypt.acme.email=${EMAIL_ADMIN}
       - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
     labels:
+      - traefik.enable=true
       # Redirect all HTTP traffic to HTTPS
       - traefik.http.routers.to-https.rule=HostRegexp(`{host:.+}`)
       - traefik.http.routers.to-https.entrypoints=websecure
