@@ -49,12 +49,16 @@ services:
       - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=${CERT_RESOLVER}
+      - traefik.http.routers.traefik.middlewares=auth
+
+
       - traefik.http.middlewares.to-https.redirectscheme.scheme=https
+      - traefik.http.middlewares.auth.basicauth.users=${TRAEFIK_USER}:${TRAEFIK_PASSWORD_HASH}
+
 
     ports:
       - 80:80
       - 443:443
-      - 8080:8080
     volumes:
       - ./data/letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
