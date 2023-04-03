@@ -6,14 +6,14 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        PAYLOAD_PUBLIC_SERVER_URL: http://${DOMAIN}
+        PAYLOAD_PUBLIC_SERVER_URL: https://${DOMAIN}
     expose:
       - 3000
     volumes:
       - ./media:/app/dist/media
     environment:
       PAYLOAD_SECRET:
-      PAYLOAD_PUBLIC_SERVER_URL: http://${DOMAIN}
+      PAYLOAD_PUBLIC_SERVER_URL: https://${DOMAIN}
       MONGODB_URI: mongodb://db:27017/app
     labels:
       - traefik.enable=true
