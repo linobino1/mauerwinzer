@@ -1,32 +1,44 @@
-# build stage
 FROM node:18-alpine as base
 
-FROM base as build-stage
+# cache node_modules
+FROM base as deps
+
+WORKDIR /app
+COPY package*.json ./
+RUN yarn install
+
+# build
+FROM base as builder
+
+ARG NODE_ENV
+ENV NODE_ENV=${NODE_ENV}
 
 ARG PAYLOAD_PUBLIC_SERVER_URL
 ENV PAYLOAD_PUBLIC_SERVER_URL=${PAYLOAD_PUBLIC_SERVER_URL}
 
-WORKDIR /app
-COPY package*.json ./
-COPY yarn.lock ./
+ENV PAYLOAD_CONFIG_PATH=/app/payload.config.ts
 
+WORKDIR /app
 COPY . .
-RUN yarn install
+COPY --from=deps /app/node_modules ./node_modules
 RUN yarn build
 
-# production stage
-FROM base as production-stage
+# run
+FROM base as runner
+
+ARG NODE_ENV
+ENV NODE_ENV=${NODE_ENV}
 
 ENV PAYLOAD_CONFIG_PATH=/app/dist/payload.config.js
 
 WORKDIR /app
-COPY package*.json  ./
 
-RUN yarn install --production
-COPY --from=build-stage /app/dist ./dist
-COPY --from=build-stage /app/build ./build
-COPY --from=build-stage /app/public ./public
+COPY package*.json ./
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/build ./build
+COPY --from=builder /app/public ./public
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["yarn", "start"]

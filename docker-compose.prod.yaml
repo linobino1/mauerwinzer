@@ -5,10 +5,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        PAYLOAD_PUBLIC_SERVER_URL: http://${DOMAIN}
     expose:
       - 3000
     volumes:
-      - ./media:/media
+      - ./media:/app/media
     environment:
       PAYLOAD_SECRET:
       PAYLOAD_PUBLIC_SERVER_URL: http://${DOMAIN}
