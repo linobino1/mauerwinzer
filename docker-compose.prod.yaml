@@ -19,8 +19,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.app.rule=Host(`${DOMAIN}`)
       - traefik.http.routers.app.entrypoints=websecure
-      - traefik.http.routers.https.tls=true
-      - traefik.http.routers.https.tls.certresolver=${CERT_RESOLVER}
+      - traefik.http.routers.app.tls=true
+      - traefik.http.routers.app.tls.certresolver=${CERT_RESOLVER}
   
   traefik:
     image: traefik
@@ -35,17 +35,17 @@ services:
       - --certificatesResolvers.letsencrypt.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory
 
       - --certificatesresolvers.letsencrypt.acme.httpchallenge=true
-      - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=http
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web
       - --certificatesresolvers.letsencrypt.acme.email=${EMAIL}
       - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
     labels:
       # Redirect all HTTP traffic to HTTPS
       - traefik.http.routers.to-https.rule=HostRegexp(`{host:.+}`)
-      - traefik.http.routers.to-https.entrypoints=http
+      - traefik.http.routers.to-https.entrypoints=websecure
       - traefik.http.routers.to-https.middlewares=to-https
 
       - traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)
-      - traefik.http.routers.traefik.entrypoints=https
+      - traefik.http.routers.traefik.entrypoints=websecure
       - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik.tls=true
       - traefik.http.routers.traefik.tls.certresolver=${CERT_RESOLVER}
