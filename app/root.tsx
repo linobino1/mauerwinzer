@@ -22,6 +22,7 @@ import type { DynamicLinksFunction } from "remix-utils";
 import { DynamicLinks } from "remix-utils";
 import { mediaUrl } from "./util/mediaUrl";
 import type { Media} from "payload/generated-types";
+import { environment } from "./environment.server";
 
 export const links: LinksFunction = () => {
   return [
@@ -49,6 +50,9 @@ export async function loader({ request, context: { payload } }: LoaderArgs) {
   return json({
     site,
     locale,
+    publicKeys: {
+      PAYLOAD_PUBLIC_SERVER_URL: environment().PAYLOAD_PUBLIC_SERVER_URL,
+    }
   }, {
     headers: {
       "Set-Cookie": localeCookie,
@@ -86,7 +90,7 @@ export function useChangeLanguage(locale: string) {
 
 export default function App() {
   // Get the locale from the loader
-  let { locale } = useLoaderData<typeof loader>();
+  let { locale, publicKeys } = useLoaderData<typeof loader>();
   let { i18n } = useTranslation();
 
   // handle locale change
@@ -100,6 +104,11 @@ export default function App() {
         <DynamicLinks />
       </head>
       <body className={styles.body}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify(publicKeys)}`,
+          }}
+        />
         <Outlet />
         <ScrollRestoration />
         <Scripts />
