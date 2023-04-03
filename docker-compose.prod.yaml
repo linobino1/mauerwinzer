@@ -10,7 +10,7 @@ services:
     expose:
       - 3000
     volumes:
-      - ./media:/app/media
+      - ./media:/app/dist/media
     environment:
       PAYLOAD_SECRET:
       PAYLOAD_PUBLIC_SERVER_URL: http://${DOMAIN}
