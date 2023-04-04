@@ -28,6 +28,12 @@ export const Site: GlobalConfig = {
       relationTo: 'media',
     },
     {
+      name: 'favicon',
+      label: t('Site Icon'),
+      type: 'upload',
+      relationTo: 'media',
+    },
+    {
       name: 'homePage',
       label: t('Homepage'),
       type: 'relationship',

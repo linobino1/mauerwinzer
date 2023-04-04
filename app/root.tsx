@@ -60,12 +60,12 @@ export async function loader({ request, context: { payload } }: LoaderArgs) {
   })
 }
 
-const dynamicLinks: DynamicLinksFunction<SerializeFrom<typeof loader>> = ({ data }) => {
+export const dynamicLinks: DynamicLinksFunction<SerializeFrom<typeof loader>> = ({ data }) => {
   return [
     {
       rel: "icon",
-      href: mediaUrl((data.site.logo as Media)?.filename as string),
-      type: "image/svg",
+      href: mediaUrl((data.site.favicon as Media)?.filename as string),
+      type: (data.site.logo as Media)?.mimeType,
     },
   ]
 }
