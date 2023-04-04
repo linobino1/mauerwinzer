@@ -14,6 +14,7 @@ services:
     environment:
       PAYLOAD_SECRET: secret123
       MONGODB_URI: mongodb://db:27017/mw
+      PAYLOAD_PUBLIC_SERVER_URL: http://localhost:3000
   
   db:
     volumes:
