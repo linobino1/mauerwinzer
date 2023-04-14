@@ -17,6 +17,28 @@
 .mainHeader > *:nth-child(2) {
   justify-self: center;
 }
+/** stack navigation under logo */
+@media screen and (max-width: 1200px) {
+  .mainHeader {
+    grid-template-columns: auto auto;
+  }
+  .mainHeader > .logoContainer {
+    grid-row: 1;
+    grid-column: 1;
+    justify-self: start;
+  }
+  .mainHeader > .reservationButton {
+    grid-row: 1;
+    grid-column: 2;
+  }
+  .mainHeader > .navMainContainer {
+    grid-row: 2;
+    grid-column: 1 / span 2;
+    justify-self: center;
+    margin-top: 2em;
+  }
+
+}
 @media screen and (max-width: 768px) {
   .mainHeader {
     grid-template-columns: auto min-content;
@@ -66,8 +88,9 @@
 .navMain {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .menuOpen,
   .menuClose {
     display: block !important;
