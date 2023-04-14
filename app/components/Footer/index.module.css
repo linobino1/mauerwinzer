@@ -5,7 +5,6 @@
   padding: max(5em, 3vw) var(--page-margin);
   display: grid;
   grid-template-columns: 25% 50% 25%;
-  row-gap: 1rem;
   font-weight: var(--font-weight-light);
   line-height: 1.3em;
 }
