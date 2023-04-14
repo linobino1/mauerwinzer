@@ -1,5 +1,6 @@
 import React from 'react';
 import RichText from '~/components/RichText';
+import classes from './index.module.css';
 
 export type Type = {
   blockType: 'content'
@@ -8,9 +9,11 @@ export type Type = {
 }
 
 export const Content: React.FC<Type> = ({ content }) => (
-  <RichText
-    content={content}
-  />
+  <div className={classes.container}>
+    <RichText
+      content={content}
+    />
+  </div>
 );
 
 export default Content;

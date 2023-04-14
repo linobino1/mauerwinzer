@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload/types';
 import { Content } from '../blocks/Content';
-import { EntryContent } from '../blocks/EntryContent';
+import { Image } from '../blocks/Image';
 import { PostsList } from '../blocks/PostsList';
 import { t } from '../i18n';
 import { slugField } from '../util/slugField';
@@ -49,7 +49,7 @@ const Pages: CollectionConfig = {
       blocks: [
         Content,
         PostsList,
-        EntryContent,
+        Image,
       ],
     },
     Meta,

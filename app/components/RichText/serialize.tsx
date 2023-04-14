@@ -2,6 +2,9 @@
 import React, { Fragment } from 'react';
 import { escape } from "html-escaper";
 import { Text } from 'slate';
+import { Image } from '~/components/Image';
+import type { Media } from 'payload/generated-types';
+import classes from './index.module.css';
 
 // eslint-disable-next-line no-use-before-define
 type Children = Leaf[];
@@ -148,8 +151,23 @@ const serialize = (children: Children): React.ReactElement[] => children.map((no
           {serialize(node.children as Children)}
         </a>
       );
+    case 'upload':
+      return (
+        <div className={classes.imageWrapper} key={i}>
+          <Image
+            image={node.value as Media}
+            responsive={[
+              { size: 'header-landscape-2560w', screenWidth: 2560, renderedWidth: '70vw' },
+              { size: 'header-landscape-1024w', screenWidth: 1024, renderedWidth: '70vw' },
+              { size: 'header-square-768w', screenWidth: 768, renderedWidth: '768px' },
+              { size: 'header-square-512w', screenWidth: 512, renderedWidth: '512px' },
+            ]}
+          />
+        </div>
+      );
 
     default:
+      console.log('node', node);
       return (
         <p key={i} style={{minHeight: '1em'}}>
           {serialize(node.children as Children)}
