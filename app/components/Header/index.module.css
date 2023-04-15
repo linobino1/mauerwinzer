@@ -65,6 +65,7 @@
   border: 0;
   font-size: 4rem;
   font-weight: var(--font-weight-bold);
+  color: inherit;
   background: transparent;
   padding: 0.5rem 1rem;
   padding-right: 0 !important;
