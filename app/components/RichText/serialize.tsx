@@ -171,7 +171,6 @@ const serialize = (children: Children): React.ReactElement[] => children.map((no
       );
 
     default:
-      console.log('node', node);
       return (
         <p key={i} style={{minHeight: '1em'}}>
           {serialize(node.children as Children)}
