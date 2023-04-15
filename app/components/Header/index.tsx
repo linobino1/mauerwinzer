@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import type {
-  Media,
+  Media, Page,
 } from "payload/generated-types";
 import { Navigation } from '../Navigation';
-import { Link } from '@remix-run/react';
+import { Link, useNavigate } from '@remix-run/react';
 import { Image } from '~/components/Image';
 import type { Site, Navigation as NavigationType } from 'payload/generated-types';
 import classes from './index.module.css';
@@ -27,6 +27,8 @@ const Header: React.FC<Props> = ({
   const menuClose = () => {
     setMenuVisible(false);
   };
+  
+  const navigate = useNavigate();
 
   return (
     <header>
@@ -60,7 +62,8 @@ const Header: React.FC<Props> = ({
         <Button
           className={classes.reservationButton}
           layout='big'
-          label='Tisch reservieren'
+          label={site.headerButton.label}
+          onClick={() => navigate((site.headerButton.page as Page).slug as string)}
         />
       </div>
       {content}

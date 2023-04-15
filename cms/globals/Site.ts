@@ -17,15 +17,35 @@ export const Site: GlobalConfig = {
       required: true,
     },
     {
-      name: 'footerContent',
-      label: t('Footer Content'),
-      type: 'richText',
-    },
-    {
       name: 'logo',
       label: t('Logo'),
       type: 'upload',
       relationTo: 'media',
+    },
+    {
+      name: 'headerButton',
+      label: t('Header Button'),
+      type: 'group',
+      fields: [
+        {
+          name: 'label',
+          type: 'text',
+          label: t('Label'),
+          required: true,
+          localized: true,
+        },
+        {
+          name: 'page',
+          type: 'relationship',
+          relationTo: 'pages',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'footerContent',
+      label: t('Footer Content'),
+      type: 'richText',
     },
     {
       name: 'favicon',
