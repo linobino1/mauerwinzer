@@ -30,10 +30,6 @@ export const links: LinksFunction = () => {
     ...(cssBundleHref
       ? [{ rel: "stylesheet", href: cssBundleHref }]
       : []),
-    {
-      rel: 'stylesheet',
-      href: 'https://fonts.googleapis.com/css2?family=Mulish:wght@100;300;400;500&display=swap',
-    },
   ];
 };
 
