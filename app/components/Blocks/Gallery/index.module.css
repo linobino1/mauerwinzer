@@ -3,7 +3,7 @@
     grid-template-columns: 50% auto;
     max-width: 1100px;
     gap: 10%;
-    margin: 0 auto;
+    margin: 3vw auto;
 }
 .image {
     object-fit: cover;
@@ -11,7 +11,7 @@
     width: 100%;
 }
 .image:nth-child(2) {
-    margin-top: 6em;
+    margin-top: 33%;
     aspect-ratio: 1/1;
 }
 @media screen and (max-width: 768px) {
