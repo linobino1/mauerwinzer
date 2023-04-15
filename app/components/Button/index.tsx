@@ -1,7 +1,7 @@
 import React from "react"
 import classes from "./index.module.css"
 
-export type Props = {
+export interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   label: string
   layout: 'big' | undefined
   className?: string
@@ -9,17 +9,19 @@ export type Props = {
 }
 
 // export const imageUrl = (image: Media, width: number, height: number): string => mediaUrl(`${image.sizes.card.}`)
-export const Button: React.FC<Props> = ({
-  className, label, layout, color,
-}) => (
-  <button
-    className={`${classes.button} ${className}`}
-    data-layout={layout}
-    data-color={color}
-    type="button"
-  >
-    {label}
-  </button>
-)
+export const Button: React.FC<Props> = (props) => {
+  const { label, layout, color } = props;
+  let updatedProps = { ...props };
+  updatedProps.className = `${classes.button} ${props.className}`;
+  return (
+    <button
+      data-layout={layout}
+      data-color={color}
+      {...updatedProps}
+    >
+      {label}
+    </button>
+  )
+}
 
 export default Button;
