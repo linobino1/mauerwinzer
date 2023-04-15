@@ -18,7 +18,8 @@ export const Gallery: React.FC<Type> = ({ images }) => {
           className={classes.image}
           image={item.image as Media}
           responsive={[
-            { size: 'header-square-512w', screenWidth: 2560, renderedWidth: '512px' },
+            { size: 'square-512w', screenWidth: 2560, renderedWidth: '512px' },
+            { size: 'square-360w', screenWidth: 600, renderedWidth: '360px' },
           ]}
         />
       ))}
