@@ -14,11 +14,15 @@ export default function PageHeader() {
           <Image
             className={classes.headerImage}
             image={page.image as Media}
-            responsive={[
-              { size: 'landscape-2560w', screenWidth: 2560, renderedWidth: '95vw' },
-              { size: 'landscape-1280w', screenWidth: 1024, renderedWidth: '95vw' },
-              { size: 'square-768w', screenWidth: 768, renderedWidth: '768px' },
-              { size: 'square-512w', screenWidth: 512, renderedWidth: '512px' },
+            srcSet={[
+              { size: 'landscape-2560w', width: 2560 },
+              { size: 'landscape-1920w', width: 1920 },
+              { size: 'landscape-1280w', width: 1280 },
+              { size: 'square-768w', width: 768 },
+              { size: 'square-512w', width: 512 },
+            ]}
+            sizes={[
+              '95vw',
             ]}
           />
         </div>
