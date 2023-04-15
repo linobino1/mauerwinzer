@@ -6,11 +6,11 @@ import type { Media } from 'payload/generated-types';
 export type Type = {
   blockType: 'image'
   blockName?: string
-  image?: Media
+  image?: Media | string
 }
 
 export const Image: React.FC<Type> = ({ image }) => {
-  return image ? (
+  return image as Media ? (
     <div className={classes.container}>
       <ImageComponent
         image={image as Media}

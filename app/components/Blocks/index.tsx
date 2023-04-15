@@ -2,7 +2,8 @@ import React from 'react';
 import type { Page, Post } from 'payload/generated-types';
 import { Content } from '~/components/Blocks/Content';
 import { Image } from '~/components/Blocks/Image';
-import PostsList from './PostsList';
+import { Gallery } from '~/components/Blocks/Gallery';
+import { PostsList } from '~/components/Blocks/PostsList';
 
 type Layout = Page['layout'];
 
@@ -26,7 +27,9 @@ const Blocks: React.FC<Props> = ({
             case 'image':
               return <Image {...block} />;
 
-            default:
+            case 'gallery':
+              return <Gallery {...block} />;
+
             case 'content':
               return <Content {...block} />;
           }

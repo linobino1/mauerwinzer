@@ -7,6 +7,15 @@ export const Translations: { [key: string]: Translation } = {
     de: 'dd.MM.yyyy',
     en: 'yyyy-MM-dd',
   },
+  'Gallery': {
+    de: 'Gallerie',
+  },
+  'Image': {
+    de: 'Bild',
+  },
+  'Images': {
+    de: 'Bilder',
+  },
   'Image (Full Width)': {
     de: 'Bild (Vollbreite)',
   },

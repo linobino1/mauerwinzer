@@ -5,6 +5,7 @@ import { PostsList } from '../blocks/PostsList';
 import { t } from '../i18n';
 import { slugField } from '../util/slugField';
 import { Meta } from './Meta';
+import { Gallery } from '../blocks/Gallery';
 
 const Pages: CollectionConfig = {
   slug: 'pages',
@@ -50,6 +51,7 @@ const Pages: CollectionConfig = {
         Content,
         PostsList,
         Image,
+        Gallery,
       ],
     },
     Meta,
