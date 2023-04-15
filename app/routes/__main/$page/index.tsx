@@ -4,7 +4,6 @@ import Blocks from '~/components/Blocks';
 import type { LoaderArgs, MetaFunction } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import PageHeader from '~/components/PageHeader';
-import classes from './index.module.css';
 import i18next from "~/i18next.server";
 import PageFooter from '~/components/PageFooter';
 
@@ -36,7 +35,7 @@ export const PageComponent: React.FC = () => {
   return (
     <>
       <PageHeader />
-      <main className={classes.main}>
+      <main>
         <Blocks
           layout={page?.layout}
         />

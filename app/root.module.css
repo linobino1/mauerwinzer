@@ -105,6 +105,9 @@ hr {
   color: inherit;
 }
 /* improve readablity */
+p {
+  max-width: calc(100vw - 2 * var(--page-margin));
+}
 @media screen and (min-width: 768px) {
   p {
     max-width: min(70vw, 1100px);
