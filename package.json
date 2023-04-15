@@ -35,7 +35,7 @@
     "isbot": "^3.6.5",
     "morgan": "^1.10.0",
     "nodemailer": "^6.9.1",
-    "payload": "^1.6.27",
+    "payload": "^1.6.32",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.1.5",
