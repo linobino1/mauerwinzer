@@ -14,3 +14,9 @@
     margin-top: 6em;
     aspect-ratio: 1/1;
 }
+@media screen and (max-width: 768px) {
+    .container {
+        grid-template-columns: 53% auto;
+        column-gap: 3%;
+    }
+}
