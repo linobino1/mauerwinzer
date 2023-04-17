@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import classes from "./index.module.css";
 import { useNavigate } from "@remix-run/react";
+import Button from "~/components/Button";
 
 
 export type Props = {
@@ -35,10 +36,13 @@ export const Modal: React.FC<Props> = ({
   return (
     <div ref={modal} className={classes.container}>
       <div className={classes.header}>
-        { title && (
-          <div>{ title }</div>
-        )}
-        <button className={classes.close} onClick={() => navigate('?modal=false', { preventScrollReset: true })} />
+        <div>{ title }</div>
+        <Button
+          layout="symbol"
+          symbol="close"
+          className={classes.close}
+          onClick={() => navigate('?modal=false', { preventScrollReset: true })}
+        />
       </div>
       <div className={classes.content}>{/* this div is necessary to center the content */}
         { children }

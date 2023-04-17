@@ -1,4 +1,4 @@
-button.button {
+.button {
     position: relative;
     appearance: none;
     outline: 0;
@@ -12,36 +12,36 @@ button.button {
     font-weight: var(--font-weight-light);
     cursor: pointer;
 }
-button.button:hover {
+.button:hover {
     background-color: var(--color-font-light);
     color: var(--color-bg);
 }
 
 /** big            ******************************************/
-button.button[data-layout="big"] {
+.button[data-layout="big"] {
     padding: 1em;
 }
 /** submit         ******************************************/
-button.button[data-layout="submit"],
-button.button[data-layout="cancel"] {
+.button[data-layout="submit"],
+.button[data-layout="cancel"] {
     padding: 1em;
     width: 100%;
     font-size: var(--font-size-big);
     min-width: min(80vw, 11em);
 }
-button.button[data-layout="submit"] {
+.button[data-layout="submit"] {
     color: var(--color-bg);
     background-color: green;
     font-weight: var(--font-weight-bold);
 }
-button.button[data-layout="submit"]:hover {
+.button[data-layout="submit"]:hover {
     filter: brightness(1.1);
 }
-button.button[data-layout="submit"]:hover::after {
+.button[data-layout="submit"]:hover::after {
     transform: rotate(15deg);
 }
-button.button[data-layout="submit"]::after,
-button.button[data-layout="cancel"]::after {
+.button[data-layout="submit"]::after,
+.button[data-layout="cancel"]::after {
     /* content: "🍾 "; */
     content: "🥂";
     font-size: 1.5em;
@@ -49,16 +49,35 @@ button.button[data-layout="cancel"]::after {
     transform: translateX(0.2em);
 }
 /** cancel         ******************************************/
-button.button[data-layout="cancel"] {
+.button[data-layout="cancel"] {
     color: var(--color-font-light);
 }
-button.button[data-layout="cancel"]::after {
+.button[data-layout="cancel"]::after {
     content: "🫗";
 }
-button.button[data-layout="cancel"]:hover {
+.button[data-layout="cancel"]:hover {
     color: var(--color-font-bright);
 }
+/** symbol         ******************************************/
+.button[data-layout="symbol"] {
+    border: 0;
+    color: inherit;
+    font: inherit;
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    background: transparent;
+    padding: 0.5rem 1rem;
+}
+.button[data-layout="symbol"]:hover {
+    color: inherit;
+}
+.button[data-symbol="close"]::before {
+    content: "\2715";
+}
+.button[data-symbol="menu"]::before {
+    content: "\2630";
+}
 /** COLOR THEME    ******************************************/
-button.button[data-color="white"] {
+.button[data-color="white"] {
     color: var(--color-font-bright-2);
 }
