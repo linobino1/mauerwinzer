@@ -24,14 +24,13 @@ import { ExternalScripts } from "remix-utils";
 import { DynamicLinks } from "remix-utils";
 import { mediaUrl } from "./util/mediaUrl";
 import type { Media} from "payload/generated-types";
-import { environment } from "./environment.server";
 import ReservationForm from '~/components/ReservationForm';
 import Modal from "./components/Modal";
 import type { ActionFunction } from '@remix-run/node';
 import { t } from "i18next";
 import transport, { connectedEmailAddresses, sender } from "email";
 import { replaceMulti } from "./util/stringInterpolation";
-import { siteKey, validateCaptcha } from "./util/captcha";
+import environment from "./util/environment";
 
 export const links: LinksFunction = () => {
   return [
@@ -57,6 +56,7 @@ export async function loader({ request, context: { payload } }: LoaderArgs) {
     locale,
     publicKeys: {
       PAYLOAD_PUBLIC_SERVER_URL: environment().PAYLOAD_PUBLIC_SERVER_URL,
+      HCAPTCHA_SITE_KEY: environment().HCAPTCHA_SITE_KEY,
     }
   }, {
     headers: {
@@ -228,7 +228,7 @@ export default function App() {
             <ReservationForm
               from={new Date(site.reservations.from)}
               until={new Date(site.reservations.until)}
-              hCaptchaSiteKey={siteKey}
+              hCaptchaSiteKey={environment().HCAPTCHA_SITE_KEY}
             />
           </Modal>
         )}

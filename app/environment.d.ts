@@ -1,17 +1,16 @@
 declare global {
-  interface ENV {
+  interface AppEnvironment {
     NODE_ENV: string
     PAYLOAD_PUBLIC_SERVER_URL: string
+    HCAPTCHA_SITE_KEY: string
+    HCAPTCHA_SECRET_KEY: string
   }
   interface Window {
-    ENV: {
-      NODE_ENV: string
-      PAYLOAD_PUBLIC_SERVER_URL: string
-    }
+    ENV: AppEnvironment
   }
   namespace NodeJS {
-    interface ProcessEnv {
-      PAYLOAD_PUBLIC_SERVER_URL: string
+    interface ProcessEnv extends AppEnvironment {
+
     }
   }
 }

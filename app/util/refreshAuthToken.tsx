@@ -1,4 +1,4 @@
-import getEnv from "./getEnv";
+import environment from "./environment";
 
 let interval: ReturnType<typeof setInterval>;
 
@@ -8,7 +8,7 @@ let interval: ReturnType<typeof setInterval>;
  * with the payload token that is saved by the browser
  */
 export const refresh = () => {
-  fetch(`${getEnv().PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000'}/api/users/refresh-token`, {
+  fetch(`${environment().PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000'}/api/users/refresh-token`, {
     method: 'POST',
     credentials: 'include',
     headers: {

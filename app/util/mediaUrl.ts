@@ -1,5 +1,5 @@
-import getEnv from "./getEnv"
+import environment from "./environment"
 
 export const mediaUrl = (filename: string): string => (
-  `${getEnv().PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000'}/media/${filename}`
+  `${environment().PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000'}/media/${filename}`
 )
