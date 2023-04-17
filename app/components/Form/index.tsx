@@ -34,7 +34,7 @@ export const Form: React.FC<FormProps> = (props) => {
         }
       }
     }
-  });
+  }, [data]);
   const updatedProps = {...props};
   updatedProps.className = `${classes.form} ${props.className}`;
   return data?.success ? (

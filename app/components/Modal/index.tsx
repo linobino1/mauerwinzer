@@ -30,7 +30,7 @@ export const Modal: React.FC<Props> = ({
     return () => {
       document.body.style.overflow = 'unset';
     }
-  });;
+  }, [navigate]);
  
   return (
     <div ref={modal} className={classes.container}>
