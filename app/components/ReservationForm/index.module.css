@@ -2,9 +2,3 @@
     align-self: center;
     min-width: min(100%, 25em);
 }
-@media screen and (max-width: 768px) {
-    .form {
-        padding-bottom: 100px;   /* safari tab bar */
-        font-size: var(--font-size-big);
-    }
-}
