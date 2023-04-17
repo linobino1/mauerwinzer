@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import classes from './index.module.css';
 import { useLocation, useNavigate } from '@remix-run/react';
 import { Form } from '~/components/Form';
@@ -9,7 +9,7 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 export type Props = {
   from: Date
   until: Date
-  hCaptchaSiteKey?: string
+  hCaptchaSiteKey: string
 }
 
 export const ReservationForm: React.FC<Props> = ({
@@ -77,22 +77,12 @@ export const ReservationForm: React.FC<Props> = ({
         name='message'
         aria-label={t('Message') as string}
       />
-      { false && (
-        <Suspense>
-          <div
-            className="h-captcha"
-            data-sitekey={hCaptchaSiteKey}
-          />
-        </Suspense>
-      )}
-      { hCaptchaSiteKey && (
-        <div
-          data-name='hCaptcha'
-          data-type='hCaptcha'
-        >
-          <HCaptcha sitekey={hCaptchaSiteKey} />
-        </div>
-      )}
+      <div
+        data-name='hCaptcha'
+        data-type='hCaptcha'
+      >
+        <HCaptcha sitekey={hCaptchaSiteKey} />
+      </div>
       <Button
         className={classes.submit}
         layout='submit'
