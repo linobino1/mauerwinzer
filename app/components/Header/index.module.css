@@ -1,137 +1,93 @@
 /** MAIN HEADER  ********************************************/
 .mainHeader {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
-  padding: var(--page-margin);
-  align-items: center;
-  font-weight: var(--font-weight-light);
-  font-size: var(--font-size-big);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    padding: var(--page-margin);
+    align-items: center;
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-big);
 }
 .mainHeader > * {
-  justify-self: end;
+    justify-self: end;
 }
 .mainHeader > *:first-child {
-  justify-self: start;
+    justify-self: start;
 }
 .mainHeader > *:nth-child(2) {
-  justify-self: center;
+    justify-self: center;
 }
 .navMain {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 /** stack navigation under logo */
 @media screen and (max-width: 1200px) and (min-width: 768px) {
-  .mainHeader {
-    grid-template-columns: auto auto;
-  }
-  .mainHeader > .logoContainer {
-    grid-row: 1;
-    grid-column: 1;
-    justify-self: start;
-  }
-  .mainHeader > .reservationButton {
-    grid-row: 1;
-    grid-column: 2;
-  }
-  .mainHeader > .navMainContainer {
-    grid-row: 2;
-    grid-column: 1 / span 2;
-    justify-self: center;
-    margin-top: 2em;
-  }
-
+    .mainHeader {
+        grid-template-columns: auto auto;
+    }
+    .mainHeader > .logoContainer {
+        grid-row: 1;
+        grid-column: 1;
+        justify-self: start;
+    }
+    .mainHeader > .reservationButton {
+        grid-row: 1;
+        grid-column: 2;
+    }
+    .mainHeader > .navMainContainer {
+        grid-row: 2;
+        grid-column: 1 / span 2;
+        justify-self: center;
+        margin-top: 2em;
+    }
+    
 }
 @media screen and (max-width: 768px) {
-  .mainHeader {
-    grid-template-columns: auto min-content;
-  }
-  .mainHeader > .reservationButton {
-    display: none;
-  }
-  .mainHeader .logoContainer {
-    justify-self: flex-start;
-  }
-  .mainHeader .logo {
-    max-width: 72vw;
-    height: auto;
-  }
+    .mainHeader {
+        grid-template-columns: auto min-content;
+    }
+    .mainHeader > .reservationButton {
+        display: none;
+    }
+    .mainHeader .logoContainer {
+        justify-self: flex-start;
+    }
+    .mainHeader .logo {
+        max-width: 72vw;
+        height: auto;
+    }
+    .navMainContainer {
+        display: none;
+    }
 }
 /** MOBILE MENU    ******************************************/
-.menuOpen,
-.menuClose {
-  cursor: pointer;
-}
-.menuOpen {
-  display: none !important;
-  appearance: none;
-  border: 0;
-  font-size: 4rem;
-  font-weight: var(--font-weight-bold);
-  color: inherit;
-  background: transparent;
-  padding: 0.5rem 1rem;
-  padding-right: 0 !important;
-}
-.menuOpen::before {
-  content: "\2630";
-}
-.menuClose {
-  display: none !important;
-  appearance: none;
-  appearance: none;
-  border: 0;
-  font-size: 3rem;
-  font-weight: var(--font-weight-bold);
-  background: transparent;
-  padding: 0.5rem 1rem;
-}
-.menuClose::before {
-  content: "\2715";
+.menuButton {
+    display: none;
 }
 @media screen and (max-width: 768px) {
-  .menuOpen,
-  .menuClose {
-    display: block !important;
-  }
-  .navMainContainer {
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    right: 0;
-    max-width: 90vw;
-    height: 100vh;
-    font-size: var(--font-size-xxx-big);
-    font-weight: var(--font-weight-bold);
-    line-height: var(--line-height-normal);
-    letter-spacing: var(--letter-spacing-big);
-    background-color: var(--color-white);
+    .menuButton {
+        display: block;
+    }
+}
+.mobileMenu {
     display: flex;
-    flex-direction: column !important;
-    align-items: flex-end !important;
-    padding: 3.2rem 1rem !important;
-    row-gap: 1em !important;
-    transition: transform 0.2s ease-in-out;
-    transform: translateX(100%);
-  }
-  .navMainContainer.visible {
-    transform: translateX(0);
-  }
-  .navMain {
+    flex-direction: column;
+    row-gap: 1em;
+    align-items: flex-end;
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 2em;
+    font-size: var(--font-size-xx-big);
+    /* font-weight: var(--font-weight-bold); */
+    line-height: var(--line-height-normal);
+    /* letter-spacing: var(--letter-spacing-big); */
+}
+.navMobile {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     border: 0 !important;
     row-gap: 1em;
-  }
-  .menuBody {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    overflow-y: auto;
-    padding-bottom: 2em;
-  }
 }

@@ -22,18 +22,7 @@
     font-weight: var(--font-weight-bold);
 }
 .close {
-    cursor: pointer;
-    justify-self: flex-start;
-    appearance: none;
-    border: 0;
-    font: inherit;
-    font-size: 3rem;
-    font-weight: var(--font-weight-bold);
-    background: transparent;
-    padding: 0.5rem 1rem;
-}
-.close::before {
-    content: "\2715";
+    align-self: flex-end;
 }
 .centerer {
     display: flex;
@@ -59,8 +48,5 @@
     }
     .content {
         overflow-y: auto;
-    }
-    .close {
-        align-self: flex-end;
     }
 }
