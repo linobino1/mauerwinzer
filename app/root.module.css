@@ -57,6 +57,9 @@
 
   --letter-spacing-big: .1em;
   --letter-spacing-x-big: .11em;
+  
+  --border-radius: 2px;
+  --box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.15);
 }
 @media (max-width: 768px) {
   :root {
@@ -67,6 +70,8 @@
     --font-size-normal: 1rem;
     --font-size-small: .9rem;
     --font-size-x-small: .8rem;
+
+    --border-radius: 5px;
   }
 }
 * {
@@ -90,6 +95,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-sans-serif);
   text-transform: capitalize;
 }
 
@@ -120,4 +126,17 @@ p {
     margin-left: auto;
     margin-right: auto;
   }
+}
+@media screen and (min-width: 768px) {
+  *[data-mobile-only] {
+    display: none;
+  }
+}
+/** Box *************************************************************/
+.box {
+  padding: 2em;
+  border-radius: var(--border-radius);
+  background-color: rgba(0,0,0,0.05);
+  margin-block: 2em;
+  box-shadow: var(--box-shadow);
 }

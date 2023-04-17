@@ -1,7 +1,9 @@
 button.button {
+    position: relative;
     appearance: none;
-    border: 0;
-    outline: 1px solid;
+    outline: 0;
+    border: 1px solid;
+    border-radius: var(--border-radius);
     width: fit-content;
     background: none;
     color: var(--color-font-light);
@@ -14,10 +16,48 @@ button.button:hover {
     background-color: var(--color-font-light);
     color: var(--color-bg);
 }
+
+/** big            ******************************************/
 button.button[data-layout="big"] {
     padding: 1em;
 }
-
+/** submit         ******************************************/
+button.button[data-layout="submit"],
+button.button[data-layout="cancel"] {
+    padding: 1em;
+    width: 100%;
+    font-size: var(--font-size-big);
+    min-width: min(80vw, 11em);
+}
+button.button[data-layout="submit"] {
+    color: var(--color-bg);
+    background-color: green;
+    font-weight: var(--font-weight-bold);
+}
+button.button[data-layout="submit"]:hover {
+    filter: brightness(1.1);
+}
+button.button[data-layout="submit"]:hover::after {
+    transform: rotate(15deg);
+}
+button.button[data-layout="submit"]::after,
+button.button[data-layout="cancel"]::after {
+    /* content: "🍾 "; */
+    content: "🥂";
+    font-size: 1.5em;
+    position: absolute;
+    transform: translateX(0.2em);
+}
+/** cancel         ******************************************/
+button.button[data-layout="cancel"] {
+    color: var(--color-font-light);
+}
+button.button[data-layout="cancel"]::after {
+    content: "🫗";
+}
+button.button[data-layout="cancel"]:hover {
+    color: var(--color-font-bright);
+}
 /** COLOR THEME    ******************************************/
 button.button[data-color="white"] {
     color: var(--color-font-bright-2);

@@ -6,6 +6,8 @@ const environmentSchema = z.object({
     .default('development'),
   PAYLOAD_PUBLIC_SERVER_URL: z.string().min(1),
   PAYLOAD_SECRET: z.string().min(1),
+  HCAPTCHA_SECRET_KEY: z.string().min(1),
+  HCAPTCHA_SITE_KEY: z.string().min(1),
 })
 
 const environment = () => environmentSchema.parse(process.env)

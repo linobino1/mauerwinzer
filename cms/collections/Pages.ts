@@ -1,10 +1,10 @@
 import type { CollectionConfig } from 'payload/types';
-import { Content } from '../blocks/Content';
-import { Image } from '../blocks/Image';
-import { PostsList } from '../blocks/PostsList';
 import { t } from '../i18n';
 import { slugField } from '../util/slugField';
 import { Meta } from './Meta';
+import { Content } from '../blocks/Content';
+import { Image } from '../blocks/Image';
+import { PostsList } from '../blocks/PostsList';
 import { Gallery } from '../blocks/Gallery';
 
 const Pages: CollectionConfig = {

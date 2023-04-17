@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload/types';
-import { t } from '../i18n';
+import { _t, t } from '../i18n';
+import { fixedT } from '../i18n';
 
 export const Site: GlobalConfig = {
   slug: 'site',
@@ -34,12 +35,44 @@ export const Site: GlobalConfig = {
           required: true,
           localized: true,
         },
+      ],
+    },
+    {
+      name: 'reservations',
+      label: t('Reservations'),
+      type: 'group',
+      fields: [
         {
-          name: 'page',
-          type: 'relationship',
-          relationTo: 'pages',
+          name: 'from',
+          type: 'text',
+          label: t('From'),
           required: true,
+          validate: (value: string) => {
+            if (!value.match(/^\d{2}:\d{2}$/)) {
+              return _t('Time must be in the format HH:mm');
+            }
+            return true;
+          }
         },
+        {
+          name: 'until',
+          type: 'text',
+          label: t('Until'),
+          required: true,
+          validate: (value: string) => {
+            if (!value.match(/^\d{2}:\d{2}$/)) {
+              return _t('Time must be in the format HH:mm');
+            }
+            return true;
+          }
+        },
+        {
+          name: 'mailTemplate',
+          type: 'textarea',
+          label: t('Reservation Request Mail'),
+          defaultValue: ({ locale }: { locale: string}): string => fixedT('DefaultReservationRequestMail', locale),
+          localized: true,
+        }
       ],
     },
     {

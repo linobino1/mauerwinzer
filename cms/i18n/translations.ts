@@ -3,10 +3,6 @@ export interface Translation {
   de?: string
 }
 export const Translations: { [key: string]: Translation } = {
-  dateFormatAdmin: {
-    de: 'dd.MM.yyyy',
-    en: 'yyyy-MM-dd',
-  },
   'Gallery': {
     de: 'Gallerie',
   },
@@ -24,10 +20,6 @@ export const Translations: { [key: string]: Translation } = {
   },
   'Footer Content': {
     de: 'Inhalt im Fußbereich',
-  },
-  timeFormatAdmin: {
-    de: 'HH:mm',
-    en: 'hh:mm',
   },
   Website: {
     de: 'Webseite',
@@ -131,8 +123,50 @@ export const Translations: { [key: string]: Translation } = {
   'Sign Out': {
     de: 'Abmelden',
   },
-  Email: {},
   Password: {
     de: 'Passwort',
+  },
+  'Name': {
+    de: 'Name',
+  },
+  'Email': {
+    de: 'E-Mail',
+  },
+  'Phone': {
+    de: 'Telefon',
+  },
+  'Message': {
+    de: 'Nachricht',
+  },
+  'Party Size': {
+    de: 'Personenzahl',
+  },
+  'Reserve a Table': {
+    de: 'Tisch reservieren',
+  },
+  Send: {
+    de: 'Senden',
+  },
+  Cancel: {
+    de: 'Abbrechen',
+  },
+  'Reservation Form': {
+    de: 'Reservierungsformular',
+  },
+  'Reservation Forms': {
+    de: 'Reservierungsformulare',
+  },
+  Reservations: {
+    de: 'Reservierungen',
+  },
+  DefaultReservationRequestMail: {
+    en: 'Dear {name},\n\nThank you for your reservation request. We will contact you as soon as possible. You submitted the following data:\n\nDate: {date}\nTime: {time}\nParty size: {partySize}\n\nBest regards,\n{restaurantName}',
+    de: 'Liebe/r {name},\n\nvielen Dank für Deine Reservierungsanfrage. Wir werden uns so schnell wie möglich antworten. Du hast folgende Daten übermittelt:\n\nDatum: {date}\nUhrzeit: {time}\nPersonenzahl: {partySize}\n\nMit freundlichen Grüßen,\n{restaurantName}',
+  },
+  From: {
+    de: 'Von',
+  },
+  Until: {
+    de: 'Bis',
   },
 };

@@ -41,7 +41,6 @@ const Posts: CollectionConfig = {
       admin: {
         date: {
           pickerAppearance: 'dayOnly',
-          displayFormat: _t('dateFormatAdmin'),
         },
       },
     },

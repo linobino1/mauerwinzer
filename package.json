@@ -16,6 +16,7 @@
     "generate:images": "cross-env ts-node ./cms/scripts/generateImageSizes"
   },
   "dependencies": {
+    "@hcaptcha/react-hcaptcha": "^1.8.1",
     "@remix-run/css-bundle": "^1.13.0",
     "@remix-run/express": "^1.12.0",
     "@remix-run/node": "^1.12.0",

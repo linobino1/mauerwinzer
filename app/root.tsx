@@ -8,6 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useSearchParams,
 } from "@remix-run/react";
 import RefreshAuthToken from "./util/refreshAuthToken";
 import type { LoaderArgs } from "@remix-run/node";
@@ -19,10 +20,18 @@ import { cssBundleHref } from "@remix-run/css-bundle";
 import styles from "./root.module.css";
 import { i18nCookie } from "./cookie";
 import type { DynamicLinksFunction } from "remix-utils";
+import { ExternalScripts } from "remix-utils";
 import { DynamicLinks } from "remix-utils";
 import { mediaUrl } from "./util/mediaUrl";
 import type { Media} from "payload/generated-types";
 import { environment } from "./environment.server";
+import ReservationForm from '~/components/ReservationForm';
+import Modal from "./components/Modal";
+import type { ActionFunction } from '@remix-run/node';
+import { t } from "i18next";
+import transport, { connectedEmailAddresses, sender } from "email";
+import { replaceMulti } from "./util/stringInterpolation";
+import { siteKey, validateCaptcha } from "./util/captcha";
 
 export const links: LinksFunction = () => {
   return [
@@ -78,19 +87,102 @@ export const handle = {
 };
 
 export function useChangeLanguage(locale: string) {
-  let { i18n } = useTranslation();
+  const { i18n } = useTranslation();
   useEffect(() => {
     i18n.changeLanguage(locale);
   }, [locale, i18n]);
 }
 
+/**
+ * form handler for modal forms (reservation)
+ */
+export const action: ActionFunction = async ({ request, context: { payload } }) => {
+  const data = await request.formData();
+  
+  let res: {
+    success?: boolean;
+    message?: string;
+    errors: {
+      message: string;
+      field?: string;
+    }[];
+  } = {
+    errors: [],
+  };
+  
+  switch (data.get('action')) {
+    case 'reservation':
+      // validate captcha
+      if (!await validateCaptcha(data.get('h-captcha-response') as string)) {
+        res.errors.push({
+          message: t('please confirm the captcha'),
+          field: 'hCaptcha',
+        });
+      }
+
+      // validate required fields
+      const required = ['name', 'phone', 'date', 'time'];
+      for (const field of required) {
+        if (!data.get(field)) {
+          res.errors.push({
+            message: t('field is required'),
+            field,
+          });
+        }
+      }
+      // validate email, date, time on client side only
+      
+      // send email
+      if (!res.errors.length) {
+        try {
+          const site = await payload.findGlobal({
+            slug: 'site',
+            depth: 1,
+          });
+          await transport?.sendMail({
+            sender,
+            to: data.get('email') as string,
+            bcc: connectedEmailAddresses,
+            subject: t('New Reservation Request') as string,
+            text: replaceMulti(site.reservations.mailTemplate as string, {
+              name: data.get('name') as string,
+              date: data.get('date') as string,
+              time: data.get('time') as string,
+              partySize: data.get('partySize') as string,
+              phone: data.get('phone') as string,
+              email: data.get('email') as string,
+              message: data.get('message') as string,
+            }),
+          });
+          res.message = t('Your request has been sent. We will contact you shortly.') as string;
+        } catch (err) {
+          // TODO: log error
+          res.errors.push({
+            message: t('Sorry, there was an error sending your request. Please try to contact us directly.'),
+          });
+        };
+      } else {
+        res.message = t('Please correct the errors below and try again.') as string;
+      }
+
+    default:
+  }
+  
+  res.success = !res.errors.length;
+  return res
+}
+
+
 export default function App() {
   // Get the locale from the loader
-  let { locale, publicKeys } = useLoaderData<typeof loader>();
-  let { i18n } = useTranslation();
+  let { locale, publicKeys, site } = useLoaderData<typeof loader>();
+  let { t, i18n } = useTranslation();
 
   // handle locale change
   useChangeLanguage(locale);
+  
+  // use search params
+  const [ searchParams ] = useSearchParams();
 
   return (
     <html lang={locale} dir={i18n.dir()}>
@@ -100,11 +192,21 @@ export default function App() {
         <DynamicLinks />
       </head>
       <body className={styles.body}>
+        <ExternalScripts />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.ENV = ${JSON.stringify(publicKeys)}`,
           }}
         />
+        { searchParams.get('modal') === 'reservation' && (
+          <Modal title={t('Reserve a Table') as string}>
+            <ReservationForm
+              from={new Date(site.reservations.from)}
+              until={new Date(site.reservations.until)}
+              hCaptchaSiteKey={siteKey}
+            />
+          </Modal>
+        )}
         <Outlet />
         <ScrollRestoration />
         <Scripts />

@@ -6,6 +6,7 @@ import { useLoaderData } from '@remix-run/react';
 import PageHeader from '~/components/PageHeader';
 import i18next from "~/i18next.server";
 import PageFooter from '~/components/PageFooter';
+import { action as rootAction } from '../../../root';
 
 export const loader = async ({ request, params, context: { payload }}: LoaderArgs) => {
   const locale = await i18next.getLocale(request);
@@ -22,6 +23,9 @@ export const loader = async ({ request, params, context: { payload }}: LoaderArg
     page: res.docs[0],
   }
 }
+
+// not sure why root action is not automatically triggered...
+export const action = rootAction;
 
 export const meta: MetaFunction = ({ data }) => ({
   charset: "utf-8",

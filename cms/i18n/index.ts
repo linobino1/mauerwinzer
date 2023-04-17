@@ -26,3 +26,8 @@ export const _t = (key: string, replacers: Record<string, string> = {}): string 
   const res = t(key, replacers);
   return res[locale] || '';
 };
+
+export const fixedT = (key: string, locale: string, replacers: Record<string, string> = {}): string => {
+  const res = t(key, replacers);
+  return res[locale] || '';
+}

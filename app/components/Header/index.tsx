@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React from 'react';
-import type {
-  Media, Page,
-} from "payload/generated-types";
+import React, { useEffect } from 'react';
+import type { Media } from "payload/generated-types";
 import { Navigation } from '../Navigation';
 import { Link, useNavigate } from '@remix-run/react';
 import { Image } from '~/components/Image';
@@ -29,20 +27,40 @@ const Header: React.FC<Props> = ({
   };
   
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (menuVisible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+  }, [menuVisible]);
 
   return (
     <header>
       <div className={classes.mainHeader}>
         <div className={`${classes.navMainContainer} ${menuVisible && classes.visible}`}>
-          <button
-            onClick={menuClose}
-            type="button"
-            className={classes.menuClose}
-          />
-          <Navigation
-            navigation={navigations.find((x) => x.type === 'main')}
-            className={classes.navMain}
-          />
+          <div className={classes.menuHeader}>
+            <button
+              onClick={menuClose}
+              type="button"
+              className={classes.menuClose}
+            />
+          </div>
+          <div className={classes.menuBody}>
+            <Navigation
+              navigation={navigations.find((x) => x.type === 'main')}
+              className={classes.navMain}
+            />
+            <Button
+              className={classes.reservationButton}
+              layout="big"
+              label={site.headerButton.label}
+              onClick={() => navigate('?modal=reservation', { preventScrollReset: true })}
+              data-mobile-only="true"
+            />
+          </div>
         </div>
         <Link to="/" className={classes.logoContainer}>
           {site.logo as Media && (
@@ -61,9 +79,9 @@ const Header: React.FC<Props> = ({
         />
         <Button
           className={classes.reservationButton}
-          layout='big'
+          layout="big"
           label={site.headerButton.label}
-          onClick={() => navigate((site.headerButton.page as Page).slug as string)}
+          onClick={() => navigate('?modal=reservation', { preventScrollReset: true })}
         />
       </div>
       {content}
