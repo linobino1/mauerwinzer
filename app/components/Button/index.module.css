@@ -63,7 +63,7 @@
     border: 0;
     color: inherit;
     font: inherit;
-    font-size: 3rem;
+    font-size: 1.5em;
     font-weight: var(--font-weight-bold);
     background: transparent;
     padding: 0.5rem 1rem;
@@ -76,6 +76,7 @@
 }
 .button[data-symbol="menu"]::before {
     content: "\2630";
+    font-size: 1.3em;
 }
 /** COLOR THEME    ******************************************/
 .button[data-color="white"] {
