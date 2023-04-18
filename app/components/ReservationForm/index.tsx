@@ -57,20 +57,17 @@ export const ReservationForm: React.FC<Props> = ({
         type='text'
         name='name'
         aria-label={t('Name') as string}
-        defaultValue={'John Doe'}
         required={true}
       />
       <input
         type='tel'
         name='phone'
         aria-label={t('Phone') as string}
-        defaultValue={'+1 555 555 5555'}
         required={true}
       />
       <input
         type='email'
         name='email'
-        defaultValue={'leo.hilsheimer@gmeila.com'}
         aria-label={t('Email') as string}
       />
       <textarea
