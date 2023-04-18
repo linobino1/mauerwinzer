@@ -47,7 +47,7 @@
         row-gap: 0;
         font-size: var(--font-size-xx-big);
     }
-    .reservationButton {
+    .mainHeader .reservationButton {
         display: none;
     }
     .logoContainer {
