@@ -2,7 +2,7 @@
 import React from 'react';
 import Blocks from '~/components/Blocks';
 import type { LoaderArgs, MetaFunction } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { useLoaderData, useLocation } from '@remix-run/react';
 import PageHeader from '~/components/PageHeader';
 import i18next from "~/i18next.server";
 import PageFooter from '~/components/PageFooter';
@@ -35,9 +35,10 @@ export const meta: MetaFunction = ({ data }) => ({
 
 export const PageComponent: React.FC = () => {
   const { page } = useLoaderData<typeof loader>();
+  const location = useLocation();
 
   return (
-    <>
+    <div key={location.pathname}>
       <PageHeader />
       <main>
         <Blocks
@@ -45,7 +46,7 @@ export const PageComponent: React.FC = () => {
         />
       </main>
       <PageFooter />
-    </>
+    </div>
   );
 };
 
