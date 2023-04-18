@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import classes from "./index.module.css";
 import { useNavigate } from "@remix-run/react";
 import Button from "~/components/Button";
@@ -15,12 +15,13 @@ export const Modal: React.FC<Props> = ({
 }) => {
   const navigate = useNavigate();
   const modal = useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
     // close modal on click outside
     document.body.addEventListener('click', (e) => {
-      if (!modal.current?.contains(e.target as Node)) {
-        navigate('?modal=false', { preventScrollReset: true });
+      if (modal.current && !modal.current?.contains(e.target as Node)) {
+        console.log('close modal')
+        navigate(-1);
       }
     });
 
@@ -41,7 +42,7 @@ export const Modal: React.FC<Props> = ({
           layout="symbol"
           symbol="close"
           className={classes.close}
-          onClick={() => navigate('?modal=false', { preventScrollReset: true })}
+          onClick={() => navigate(-1)}
         />
       </div>
       <div className={classes.content}>{/* this div is necessary to center the content */}
