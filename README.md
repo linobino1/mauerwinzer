@@ -1,6 +1,6 @@
-# Welcome to RePay!
+# Mauerwinzer Website
 
-Simple template to get started with [Remix](https://remix.run) and [PayloadCMS](https://payloadcms.com).
+Powered by [Remix](https://remix.run) and [PayloadCMS](https://payloadcms.com).
 
 ## Development
 
