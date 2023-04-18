@@ -20,7 +20,7 @@ services:
       - traefik.http.routers.app.rule=Host(`${DOMAIN}`)
       - traefik.http.routers.app.entrypoints=websecure
       - traefik.http.routers.app.tls=true
-      - traefik.http.routers.app.tls.certresolver=${CERT_RESOLVER}
+      - traefik.http.routers.app.tls.certresolver=letsencrypt
   
   traefik:
     image: traefik
@@ -49,7 +49,7 @@ services:
       - traefik.http.routers.traefik.entrypoints=websecure
       - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik.tls=true
-      - traefik.http.routers.traefik.tls.certresolver=${CERT_RESOLVER}
+      - traefik.http.routers.traefik.tls.certresolver=letsencrypt
       - traefik.http.routers.traefik.middlewares=auth
 
 
