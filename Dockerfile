@@ -5,6 +5,7 @@ FROM base as deps
 
 WORKDIR /app
 COPY package*.json ./
+COPY yarn.lock ./
 RUN yarn install
 
 # build
