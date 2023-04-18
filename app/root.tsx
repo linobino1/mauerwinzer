@@ -98,7 +98,7 @@ const validateCaptcha = async (token: string): Promise<boolean> => {
     console.log('Captcha validation skipped in development mode');
     return true;
   }
-  fetch('https://hcaptcha.com/siteverify', {
+  let res = await fetch('https://hcaptcha.com/siteverify', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -109,13 +109,9 @@ const validateCaptcha = async (token: string): Promise<boolean> => {
       response: token,
     }),
   })
-  .then((res) => res.json())
-  .then((json) => {
-    if (json.success) {
-      return true;
-    }
-  });
-  return false;
+  .then((res) => res.json());
+  
+  return res.success;
 }
 
 /**
