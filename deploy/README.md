@@ -119,6 +119,6 @@ The GitHub Plugin for Jenkins provides a webhook that can be used to trigger bui
 
 1. in the jenkins job activate `Configure` > `Build Triggers` > `GitHub hook trigger for GITScm polling`
 
-1. in the git repo add a webhook to `http://jenkins.example.com/github-webhook/` and select `Just the push event`
+1. in the git repo add a webhook to `https://jenkins.example.com/github-webhook/` and select `Just the push event`
 
 1. done.
