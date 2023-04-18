@@ -14,7 +14,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
       - traefik.enable=true
-      - traefik.http.routers.jenkins.rule=Host(`traefik.${DOMAIN}`)
+      - traefik.http.routers.jenkins.rule=Host(`jenkins.${DOMAIN}`)
       - traefik.http.routers.jenkins.entrypoints=websecure
       - traefik.http.routers.jenkins.tls=true
       - traefik.http.routers.jenkins.tls.certresolver=letsencrypt
