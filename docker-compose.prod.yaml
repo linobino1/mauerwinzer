@@ -2,7 +2,6 @@ version: '3.8'
 
 services:
   app:
-    container_name: app
     build:
       context: .
       dockerfile: Dockerfile
@@ -39,7 +38,6 @@ services:
       - traefik.http.routers.app.tls.certresolver=letsencrypt
   
   traefik:
-    container_name: traefik
     image: traefik
     command:
       - --providers.docker=true
@@ -82,7 +80,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
   
   db:
-    container_name: db
     image: mongo:4.4.18 # last version running without CPU flag AVX
     volumes:
       - data:/data/db
