@@ -8,7 +8,7 @@ services:
       args:
         NODE_ENV: production
         PAYLOAD_PUBLIC_SERVER_URL: https://${DOMAIN}
-        HCAPTHA_SITE_KEY: ${HCAPTHA_SITE_KEY}
+        HCAPTCHA_SITE_KEY: ${HCAPTCHA_SITE_KEY}
     expose:
       - 3000
     volumes:
@@ -28,7 +28,7 @@ services:
       SMTP_USER:
       SMTP_PASS:
 
-      HCAPTHA_SITE_KEY:
+      HCAPTCHA_SITE_KEY:
       HCAPTCHA_SECRET_KEY:
     labels:
       - traefik.enable=true
