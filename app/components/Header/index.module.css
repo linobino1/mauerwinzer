@@ -2,20 +2,12 @@
 .mainHeader {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    row-gap: 2em;
     width: 100%;
     padding: var(--page-margin);
     align-items: center;
     font-weight: var(--font-weight-light);
     font-size: var(--font-size-big);
-}
-.mainHeader > * {
-    justify-self: end;
-}
-.mainHeader > *:first-child {
-    justify-self: start;
-}
-.mainHeader > *:nth-child(2) {
-    justify-self: center;
 }
 .navMain {
     display: flex;
@@ -35,24 +27,27 @@
     .mainHeader > .reservationButton {
         grid-row: 1;
         grid-column: 2;
+        justify-self: end;
     }
     .mainHeader > .navMainContainer {
         grid-row: 2;
         grid-column: 1 / span 2;
         justify-self: center;
-        margin-top: 2em;
     }
     
 }
 @media screen and (max-width: 768px) {
     .mainHeader {
-        grid-template-columns: auto min-content;
+        grid-template-columns: 1fr;
+        row-gap: 0;
+        font-size: var(--font-size-xx-big);
     }
     .mainHeader > .reservationButton {
         display: none;
     }
     .mainHeader .logoContainer {
-        justify-self: flex-start;
+        justify-self: center;
+        grid-row: 2;
     }
     .mainHeader .logo {
         max-width: 72vw;
@@ -64,11 +59,12 @@
 }
 /** MOBILE MENU    ******************************************/
 .menuButton {
-    display: none;
+    grid-row: 1;
+    justify-self: end;
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
     .menuButton {
-        display: block;
+        display: none;
     }
 }
 .mobileMenu {
