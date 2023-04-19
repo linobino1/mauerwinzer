@@ -4,11 +4,11 @@ import type { Page } from "payload/generated-types";
 import { useTranslation } from "react-i18next";
 
 export const loader = async ({ context: { payload }}: LoaderArgs) => {
-  const data = await payload.findGlobal({
+  const site = await payload.findGlobal({
     slug: 'site',
   });
   
-  throw redirect(`/${(data.homePage as Page)?.slug}`);
+  throw redirect(`/${(site.homePage as Page)?.slug}`);
 };
 
 export default function Index() {
