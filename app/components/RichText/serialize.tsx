@@ -145,7 +145,7 @@ const serialize = (children: Children): React.ReactElement[] => children.map((no
         </li>
       );
     case 'link':
-      console.log('LINK', node);
+      const target = node.newTab ? '_blank' : '_self';
       // treat internal links
       if (node.linkType === 'internal') {
         if (node.doc.relationTo === Pages.slug) {
@@ -154,6 +154,7 @@ const serialize = (children: Children): React.ReactElement[] => children.map((no
             <a
               key={i}
               href={`/${page.slug}`}
+              target={target}
             >
               {serialize(node.children as Children)}
             </a>
@@ -166,7 +167,11 @@ const serialize = (children: Children): React.ReactElement[] => children.map((no
         );
       }
       return (
-        <a key={i} href={escape(node.url ?? '')}>
+        <a
+          key={i}
+          href={escape(node.url ?? '')}
+          target={target}
+        >
           {serialize(node.children as Children)}
         </a>
       );
