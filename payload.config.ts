@@ -3,7 +3,6 @@ import path from 'path';
 import i18n from './i18n';
 import Media from './cms/collections/Media';
 import Navigations from './cms/collections/Navigations';
-import Posts from './cms/collections/Posts';
 import Pages from './cms/collections/Pages';
 import Users from './cms/collections/Users';
 import Site from './cms/globals/Site';
@@ -26,9 +25,6 @@ export default buildConfig({
     Pages,
     Media,
     Navigations,
-
-    // Blog
-    Posts,
   ],
   globals: [
     Site,
