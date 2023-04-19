@@ -103,6 +103,13 @@ docker exec -i <container> /usr/bin/mongorestore -d app /dump/app
 # `-d app` is the database where the dump should be imported to
 ```
 
+If you need to clear the database before importing the dump, you can do that with the following command:
+```sh
+docker exec -it <container> mongo
+> use app
+> db.dropDatabase()
+```
+
 ### Media Import / Export
 
 Zip the `media` folder and copy it to the target machine.
