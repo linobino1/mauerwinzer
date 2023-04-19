@@ -169,4 +169,13 @@ export const Translations: { [key: string]: Translation } = {
   Until: {
     de: 'Bis',
   },
+  Menu: {
+    de: 'Weinkarte',
+  },
+  'Menu In House': {
+    de: 'Weinkarte im Restaurant',
+  },
+  'Menu Take Away': {
+    de: 'Weinkarte zum Mitnehmen',
+  },
 };
