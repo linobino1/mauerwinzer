@@ -11,6 +11,8 @@ services:
         HCAPTCHA_SITE_KEY: ${HCAPTCHA_SITE_KEY}
     expose:
       - 3000
+    networks:
+      - app
     volumes:
       - ./media:/app/dist/media
     environment:
@@ -45,5 +47,9 @@ services:
       - ./dump:/dump
     restart: always
       
+networks:
+  app:
+    external: true
+
 volumes:
   data:

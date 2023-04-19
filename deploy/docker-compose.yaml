@@ -8,6 +8,8 @@ services:
     expose:
       - 8080
       - 50000
+    networks:
+      - app
     container_name: jenkins
     volumes:
       - /var/jenkins_home:/var/jenkins_home
@@ -22,6 +24,8 @@ services:
   
   traefik:
     image: traefik
+    networks:
+      - app
     command:
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
@@ -60,3 +64,7 @@ services:
     volumes:
       - ./letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      
+networks:
+  app:
+    external: true
