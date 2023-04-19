@@ -4,4 +4,6 @@
     font-size: var(--font-size-xx-big);
     gap: 1em;
     margin-block: 1em;
+    margin-inline: 1em;
+    flex-wrap: wrap;
 }
