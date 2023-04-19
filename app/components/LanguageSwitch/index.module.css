@@ -1,6 +1,5 @@
 .container {
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-normal);
+  text-transform: lowercase;
 }
 .language {
   padding-inline: 0.5em;
@@ -14,5 +13,5 @@
   color: inherit;
 }
 .language.active {
-  text-decoration: underline;
+  border-bottom: 1px solid;
 }
