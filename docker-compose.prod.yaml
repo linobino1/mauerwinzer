@@ -12,7 +12,7 @@ services:
     expose:
       - 3000
     networks:
-      - app
+      - traefik
     volumes:
       - ./media:/app/dist/media
     environment:
@@ -48,7 +48,7 @@ services:
     restart: always
       
 networks:
-  app:
+  traefik:
     external: true
 
 volumes:

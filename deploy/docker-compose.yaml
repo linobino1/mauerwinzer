@@ -9,7 +9,7 @@ services:
       - 8080
       - 50000
     networks:
-      - app
+      - traefik
     container_name: jenkins
     volumes:
       - /var/jenkins_home:/var/jenkins_home
@@ -25,7 +25,7 @@ services:
   traefik:
     image: traefik
     networks:
-      - app
+      - traefik
     command:
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
@@ -66,5 +66,5 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       
 networks:
-  app:
+  traefik:
     external: true
