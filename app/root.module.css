@@ -10,6 +10,7 @@
   font-family: 'Mulish';
   src: url('../public/fonts/Mulish/static/Mulish-ExtraLight.ttf') format('truetype');
   font-weight: 200;
+  font-display: swap;
 }
 
 :root {
