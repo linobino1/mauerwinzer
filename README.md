@@ -125,6 +125,8 @@ unzip media.zip
 sudo mv media/* /var/jenkins_home/workspace/<project-name>/media/
 ```
 
+Rebuild the project.
+
 ## Deployment
 
 
