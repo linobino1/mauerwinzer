@@ -40,10 +40,16 @@ services:
       - traefik.http.routers.app.tls=true
       - traefik.http.routers.app.tls.certresolver=letsencrypt
       - traefik.docker.network=traefik
+    depends_on:
+      - db
     restart: always
   
   db:
     image: mongo:4.4.18 # last version running without CPU flag AVX
+    expose:
+      - 27017
+    command:
+      - --storageEngine=wiredTiger
     volumes:
       - data:/data/db
       - ./dump:/dump
