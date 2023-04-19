@@ -137,7 +137,7 @@ A debian based linux server with a docker installation
 1. spin up jenkins and traefik
 
 ```bash
-docker-compose -f docker-compose.deploy.yaml up -d
+docker-compose -f docker compose.deploy.yaml up -d
 ```
 
 1. open jenkins in browser `http://myserver:8080`
