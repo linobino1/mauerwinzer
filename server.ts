@@ -2,10 +2,12 @@ import path from "path";
 import express from "express";
 import compression from "compression";
 import morgan from "morgan";
+import type { Payload } from "payload";
 import payload from "payload";
 import { createRequestHandler } from "@remix-run/express";
 import invariant from "tiny-invariant";
 import { sender, transport } from "./email";
+import type { Media, Menu } from "payload/generated-types";
 
 require("dotenv").config();
 
@@ -36,7 +38,7 @@ async function start() {
   });
 
   app.use(compression());
-
+  
   // http://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
   app.disable("x-powered-by");
 
@@ -53,6 +55,24 @@ async function start() {
   app.use(morgan("tiny"));
   
   app.use(payload.authenticate)
+
+  // custom menu route
+  app.get("/menu*", async (req, res) => {
+    // @ts-expect-error
+    const payload: Payload = req.payload;
+    const menu = await payload.findGlobal({
+      slug: 'menu',
+    });
+    
+    switch (req.path) {
+      case '/menu-takeaway':
+        return res.redirect(((menu as Menu)?.menuTakeAway as Media).url as string);
+      case '/menu-inhouse':
+        return res.redirect(((menu as Menu)?.menuInHouse as Media).url as string);
+      default:
+        return res.status(400).send('Bad request');
+    }
+  });
 
   app.all(
     "*",

@@ -7,6 +7,7 @@ import Posts from './cms/collections/Posts';
 import Pages from './cms/collections/Pages';
 import Users from './cms/collections/Users';
 import Site from './cms/globals/Site';
+import Menu from './cms/globals/Menu';
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
@@ -31,6 +32,7 @@ export default buildConfig({
   ],
   globals: [
     Site,
+    Menu,
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'cms/payload-types.ts'),
