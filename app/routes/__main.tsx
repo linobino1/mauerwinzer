@@ -6,7 +6,7 @@ import Header from "~/components/Header";
 import i18next from "~/i18next.server";
 import classes from "./__main.module.css";
 
-export const loader = async ({ request, context: { payload, user }}: LoaderArgs) => {
+export const loader = async ({ request, context: { payload }}: LoaderArgs) => {
   const locale = await i18next.getLocale(request);
 
   const [site, navigations] = await Promise.all([
@@ -20,7 +20,6 @@ export const loader = async ({ request, context: { payload, user }}: LoaderArgs)
     }),
   ]);
   return {
-    user,
     site,
     navigations: navigations.docs,
   };

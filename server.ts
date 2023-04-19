@@ -54,8 +54,6 @@ async function start() {
 
   app.use(morgan("tiny"));
   
-  app.use(payload.authenticate)
-
   // custom menu route
   app.get("/menu*", async (req, res) => {
     // @ts-expect-error
@@ -87,8 +85,6 @@ async function start() {
               return {
                 // @ts-expect-error
                 payload: req.payload,
-                // @ts-expect-error
-                user: req?.user,
                 res,
               };
             },
@@ -101,8 +97,6 @@ async function start() {
             return {
               // @ts-expect-error
               payload: req.payload,
-              // @ts-expect-error
-              user: req?.user,
               res,
             };
           },

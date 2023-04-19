@@ -10,7 +10,6 @@ import {
   useLoaderData,
   useSearchParams,
 } from "@remix-run/react";
-import RefreshAuthToken from "./util/refreshAuthToken";
 import type { LoaderArgs } from "@remix-run/node";
 import i18next from "~/i18next.server";
 import { useTranslation } from "react-i18next";
@@ -232,7 +231,6 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
-        <RefreshAuthToken />
       </body>
     </html>
   );

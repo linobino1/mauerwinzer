@@ -14,61 +14,15 @@ const Users: CollectionConfig = {
     singular: t('User'),
     plural: t('Users'),
   },
-  auth: {
-    tokenExpiration: 1 * 60 * 60, // 1 hour
-    cookies: {
-     secure: false,
-     sameSite: 'strict',
-    },
-    verify: {
-      generateEmailSubject: () => 'please verify your email address',
-      generateEmailHTML: ({ user, token }) => {
-        const url = `http://localhost:3000/auth/verify-email?token=${token}`;
-        return `
-          <!doctype html>
-          <html>
-            <body>
-              <p>Hello, ${user.name}!</p>
-              <p>Click below to verify your email address.</p>
-              <p>
-                <a href="${url}">${url}</a>
-              </p>
-            </body>
-          </html>
-        `;
-      }
-    },
-    forgotPassword: {
-      generateEmailSubject: () => 'reset your password',
-      generateEmailHTML: (args) => {
-        const token = args?.token;
-        const user = args?.user as User;
-
-        // Use the token provided to allow your user to reset their password
-        const resetPasswordURL = `http://localhost:3000/auth/reset-password?token=${token}`;
-
-        return `
-          <!doctype html>
-          <html>
-            <body>
-              <p>Hello, ${user.email}!</p>
-              <p>Click below to reset your password.</p>
-              <p>
-                <a href="${resetPasswordURL}">${resetPasswordURL}</a>
-              </p>
-            </body>
-          </html>
-        `;
-      }
-    },
-  },
+  auth: true,
   admin: {
     group: t('Site'),
     useAsTitle: 'name',
     defaultColumns: ['name', 'role'],
   },
   access: {
-    read: () => true,
+    // allow authenticated users
+    read: ({ req: { user } }) => !!user,
   },
   fields: [
     // Email added by default
