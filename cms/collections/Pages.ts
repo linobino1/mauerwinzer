@@ -6,6 +6,8 @@ import { Content } from '../blocks/Content';
 import { Image } from '../blocks/Image';
 import { PostsList } from '../blocks/PostsList';
 import { Gallery } from '../blocks/Gallery';
+import { Instagram } from '../blocks/Instagram';
+import { CallToAction } from '../blocks/CallToAction';
 
 const Pages: CollectionConfig = {
   slug: 'pages',
@@ -52,6 +54,8 @@ const Pages: CollectionConfig = {
         PostsList,
         Image,
         Gallery,
+        Instagram,
+        CallToAction,
       ],
     },
     Meta,

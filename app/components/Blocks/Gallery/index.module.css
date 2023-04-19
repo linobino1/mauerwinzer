@@ -18,5 +18,6 @@
     .container {
         grid-template-columns: 53% auto;
         column-gap: 3%;
+        margin-block: 3em;
     }
 }

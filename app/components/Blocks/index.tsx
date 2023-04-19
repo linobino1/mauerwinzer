@@ -4,6 +4,8 @@ import { Content } from '~/components/Blocks/Content';
 import { Image } from '~/components/Blocks/Image';
 import { Gallery } from '~/components/Blocks/Gallery';
 import { PostsList } from '~/components/Blocks/PostsList';
+import { Instagram } from '~/components/Blocks/Instagram';
+import { CallToAction } from '~/components/Blocks/CallToAction';
 
 type Layout = Page['layout'];
 
@@ -21,6 +23,9 @@ const Blocks: React.FC<Props> = ({
       <section key={i} className={block.blockType}>
         { (() => {
           switch (block.blockType) {
+            case 'content':
+              return <Content {...block} />;
+
             case 'postsList':
               return <PostsList {...block} posts={posts as Post[]} />;
 
@@ -30,8 +35,11 @@ const Blocks: React.FC<Props> = ({
             case 'gallery':
               return <Gallery {...block} />;
 
-            case 'content':
-              return <Content {...block} />;
+            case 'instagram':
+              return <Instagram {...block} />;
+
+            case 'callToAction':
+              return <CallToAction {...block} />;
           }
         })()}
       </section>
