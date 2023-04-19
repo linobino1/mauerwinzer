@@ -55,17 +55,20 @@ a[href^="tel:"] {
 .navFooter a {
   padding-left: 0;
 }
-
 .navSocial {
   grid-column: 3;
   grid-row: 1;
   justify-self: flex-end;
 }
-.newsletterButton {
+.buttons {
   grid-column: 3;
   grid-row: 2;
   justify-self: flex-end;
   align-self: flex-end;
+  gap: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 /** Mobile Grid Layout *****************************************************************/
@@ -79,8 +82,12 @@ a[href^="tel:"] {
     grid-column: 1 !important;
     justify-self: center;
   }
-  .newsletterButton {
+  .buttons {
     grid-row: 3;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
   }
   .navSocial {
     grid-row: 2;
