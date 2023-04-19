@@ -2,7 +2,6 @@ import React from "react"
 import classes from "./index.module.css"
 
 export interface Props extends React.HTMLAttributes<HTMLButtonElement> {
-  label?: string
   layout?: 'big' | 'submit' | 'cancel' | 'symbol' | undefined
   className?: string
   color?: 'white' | undefined
@@ -13,7 +12,7 @@ export interface Props extends React.HTMLAttributes<HTMLButtonElement> {
 
 // export const imageUrl = (image: Media, width: number, height: number): string => mediaUrl(`${image.sizes.card.}`)
 export const Button: React.FC<Props> = (props) => {
-  let { label, layout, color, symbol } = props;
+  let { layout, color, symbol } = props;
   let updatedProps = { ...props };
   updatedProps.className = `${classes.button} ${props.className}`;
   
@@ -24,7 +23,7 @@ export const Button: React.FC<Props> = (props) => {
       data-symbol={symbol}
       {...updatedProps}
     >
-      {label || props.children}
+      { props.children }
     </button>
   )
 }

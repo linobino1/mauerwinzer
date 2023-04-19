@@ -27,10 +27,9 @@ export const Footer: React.FC<Props> = ({
       <RichText content={site.footerContent} className={classes.footerContent} />
       <Button
         className={classes.newsletterButton}
-        label="Newsletter abonnieren"
         layout="big"
         color="white"
-      />
+      >{'Newsletter abonnieren'}</Button>
     </footer>
   )
 };

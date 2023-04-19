@@ -8,6 +8,8 @@ import type { Site, Navigation as NavigationType } from 'payload/generated-types
 import classes from './index.module.css';
 import Button from '../Button';
 import Modal from '../Modal';
+import LanguageSwitch from '../LanguageSwitch';
+import { t } from 'i18next';
 
 type Props = {
   site: Site
@@ -48,12 +50,14 @@ const Header: React.FC<Props> = ({
           className={classes.menuButton}
           onClick={() => navigate('?modal=menu', { preventScrollReset: true })}
         />
-        <Button
-          layout="big"
-          label={site.headerButton.label}
-          className={classes.reservationButton}
-          onClick={() => navigate('?modal=reservation', { preventScrollReset: true })}
-        />
+        <div className={classes.navSecondary}>
+          <LanguageSwitch />
+          <Button
+            layout="big"
+            className={classes.reservationButton}
+            onClick={() => navigate('?modal=reservation', { preventScrollReset: true })}
+          >{t('Reserve a Table')}</Button>
+        </div>
       </div>
       {content}
       { searchParams.get('modal') === 'menu' && (
@@ -63,12 +67,12 @@ const Header: React.FC<Props> = ({
               navigation={navigations.find((x) => x.type === 'main')}
               className={classes.navMobile}
             />
+            <LanguageSwitch />
             <Button
               className={classes.reservationButton}
               layout="big"
-              label={site.headerButton.label}
               onClick={() => navigate('?modal=reservation', { preventScrollReset: true })}
-            />
+            >{t('Reserve a Table')}</Button>
           </div>
         </Modal>
       )}
