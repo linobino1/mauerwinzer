@@ -21,6 +21,10 @@ export const Navigations: CollectionConfig = {
           value: 'main',
         },
         {
+          label: 'Mobile Navigation',
+          value: 'mobile',
+        },
+        {
           label: 'Footer Navigation',
           value: 'footer',
         },

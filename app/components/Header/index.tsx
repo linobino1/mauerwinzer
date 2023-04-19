@@ -65,10 +65,9 @@ const Header: React.FC<Props> = ({
         <Modal>
           <div className={classes.mobileMenu}>
             <Navigation
-              navigation={navigations.find((x) => x.type === 'main')}
+              navigation={navigations.find((x) => x.type === 'mobile')}
               className={classes.navMobile}
             />
-            <LanguageSwitch />
             <Button
               className={classes.reservationButton}
               layout="big"
