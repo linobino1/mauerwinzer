@@ -13,6 +13,7 @@ services:
       - 3000
     networks:
       - traefik
+      - default
     volumes:
       - ./media:/app/dist/media
     environment:
