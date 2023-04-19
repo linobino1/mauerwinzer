@@ -20,10 +20,6 @@ const Users: CollectionConfig = {
     useAsTitle: 'name',
     defaultColumns: ['name', 'role'],
   },
-  access: {
-    // allow authenticated users
-    read: ({ req: { user } }) => !!user,
-  },
   fields: [
     // Email added by default
     {

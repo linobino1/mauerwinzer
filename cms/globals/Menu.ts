@@ -4,9 +4,6 @@ import { t } from '../i18n';
 export const Menu: GlobalConfig = {
   slug: 'menu',
   label: t('Menu'),
-  access: {
-    read: (): boolean => true,
-  },
   admin: {
     group: t('Site'),
   },

@@ -4,9 +4,6 @@ import { fixedT } from '../i18n';
 
 export const Site: GlobalConfig = {
   slug: 'site',
-  access: {
-    read: (): boolean => true,
-  },
   admin: {
     group: t('Site'),
   },

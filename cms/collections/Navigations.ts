@@ -8,9 +8,6 @@ export const Navigations: CollectionConfig = {
     useAsTitle: 'type',
     defaultColumns: ['type'],
   },
-  access: {
-    read: (): boolean => true,
-  },
   fields: [
     {
       name: 'type',
