@@ -9,7 +9,7 @@ import classes from './index.module.css';
 import Button from '../Button';
 import Modal from '../Modal';
 import LanguageSwitch from '../LanguageSwitch';
-import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   site: Site
@@ -22,6 +22,7 @@ const Header: React.FC<Props> = ({
 }) => {
   const navigate = useNavigate();
   const [ searchParams ] = useSearchParams();
+  const { t } = useTranslation();
   
   return (
     <header>

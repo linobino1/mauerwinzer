@@ -1,2 +1,10 @@
 {
+    "Reserve a Table": "Reserve a Table",
+    "Name": "Name",
+    "Email": "Email",
+    "Phone": "Telefon",
+    "Message": "Nachricht",
+    "Party Size": "Personenzahl",
+    "Send": "Senden",
+    "Cancel": "Abbrechen"
 }

@@ -16,7 +16,7 @@ export default function LanguageSwitch({ className }: Props) {
   const location = useLocation();
 
   return (
-    <div className={className}>
+    <div className={`${classes.container} ${className}`}>
       {(Object.keys(languages) as Array<keyof typeof languages>).map((lng) => {
         const query = new URLSearchParams(location.search);
         query.set('lng', lng);

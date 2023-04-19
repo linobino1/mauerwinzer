@@ -24,18 +24,10 @@ export const Site: GlobalConfig = {
       relationTo: 'media',
     },
     {
-      name: 'headerButton',
-      label: t('Header Button'),
-      type: 'group',
-      fields: [
-        {
-          name: 'label',
-          type: 'text',
-          label: t('Label'),
-          required: true,
-          localized: true,
-        },
-      ],
+      name: 'favicon',
+      label: t('Site Icon'),
+      type: 'upload',
+      relationTo: 'media',
     },
     {
       name: 'reservations',
@@ -79,6 +71,7 @@ export const Site: GlobalConfig = {
       name: 'footerContent',
       label: t('Footer Content'),
       type: 'richText',
+      localized: true,
     },
     {
       name: 'favicon',

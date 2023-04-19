@@ -14,11 +14,20 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
-.reservationButton {
-   justify-self: end;
+.navSecondary {
+    justify-self: end;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    gap: 1em;
 }
 .logoContainer {
     justify-self: center;
+}
+@media screen and (min-width: 768px) {
+    .language {
+        font-size: var(--font-size-small);
+    }
 }
 /** stack navigation under logo */
 @media screen and (max-width: 1200px) and (min-width: 768px) {
@@ -30,7 +39,7 @@
         grid-column: 1;
         justify-self: start;
     }
-    .reservationButton {
+    .navSecondary {
         grid-row: 1;
         grid-column: 2;
     }
@@ -47,7 +56,7 @@
         row-gap: 0;
         font-size: var(--font-size-xx-big);
     }
-    .mainHeader .reservationButton {
+    .mainHeader .navSecondary {
         display: none;
     }
     .logoContainer {

@@ -1,7 +1,10 @@
-.language {
-  padding-left: .5rem;
-  padding-right: .5rem;  
+.container {
+  font-size: var(--font-size-small);
   font-weight: var(--font-weight-normal);
+}
+.language {
+  padding-inline: 0.5em;
+  padding-block: 0.2em;
 }
 .language,
 .language:active,
@@ -12,7 +15,4 @@
 }
 .language.active {
   text-decoration: underline;
-}
-.language:not(:last-child) {
-  border-right: 1.5px solid;
 }

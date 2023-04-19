@@ -1,6 +1,10 @@
 {
-  "Welcome": "Willkommen",
-  "submit": "absenden",
-  "back": "zurück",
-  "sign in": "anmelden"
+  "Reserve a Table": "Tisch reservieren",
+  "Name": "Name",
+  "Email": "Email",
+  "Phone": "Telefon",
+  "Message": "Nachricht",
+  "Party Size": "Personenzahl",
+  "Send": "Senden",
+  "Cancel": "Abbrechen"
 }
