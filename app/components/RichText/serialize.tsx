@@ -3,8 +3,9 @@ import React, { Fragment } from 'react';
 import { escape } from "html-escaper";
 import { Text } from 'slate';
 import { Image } from '~/components/Image';
-import type { Media } from 'payload/generated-types';
+import type { Media, Page } from 'payload/generated-types';
 import classes from './index.module.css';
+import Pages from 'cms/collections/Pages';
 
 // eslint-disable-next-line no-use-before-define
 type Children = Leaf[];
@@ -18,6 +19,7 @@ type Leaf = {
   children?: Children
   url?: string
   [key: string]: unknown
+  doc?: any
 };
 
 const serialize = (children: Children): React.ReactElement[] => children.map((node, i) => {
@@ -143,11 +145,28 @@ const serialize = (children: Children): React.ReactElement[] => children.map((no
         </li>
       );
     case 'link':
+      console.log('LINK', node);
+      // treat internal links
+      if (node.linkType === 'internal') {
+        if (node.doc.relationTo === Pages.slug) {
+          const page: Page = node.doc.value;
+          return (
+            <a
+              key={i}
+              href={`/${page.slug}`}
+            >
+              {serialize(node.children as Children)}
+            </a>
+          );
+        }
+        return (
+          <span key={i}>
+            {serialize(node.children as Children)}
+          </span>
+        );
+      }
       return (
-        <a
-          href={escape(node.url ?? '')}
-          key={i}
-        >
+        <a key={i} href={escape(node.url ?? '')}>
           {serialize(node.children as Children)}
         </a>
       );
