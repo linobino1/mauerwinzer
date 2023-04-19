@@ -60,13 +60,13 @@ The location of the `dump` folder is defined in the docker-compose file you are 
 relative path, it will be relative to the jenkins workspace.
 
 ```
-# docker-compose.prod.yaml
+# docker-compose.production.yaml
 services:
     db:
         volumes:
             - ./dump:/dump
             
-# deploy/docker-compose.yaml
+# docker-compose.deploy.yaml
 services:
     jenkins:
         volumes:
@@ -137,7 +137,7 @@ A debian based linux server with a docker installation
 1. spin up jenkins and traefik
 
 ```bash
-docker-compose -f docker compose.deploy.yaml up -d
+docker compose -f docker-compose.deploy.yaml up -d
 ```
 
 1. open jenkins in browser `http://myserver:8080`
