@@ -54,6 +54,12 @@ async function start() {
 
   app.use(morgan("tiny"));
   
+  // robots.txt
+  app.get('/robots.txt', function (req, res) {
+    res.type('text/plain');
+    res.send("User-agent: *\nDisallow:");
+  });
+
   // custom menu route
   app.get("/menu*", async (req, res) => {
     // @ts-expect-error
