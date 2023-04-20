@@ -27,9 +27,11 @@ export const loader = async ({ request, params, context: { payload }}: LoaderArg
 // not sure why root action is not automatically triggered...
 export const action = rootAction;
 
-export const meta: MetaFunction = ({ data }) => ({
+export const meta: MetaFunction = ({ data, parentsData }) => ({
   charset: "utf-8",
-  title: data.page?.title,
+  title: data.page?.title || parentsData.root?.site?.title,
+  description: data.page?.meta?.description || parentsData.root?.site?.meta?.description,
+  keywords: `${data.page?.meta?.keywords || ''} ${parentsData.root?.site?.meta?.keywords || ''}`.trim(),
   viewport: "width=device-width,initial-scale=1",
 });
 

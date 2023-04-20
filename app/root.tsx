@@ -77,6 +77,8 @@ export const dynamicLinks: DynamicLinksFunction<SerializeFrom<typeof loader>> = 
 export const meta: MetaFunction<typeof loader> = ({ data }) => ({
   charset: "utf-8",
   title: data.site.title,
+  description: data.site.meta?.description,
+  keywords: data.site.meta?.keywords,
   viewport: "width=device-width,initial-scale=1",
 });
 

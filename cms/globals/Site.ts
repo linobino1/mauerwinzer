@@ -1,6 +1,7 @@
 import type { GlobalConfig } from 'payload/types';
 import { _t, t } from '../i18n';
 import { fixedT } from '../i18n';
+import { metaField } from '../fields/meta';
 
 export const Site: GlobalConfig = {
   slug: 'site',
@@ -82,6 +83,7 @@ export const Site: GlobalConfig = {
       type: 'relationship',
       relationTo: 'pages',
     },
+    metaField(t('Global Meta')),
   ],
 };
 

@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload/types';
 import { t } from '../i18n';
-import { slugField } from '../util/slugField';
-import { Meta } from './Meta';
+import { slugField } from '../fields/slug';
+import { metaField } from '../fields/meta';
 import { Content } from '../blocks/Content';
 import { Image } from '../blocks/Image';
 import { PostsList } from '../blocks/PostsList';
@@ -55,7 +55,7 @@ const Pages: CollectionConfig = {
         CallToAction,
       ],
     },
-    Meta,
+    metaField(t('Meta')),
   ],
 };
 

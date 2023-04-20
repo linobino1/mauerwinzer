@@ -1,9 +1,9 @@
 import type { Field } from 'payload/types';
 import { t } from '../i18n';
 
-export const Meta: Field = {
+export const metaField = (label: Record<string, string>): Field => ({
   name: 'meta',
-  label: t('Meta'),
+  label,
   type: 'group',
   fields: [
     {
@@ -18,4 +18,4 @@ export const Meta: Field = {
       type: 'text',
     },
   ],
-};
+});
