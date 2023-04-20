@@ -4,7 +4,6 @@ import { slugField } from '../fields/slug';
 import { metaField } from '../fields/meta';
 import { Content } from '../blocks/Content';
 import { Image } from '../blocks/Image';
-import { PostsList } from '../blocks/PostsList';
 import { Gallery } from '../blocks/Gallery';
 import { Instagram } from '../blocks/Instagram';
 import { CallToAction } from '../blocks/CallToAction';
@@ -48,7 +47,6 @@ const Pages: CollectionConfig = {
       minRows: 1,
       blocks: [
         Content,
-        PostsList,
         Image,
         Gallery,
         Instagram,

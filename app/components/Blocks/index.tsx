@@ -1,9 +1,8 @@
 import React from 'react';
-import type { Page, Post } from 'payload/generated-types';
+import type { Page } from 'payload/generated-types';
 import { Content } from '~/components/Blocks/Content';
 import { Image } from '~/components/Blocks/Image';
 import { Gallery } from '~/components/Blocks/Gallery';
-import { PostsList } from '~/components/Blocks/PostsList';
 import { Instagram } from '~/components/Blocks/Instagram';
 import { CallToAction } from '~/components/Blocks/CallToAction';
 
@@ -12,11 +11,10 @@ type Layout = Page['layout'];
 type Props = {
   layout: Layout
   className?: string
-  posts?: Post[]
 }
 
 const Blocks: React.FC<Props> = ({
-  layout, className, posts,
+  layout, className,
 }) => (
   <div className={className}>
     {layout?.map((block, i) => (
@@ -25,9 +23,6 @@ const Blocks: React.FC<Props> = ({
           switch (block.blockType) {
             case 'content':
               return <Content {...block} />;
-
-            case 'postsList':
-              return <PostsList {...block} posts={posts as Post[]} />;
 
             case 'image':
               return <Image {...block} />;
