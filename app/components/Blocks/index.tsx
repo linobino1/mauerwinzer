@@ -5,6 +5,7 @@ import { Image } from '~/components/Blocks/Image';
 import { Gallery } from '~/components/Blocks/Gallery';
 import { Instagram } from '~/components/Blocks/Instagram';
 import { CallToAction } from '~/components/Blocks/CallToAction';
+import { GoogleMaps } from '~/components/Blocks/GoogleMaps';
 
 type Layout = Page['layout'];
 
@@ -35,6 +36,9 @@ const Blocks: React.FC<Props> = ({
 
             case 'callToAction':
               return <CallToAction {...block} />;
+
+            case 'googleMaps':
+              return <GoogleMaps {...block} />;
           }
         })()}
       </section>

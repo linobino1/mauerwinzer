@@ -1,0 +1,14 @@
+.container {
+    margin: 2em var(--page-margin);
+}
+.container h2 {
+    font-size: var(--font-size-xx-big);
+    text-align: center;
+}
+.container iframe {
+    margin: 0 auto;
+    aspect-ratio: 3/2;
+    max-width: 100%;
+    max-height: max(30em, 50vh);
+    display: block;
+}

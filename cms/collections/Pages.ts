@@ -7,6 +7,7 @@ import { Image } from '../blocks/Image';
 import { Gallery } from '../blocks/Gallery';
 import { Instagram } from '../blocks/Instagram';
 import { CallToAction } from '../blocks/CallToAction';
+import { GoogleMaps } from '../blocks/GoogleMaps';
 
 const Pages: CollectionConfig = {
   slug: 'pages',
@@ -51,6 +52,7 @@ const Pages: CollectionConfig = {
         Gallery,
         Instagram,
         CallToAction,
+        GoogleMaps,
       ],
     },
     metaField(t('Meta')),
