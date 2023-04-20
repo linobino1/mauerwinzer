@@ -5,12 +5,14 @@ import classes from './index.module.css';
 export type Type = {
   blockType: 'instagram'
   blockName?: string
+  beholdId: string
 }
 
-export const Instagram: React.FC<Type> = () => {
+export const Instagram: React.FC<Type> = ({ beholdId }) => {
   return (
     <div className={classes.container}>
-      <h1>instagram</h1>
+      <figure data-behold-id={beholdId}></figure>
+      <script src="https://w.behold.so/widget.js" type="module"></script>
     </div>
   )
 };
