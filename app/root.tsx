@@ -7,7 +7,9 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  isRouteErrorResponse,
   useLoaderData,
+  useRouteError,
   useSearchParams,
 } from "@remix-run/react";
 import type { LoaderArgs } from "@remix-run/node";
@@ -194,6 +196,38 @@ export const action: ActionFunction = async ({ request, context: { payload } }) 
   return res
 }
 
+
+export function ErrorBoundary() {
+  let error = useRouteError();
+  console.log("ROOT error boundary", error)
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <div>
+        <h1>
+          {error.status} {error.statusText}
+        </h1>
+        <p>{error.data}</p>
+      </div>
+    );
+  }
+  
+  // display info about the error in development
+  return environment().NODE_ENV === 'development' ? (
+    error instanceof Error ? (
+      <div>
+        <h1>Error</h1>
+        <p>{error.message}</p>
+        <p>The stack trace is:</p>
+        <pre>{error.stack}</pre>
+      </div>
+    ) : (
+      <pre>{'Unknown Error'}</pre>
+    )
+  ) : (
+    <h1>Something went wrong</h1>
+  );
+}
 
 export default function App() {
   // Get the locale from the loader

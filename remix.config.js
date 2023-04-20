@@ -8,6 +8,7 @@ module.exports = {
   ],
   future: {
     unstable_cssModules: true,
+    v2_errorBoundary: true,
   },
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
