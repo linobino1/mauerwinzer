@@ -4,10 +4,10 @@ export const Instagram: Block = {
   slug: 'instagram',
   fields: [
     {
-      name: 'beholdId',
+      name: 'apiUrl',
       type: 'text',
       required: true,
-    }
+    },
   ],
 }
 
