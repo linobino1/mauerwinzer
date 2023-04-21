@@ -5,6 +5,7 @@ import { Form } from '~/components/Form';
 import Button from '~/components/Button';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { useTranslation } from 'react-i18next';
+import { useLocale } from 'remix-i18next';
 
 export type Props = {
   from: Date
@@ -18,6 +19,7 @@ export const ReservationForm: React.FC<Props> = ({
   const location = useLocation();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const locale = useLocale();
   return (
     <Form
       method='post'
@@ -79,7 +81,7 @@ export const ReservationForm: React.FC<Props> = ({
         data-name='hCaptcha'
         data-type='hCaptcha'
       >
-        <HCaptcha sitekey={hCaptchaSiteKey} />
+        <HCaptcha sitekey={hCaptchaSiteKey} languageOverride={locale} />
       </div>
       <Button
         className={classes.submit}
