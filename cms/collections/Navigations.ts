@@ -36,7 +36,6 @@ export const Navigations: CollectionConfig = {
       name: 'items',
       type: 'array',
       minRows: 1,
-      maxRows: 8,
       admin: {
         components: {
           RowLabel: ({ data }: { data: any}): string => data.name,
