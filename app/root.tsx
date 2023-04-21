@@ -147,13 +147,6 @@ export const action: ActionFunction = async ({ request, context: { payload } }) 
           message: t('please confirm the captcha'),
           field: 'hCaptcha',
         });
-        // DEBUG
-        await transport?.sendMail({
-          sender,
-          to: connectedEmailAddresses,
-          subject: 'Captcha validation failed',
-          text: `${data.get('h-captcha-response')} - ${data.get('email')}`,
-        });
       }
 
       // validate required fields
