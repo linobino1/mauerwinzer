@@ -24,6 +24,7 @@ export const sender = {
   name: process.env.EMAIL_FROM_NAME || 'remix-payload app',
   address: process.env.EMAIL_FROM || 'app@example.com',
 }
+export const from = `${sender.name} <${sender.address}>`;
 export const connectedEmailAddresses =
   process.env.CONNECTED_EMAIL_ADDRESSES?.split(',').map((x) => x.trim()).filter(Boolean) || [];
 

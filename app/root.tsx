@@ -29,7 +29,7 @@ import ReservationForm from '~/components/ReservationForm';
 import Modal from "./components/Modal";
 import type { ActionFunction } from '@remix-run/node';
 import { t } from "i18next";
-import transport, { connectedEmailAddresses, sender } from "email";
+import transport, { connectedEmailAddresses, from } from "email";
 import { replaceMulti } from "./util/stringInterpolation";
 import environment from "./util/environment";
 import CookieConsent from "react-cookie-consent";
@@ -169,7 +169,7 @@ export const action: ActionFunction = async ({ request, context: { payload } }) 
             depth: 1,
           });
           await transport?.sendMail({
-            sender,
+            from,
             to: data.get('email') as string,
             bcc: connectedEmailAddresses,
             subject: t('New Reservation Request') as string,
