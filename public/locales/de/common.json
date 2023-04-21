@@ -9,5 +9,11 @@
   "Cancel": "Abbrechen",
   "CookieBannerText": "Diese Website verwendet Cookies, um Ihnen die bestmögliche Funktionalität bieten zu können.",
   "Accept": "Akzeptieren",
-  "Decline": "Ablehnen"
+  "Decline": "Ablehnen",
+  "please confirm the captcha": "bitte bestätigen Sie den Captcha",
+  "field is required": "Pflichtfeld",
+  "New Reservation Request": "Neue Reservierungsanfrage",
+  "Your request has been sent. We will contact you shortly.": "Ihre Anfrage wurde gesendet. Wir geben Ihnen schnellstmöglich Rückmeldung.",
+  "rry, there was an error sending your request. Please try to contact us directly": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns direkt.",
+  "Please correct the errors below and try again.": "Bitte korrigieren Sie die unten aufgeführten Fehler und versuchen Sie es erneut.",
 }

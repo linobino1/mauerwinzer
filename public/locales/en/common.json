@@ -1,13 +1,3 @@
 {
-    "Reserve a Table": "Reserve a Table",
-    "Name": "Name",
-    "Email": "Email",
-    "Phone": "Telefon",
-    "Message": "Nachricht",
-    "Party Size": "Personenzahl",
-    "Send": "Senden",
-    "Cancel": "Abbrechen",
-    "CookieBannerText": "This website uses cookies to ensure you get the best experience on our website.",
-    "Accept": "Accept",
-    "Decline": "Decline"
+    "CookieBannerText": "This website uses cookies to ensure you get the best experience on our website."
 }
