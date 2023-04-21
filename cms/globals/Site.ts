@@ -6,7 +6,7 @@ import { metaField } from '../fields/meta';
 export const Site: GlobalConfig = {
   slug: 'site',
   admin: {
-    group: t('Site'),
+    group: t('Config'),
   },
   fields: [
     {

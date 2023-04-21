@@ -5,7 +5,7 @@ export const Menu: GlobalConfig = {
   slug: 'menu',
   label: t('Menu'),
   admin: {
-    group: t('Site'),
+    group: t('Contents'),
   },
   fields: [
     {

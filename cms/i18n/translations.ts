@@ -3,6 +3,12 @@ export interface Translation {
   de?: string
 }
 export const Translations: { [key: string]: Translation } = {
+  'Contents': {
+    de: 'Inhalte',
+  },
+  'Config': {
+    de: 'Konfiguration',
+  },
   'Gallery': {
     de: 'Gallerie',
   },

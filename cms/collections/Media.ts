@@ -11,6 +11,9 @@ export const Media: CollectionConfig = {
     singular: t('Media'),
     plural: t('Media'),
   },
+  admin: {
+    group: t('Media'),
+  },
   access: {
     read: (): boolean => true, // Everyone can read Media
   },

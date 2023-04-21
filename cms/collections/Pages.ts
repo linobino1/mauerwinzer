@@ -16,7 +16,7 @@ const Pages: CollectionConfig = {
     plural: t('Pages'),
   },
   admin: {
-    group: t('Site'),
+    group: t('Contents'),
     defaultColumns: ['title'],
     useAsTitle: 'title',
   },

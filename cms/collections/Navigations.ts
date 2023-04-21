@@ -4,7 +4,7 @@ import { t } from '../i18n';
 export const Navigations: CollectionConfig = {
   slug: 'navigations',
   admin: {
-    group: t('Site'),
+    group: t('Config'),
     useAsTitle: 'type',
     defaultColumns: ['type'],
   },

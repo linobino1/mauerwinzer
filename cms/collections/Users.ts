@@ -16,7 +16,7 @@ const Users: CollectionConfig = {
   },
   auth: true,
   admin: {
-    group: t('Site'),
+    group: t('Config'),
     useAsTitle: 'name',
     defaultColumns: ['name', 'role'],
   },

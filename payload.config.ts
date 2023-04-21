@@ -21,10 +21,10 @@ export default buildConfig({
   },
   collections: [
     // Site
-    Users,
     Pages,
     Media,
     Navigations,
+    Users,
   ],
   globals: [
     Site,
