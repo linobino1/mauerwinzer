@@ -104,16 +104,16 @@ const validateCaptcha = async (token: string): Promise<boolean> => {
     return true;
   }
   try {
-    const body = new FormData();
-    body.append('secret', environment().HCAPTCHA_SECRET_KEY);
-    body.append('sitekey', environment().HCAPTCHA_SITE_KEY);
-    body.append('response', token);
     const res = await fetch('https://hcaptcha.com/siteverify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body,
+      body: new URLSearchParams({
+        secret: environment().HCAPTCHA_SECRET_KEY,
+        sitekey: environment().HCAPTCHA_SITE_KEY,
+        response: token,
+      }),
     });
     const data = await res.json();
     return !!data.success;
