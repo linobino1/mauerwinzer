@@ -6,5 +6,8 @@
   "Message": "Nachricht",
   "Party Size": "Personenzahl",
   "Send": "Senden",
-  "Cancel": "Abbrechen"
+  "Cancel": "Abbrechen",
+  "CookieBannerText": "Diese Website verwendet Cookies, um Ihnen die bestmögliche Funktionalität bieten zu können.",
+  "Accept": "Akzeptieren",
+  "Decline": "Ablehnen"
 }

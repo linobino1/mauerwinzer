@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classes from './index.module.css';
+import { getCookieConsentValue } from "react-cookie-consent";
+
 
 export type Type = {
   blockType: 'googleMaps'
@@ -11,7 +13,11 @@ export type Type = {
 export const GoogleMaps: React.FC<Type> = ({
   title, src,
 }) => {
-  return (
+  const [consent, setConsent] = React.useState(false);
+  useEffect(() => {
+    setConsent(!!getCookieConsentValue());
+  }, []);
+  return consent ? (
     <div className={classes.container}>
       { title && (<h2>{title}</h2>) }
       <iframe
@@ -25,6 +31,10 @@ export const GoogleMaps: React.FC<Type> = ({
       />
       
     </div>
+  ) : (
+    <>
+      {/* TODO: we could show a preview here asking the user to consent to cookies */}
+    </>
   )
 };
 
