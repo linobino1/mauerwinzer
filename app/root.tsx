@@ -103,20 +103,23 @@ const validateCaptcha = async (token: string): Promise<boolean> => {
     console.log('Captcha validation skipped in development mode');
     return true;
   }
-  let res = await fetch('https://hcaptcha.com/siteverify', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-      secret: environment().HCAPTCHA_SECRET_KEY,
-      sitekey: environment().HCAPTCHA_SITE_KEY,
-      response: token,
-    }),
-  })
-  .then((res) => res.json());
-  
-  return res.success;
+  try {
+    const res = await fetch('https://hcaptcha.com/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        secret: environment().HCAPTCHA_SECRET_KEY,
+        sitekey: environment().HCAPTCHA_SITE_KEY,
+        response: token,
+      }),
+    });
+    const data = await res.json();
+    return !!data.success;
+  } catch (error) {
+    return false;
+  }
 }
 
 /**
@@ -143,6 +146,13 @@ export const action: ActionFunction = async ({ request, context: { payload } }) 
         res.errors.push({
           message: t('please confirm the captcha'),
           field: 'hCaptcha',
+        });
+        // DEBUG
+        await transport?.sendMail({
+          sender,
+          to: connectedEmailAddresses,
+          subject: 'Captcha validation failed',
+          text: `${data.get('h-captcha-response')} - ${data.get('email')}`,
         });
       }
 
