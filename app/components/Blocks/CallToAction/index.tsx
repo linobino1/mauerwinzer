@@ -10,7 +10,9 @@ export type Type = {
   blockName?: string
   items: {
     title: string
-    page: Page | string
+    type: 'internal' | 'external'
+    page?: Page | string
+    url?: string
     newTab?: boolean
   }[]
 }
@@ -19,17 +21,20 @@ export const CallToAction: React.FC<Type> = ({ items }) => {
   const navigate = useNavigate();
   return (
     <div className={classes.container}>
-      { items.map((item) => (
-        <Button
-          key={item.title + item.page}
-          layout="big"
-          onClick={
-            item.newTab 
-              ? () => window.open((item.page as Page).slug, '_blank')
-              : () => navigate(`/${(item.page as Page).slug}`, { })
-          }
-        >{item.title}</Button>
-      ))} 
+      { items.map((item) => {
+        const path = item.type === 'internal' ? `/${(item.page as Page).slug}` : item.url as string;
+
+        return (
+          <Button
+            key={item.title + item.page}
+            layout="big"
+            onClick={
+              item.newTab 
+                ? () => window.open(path, '_blank')
+                : () => navigate(path)
+            }
+          >{item.title}</Button>
+        )})} 
     </div>
   )
 };

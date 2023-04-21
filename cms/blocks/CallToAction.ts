@@ -20,11 +20,38 @@ export const CallToAction: Block = {
           required: true,
         },
         {
+          name: 'type',
+          type: 'radio',
+          defaultValue: 'internal',
+          options: [
+            {
+              label: 'Internal Link',
+              value: 'internal',
+            },
+            {
+              label: 'External Link',
+              value: 'external',
+            },
+          ],
+        },
+        // internal link
+        {
           name: 'page',
           type: 'relationship',
           relationTo: 'pages',
           required: true,
-          hasMany: false,
+          admin: {
+            condition: (data, siblingData) => siblingData.type === 'internal',
+          },
+        },
+        // external link
+        {
+          name: 'url',
+          type: 'text',
+          required: true,
+          admin: {
+            condition: (data, siblingData) => siblingData.type === 'external',
+          },
         },
         {
           name: 'newTab',
