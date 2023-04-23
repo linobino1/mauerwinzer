@@ -7,7 +7,6 @@ import PageHeader from '~/components/PageHeader';
 import i18next from "~/i18next.server";
 import PageFooter from '~/components/PageFooter';
 import { action as rootAction } from '../../../root';
-import { useTranslation } from 'react-i18next';
 import {
   isRouteErrorResponse,
   useRouteError,
@@ -48,8 +47,7 @@ export const meta: MetaFunction = ({ data, parentsData }) => ( data && {
 
 export const PageComponent: React.FC = () => {
   const { page } = useLoaderData<typeof loader>();
-  const { t } = useTranslation();
-
+  
   return (
     <>
       <PageHeader />
