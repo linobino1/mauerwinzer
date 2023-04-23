@@ -4,6 +4,7 @@ import RichText from '../RichText';
 import type { Navigation as NavigationType, Site } from 'payload/generated-types';
 import classes from './index.module.css';
 import Button from '../Button';
+import { useTranslation } from 'react-i18next';
 
 export type Props = {
   site: Site
@@ -13,6 +14,7 @@ export type Props = {
 export const Footer: React.FC<Props> = ({
   site, navigations,
 }) => {
+  const { t } = useTranslation();
   return (
     <footer className={classes.footer}>
       <Navigation
@@ -30,12 +32,12 @@ export const Footer: React.FC<Props> = ({
           layout="big"
           color="white"
           onClick={() => window.open('/menu-inhouse', '_blank')}
-        >{'Weinkarte'}</Button>
+        >{t('Menu')}</Button>
         <Button
           layout="big"
           color="white"
           onClick={() => window.open('/menu-takeaway', '_blank')}
-        >{'Weinkarte ausser Haus'}</Button>
+        >{t('Menu take-away')}</Button>
       </div>
     </footer>
   )
