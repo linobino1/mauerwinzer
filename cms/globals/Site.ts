@@ -1,9 +1,6 @@
 import type { GlobalConfig } from 'payload/types';
 import { t, fixedT } from '../i18n';
 import { metaField } from '../fields/meta';
-import { t as t2 } from 'i18next';
-
-console.log('t2', t2('testkey'));
 
 export const Site: GlobalConfig = {
   slug: 'site',
