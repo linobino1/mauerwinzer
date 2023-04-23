@@ -1,0 +1,4 @@
+{
+  "required format: {{format}}": "required format: {{format}}",
+  "DefaultReservationRequestMail": "Dear {name},\n\nThank you for your reservation request. We will contact you as soon as possible. You submitted the following data:\n\nDate: {date}\nTime: {time}\nParty size: {partySize}\n\nBest regards,\n{restaurantName}"
+}

@@ -1,16 +1,20 @@
 import type { GlobalConfig } from 'payload/types';
-import { _t, t } from '../i18n';
-import { fixedT } from '../i18n';
+import { t, fixedT } from '../i18n';
 import { metaField } from '../fields/meta';
+import { t as t2 } from 'i18next';
+
+console.log('t2', t2('testkey'));
 
 export const Site: GlobalConfig = {
   slug: 'site',
   admin: {
     group: t('Config'),
   },
+  label: t('Site Config'),
   fields: [
     {
       name: 'title',
+      label: t('Title'),
       type: 'text',
       localized: true,
       required: true,
@@ -23,7 +27,6 @@ export const Site: GlobalConfig = {
     },
     {
       name: 'favicon',
-      label: t('Site Icon'),
       type: 'upload',
       relationTo: 'media',
     },
@@ -37,9 +40,9 @@ export const Site: GlobalConfig = {
           type: 'text',
           label: t('From'),
           required: true,
-          validate: (value: string) => {
+          validate: (value: string, { t }) => {
             if (!value.match(/^\d{2}:\d{2}$/)) {
-              return _t('Time must be in the format HH:mm');
+              return t('required format: {{format}}', { format: 'HH:mm' });
             }
             return true;
           }
@@ -49,9 +52,9 @@ export const Site: GlobalConfig = {
           type: 'text',
           label: t('Until'),
           required: true,
-          validate: (value: string) => {
+          validate: (value: string, { t }) => {
             if (!value.match(/^\d{2}:\d{2}$/)) {
-              return _t('Time must be in the format HH:mm');
+              return t('required format: {{format}}', { format: 'HH:mm' });
             }
             return true;
           }
@@ -72,14 +75,8 @@ export const Site: GlobalConfig = {
       localized: true,
     },
     {
-      name: 'favicon',
-      label: t('Site Icon'),
-      type: 'upload',
-      relationTo: 'media',
-    },
-    {
       name: 'homePage',
-      label: t('Homepage'),
+      label: t('Home'),
       type: 'relationship',
       relationTo: 'pages',
     },

@@ -1,33 +1,47 @@
-import { Translations } from './translations';
+/**
+ * This file contains the translations for the payloadCMS admin panel only!
+ * Even though the actual translation strings are saved in `public/locales`,
+ * this file is the only place where they are used. The `backend` namespace
+ * is not used anywhere else in the app.
+ */
+import en from './../../public/locales/en/backend.json';
+import de from './../../public/locales/de/backend.json';
 
-const locale = 'de';
+export type TranslationKeyEN = keyof typeof en;
+export type TranslationKeyDE = keyof typeof de;
 
-// get a translation, fallback to key
-// eslint-disable-next-line @typescript-eslint/naming-convention
+/**
+ * get an array of the translations in all languages with replacers applied
+ * @param key Key of the translation, e.g. 'Hello {name}!'
+ * @param replacers { name: 'John' }
+ * @returns { en: 'Hello John!', de: 'Hallo John!' }
+ */
 export const t = (key: string, replacers: Record<string, string> = {}): Record<string, string> => {
-  const res: Record<string, string> = {
-    en: '',
-    de: '',
+  return {
+    en: replace(en.hasOwnProperty(key) ? en[key as TranslationKeyEN] : key, replacers),
+    de: replace(de.hasOwnProperty(key) ? de[key as TranslationKeyDE] : key, replacers),
   };
-  res.de = Translations[key]?.de || key;
-  res.en = Translations[key]?.en || key;
-
-  // treat replacers
-  Object.keys(replacers).forEach((_key) => {
-    res.de = res.de?.replace(`{${_key}}`, replacers[_key]);
-    res.en = res.en?.replace(`{${_key}}`, replacers[_key]);
-  });
-
-  return res;
-};
-
-// eslint-disable-next-line @typescript-eslint/naming-convention
-export const _t = (key: string, replacers: Record<string, string> = {}): string => {
-  const res = t(key, replacers);
-  return res[locale] || '';
 };
 
 export const fixedT = (key: string, locale: string, replacers: Record<string, string> = {}): string => {
-  const res = t(key, replacers);
-  return res[locale] || '';
+  switch (locale) {
+    case 'en':
+      return replace(en.hasOwnProperty(key) ? en[key as TranslationKeyEN] : key, replacers);
+    case 'de':
+      return replace(de.hasOwnProperty(key) ? de[key as TranslationKeyDE] : key, replacers);
+  }
+  return key;
+}
+
+/**
+ * @param s Hello {name}!
+ * @param replacers { name: 'John' }
+ * @returns Hello John!
+ */
+const replace = (s: string, replacers: Record<string, string> = {}): string => {
+  let res = s;
+  Object.keys(replacers).forEach((key) => {
+    res = res?.replace(`{${key}}`, replacers[key]);
+  });
+  return res;
 }

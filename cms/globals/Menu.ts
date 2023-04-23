@@ -10,13 +10,13 @@ export const Menu: GlobalConfig = {
   fields: [
     {
       name: 'menuInHouse',
-      label: t('Menu In House'),
+      label: t('Menu in-house'),
       type: 'upload',
       relationTo: 'media',
     },
     {
       name: 'menuTakeAway',
-      label: t('Menu Take Away'),
+      label: t('Menu take-away'),
       type: 'upload',
       relationTo: 'media',
     },

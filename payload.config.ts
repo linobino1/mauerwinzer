@@ -7,6 +7,8 @@ import Pages from './cms/collections/Pages';
 import Users from './cms/collections/Users';
 import Site from './cms/globals/Site';
 import Menu from './cms/globals/Menu';
+import en from './public/locales/en/backend.json';
+import de from './public/locales/de/backend.json';
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
@@ -15,6 +17,14 @@ export default buildConfig({
   },
   i18n: {
     ...i18n,
+    resources: {
+      de: {
+        common: de,
+      },
+      en: {
+        common: en,
+      },
+    },
   },
   graphQL: {
     disable: true,

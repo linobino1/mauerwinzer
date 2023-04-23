@@ -8,6 +8,10 @@ export const Navigations: CollectionConfig = {
     useAsTitle: 'type',
     defaultColumns: ['type'],
   },
+  labels: {
+    singular: t('Navigation'),
+    plural: t('Navigations'),
+  },
   fields: [
     {
       name: 'type',
@@ -34,6 +38,7 @@ export const Navigations: CollectionConfig = {
     },
     {
       name: 'items',
+      label: t('Items'),
       type: 'array',
       minRows: 1,
       admin: {
@@ -44,29 +49,31 @@ export const Navigations: CollectionConfig = {
       fields: [
         {
           name: 'type',
+          label: t('Type'),
           type: 'radio',
           defaultValue: 'internal',
           options: [
             {
-              label: 'Internal Link',
+              label: t('Internal Link'),
               value: 'internal',
             },
             {
-              label: 'External Link',
+              label: t('External Link'),
               value: 'external',
             },
             {
-              label: 'Subnavigation',
+              label: t('Subnavigation'),
               value: 'subnavigation',
             },
             {
-              label: 'Language Switch',
+              label: t('Language Switch'),
               value: 'language',
             },
           ],
         },
         {
           name: 'name',
+          label: t('Name'),
           type: 'text',
           localized: true,
           required: true,
@@ -77,6 +84,7 @@ export const Navigations: CollectionConfig = {
         // internal link
         {
           name: 'page',
+          label: t('Page'),
           type: 'relationship',
           relationTo: 'pages',
           required: true,
@@ -104,6 +112,7 @@ export const Navigations: CollectionConfig = {
         // subnavigation
         {
           name: 'subnavigation',
+          label: t('Subnavigation'),
           type: 'relationship',
           relationTo: 'navigations',
           admin: {

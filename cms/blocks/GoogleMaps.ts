@@ -1,4 +1,5 @@
 import type { Block } from "payload/types";
+import { t } from "../i18n";
 
 export const GoogleMaps: Block = {
   slug: 'googleMaps',
@@ -9,6 +10,7 @@ export const GoogleMaps: Block = {
   fields: [
     {
       name: 'title',
+      label: t('Title'),
       type: 'text',
       localized: true,
       required: false,
