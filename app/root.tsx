@@ -79,10 +79,13 @@ export const dynamicLinks: DynamicLinksFunction<SerializeFrom<typeof loader>> = 
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => ({
   charset: "utf-8",
+  viewport: "width=device-width,initial-scale=1",
   title: data.site.title,
   description: data.site.meta?.description,
   keywords: data.site.meta?.keywords,
-  viewport: "width=device-width,initial-scale=1",
+  "og:title": data.site.meta?.ogTitle,
+  "og:description": data.site.meta?.ogDescription,
+  "og:image": mediaUrl((data.site.meta?.ogImage as Media)?.filename as string),
 });
 
 export const handle = {

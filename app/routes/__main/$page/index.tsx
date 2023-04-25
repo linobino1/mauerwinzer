@@ -13,6 +13,7 @@ import {
 } from "@remix-run/react";
 import { Response } from '@remix-run/node';
 import classes from './index.module.css';
+import { mediaUrl } from '~/util/mediaUrl';
 
 
 export const loader = async ({ request, params, context: { payload }}: LoaderArgs) => {
@@ -37,13 +38,20 @@ export const loader = async ({ request, params, context: { payload }}: LoaderArg
 // not sure why root action is not automatically triggered...
 export const action = rootAction;
 
-export const meta: MetaFunction = ({ data, parentsData }) => ( data && {
-  charset: "utf-8",
-  title: data.page?.title || parentsData.root?.site?.title,
-  description: data.page?.meta?.description || parentsData?.root?.site?.meta?.description,
-  keywords: `${data.page?.meta?.keywords || ''} ${parentsData?.root?.site?.meta?.keywords || ''}`.trim(),
-  viewport: "width=device-width,initial-scale=1",
-});
+export const meta: MetaFunction = ({ data, parentsData }) => {
+  const image = data.page?.meta?.ogImage || parentsData.root?.site?.meta?.ogImage;
+  return data && {
+    charset: "utf-8",
+    viewport: "width=device-width,initial-scale=1",
+    title: data.page?.title || parentsData.root?.site?.title,
+    description: data.page?.meta?.description || parentsData?.root?.site?.meta?.description,
+    keywords: `${data.page?.meta?.keywords || ''} ${parentsData?.root?.site?.meta?.keywords || ''}`.trim(),
+    "og:title": data.page?.meta.ogTitle || parentsData.root?.site?.meta.ogTitle,
+    "og:description": data.page?.meta.ogDescription || parentsData.root?.site?.meta.ogDescription,
+    "og:image": mediaUrl(image?.sizes['landscape-1280w']?.filename as string),
+  }
+};
+
 
 export const PageComponent: React.FC = () => {
   const { page } = useLoaderData<typeof loader>();
