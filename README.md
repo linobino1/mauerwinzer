@@ -42,6 +42,9 @@ docker exec -i <container> /usr/bin/mongodump --uri mongodb://db:27017/app --out
 # navigate to the dump folder, it should be a docker volume defined in the docker-compose file you are using
 cd path/to/dump
 
+# if you are in production and the volume is defined with a relative path, it will be relative to the jenkins workspace
+cd /var/jenkins_home/workspace/<project-name>/dump
+
 # zip the dump folder (it will be named like the database you are using)
 zip -r dump.zip app
 
