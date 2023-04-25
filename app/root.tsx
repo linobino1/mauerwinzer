@@ -127,6 +127,7 @@ const validateCaptcha = async (token: string): Promise<boolean> => {
 export const action: ActionFunction = async ({ request, context: { payload } }) => {
   const data = await request.formData();
   const t = await i18next.getFixedT(request);
+  const locale = await i18next.getLocale(request);
   
   let res: {
     success?: boolean;
@@ -167,6 +168,7 @@ export const action: ActionFunction = async ({ request, context: { payload } }) 
           const site = await payload.findGlobal({
             slug: 'site',
             depth: 1,
+            locale,
           });
           await transport?.sendMail({
             from,
