@@ -46,7 +46,7 @@ services:
         
       # Redirect all www to non-www middleware
       - traefik.http.middlewares.to-nonwww.redirectregex.regex=^(https?://)www\.(.+)
-      - traefik.http.middlewares.to-nonwww.redirectregex.replacement=https://${1}
+      - traefik.http.middlewares.to-nonwww.redirectregex.replacement=https://$${1}
 
       - traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)
       - traefik.http.routers.traefik.entrypoints=websecure
