@@ -19,7 +19,7 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
   return navigation ? (
     <nav className={`${classes.nav} ${classes[navigation.type]} ${className}`}>
       {navigation?.items?.map(({
-        id, icon, subnavigation, page, url, name, type,
+        id, icon, subnavigation, page, url, name, type, newTab,
       }) => {
         if (type === 'language') {
           return <LanguageSwitch key={id} className={classes.navItem} />;
@@ -53,6 +53,7 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
               <Link
                 to={href}
                 className={`${classes.navItem} ${isActive && classes.active}`}
+                target={newTab ? '_blank' : undefined}
               >
                 {inner}
               </Link>
