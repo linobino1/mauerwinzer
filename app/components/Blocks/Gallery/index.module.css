@@ -16,8 +16,17 @@
 }
 @media screen and (max-width: 768px) {
     .container {
-        grid-template-columns: 53% auto;
-        column-gap: 3%;
-        margin-block: 3em;
+        display: flex;
+        flex-direction: column;
+        margin: 0 3vw;
+        gap: 0;
+    }
+    .image {
+        width: 66vw;
+        align-self: flex-start;
+        margin: 0 !important;
+    }
+    .image:nth-child(2) {
+        align-self: flex-end;
     }
 }

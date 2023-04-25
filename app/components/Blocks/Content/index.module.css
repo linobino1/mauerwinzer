@@ -8,3 +8,8 @@
     line-height: 137%;;
     margin-block: 1em;
 }
+@media screen and (max-width: 768px) {
+    .container {
+        margin-block: 0;
+    }
+}
