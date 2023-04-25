@@ -31,7 +31,7 @@
 /** bigger logo on big screens */
 @media screen and (min-width: 1450px) {
     .logo {
-        width: 25vw;
+        width: 520px;
         height: auto;
     }
 }
