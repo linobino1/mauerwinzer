@@ -61,7 +61,7 @@ async function start() {
   });
 
   // custom menu route
-  app.get("/menu*", async (req, res) => {
+  app.get("/menu-(inhouse|takeaway)", async (req, res) => {
     // @ts-expect-error
     const payload: Payload = req.payload;
     const menu = await payload.findGlobal({
