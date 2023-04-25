@@ -24,11 +24,13 @@ export const metaField = (label: Record<string, string>): Field => ({
       name: 'ogTitle',
       label: 'og:title',
       type: 'text',
+      localized: true,
     },
     {
       name: 'ogDescription',
       label: 'og:description',
       type: 'textarea',
+      localized: true,
       admin: {
         description: '<65 characters',
       },
