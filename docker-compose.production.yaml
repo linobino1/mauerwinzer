@@ -40,6 +40,8 @@ services:
       - traefik.http.routers.app.entrypoints=websecure
       - traefik.http.routers.app.tls=true
       - traefik.http.routers.app.tls.certresolver=letsencrypt
+      - traefik.http.routers.app.tls.domains[0].main=${DOMAIN}
+      - traefik.http.routers.app.tls.domains[0].sans=www.${DOMAIN}
       - traefik.http.routers.app.middlewares=to-nonwww
       - traefik.docker.network=traefik
     depends_on:
