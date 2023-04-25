@@ -28,7 +28,6 @@ import type { Media} from "payload/generated-types";
 import ReservationForm from '~/components/ReservationForm';
 import Modal from "./components/Modal";
 import type { ActionFunction } from '@remix-run/node';
-import { t } from "i18next";
 import transport, { connectedEmailAddresses, from } from "email";
 import { replaceMulti } from "./util/stringInterpolation";
 import environment from "./util/environment";
@@ -127,6 +126,7 @@ const validateCaptcha = async (token: string): Promise<boolean> => {
  */
 export const action: ActionFunction = async ({ request, context: { payload } }) => {
   const data = await request.formData();
+  const t = await i18next.getFixedT(request);
   
   let res: {
     success?: boolean;
