@@ -38,17 +38,25 @@ export const loader = async ({ request, params, context: { payload }}: LoaderArg
 // not sure why root action is not automatically triggered...
 export const action = rootAction;
 
+// meta tags overrides
 export const meta: MetaFunction = ({ data, parentsData }) => {
   const image = data.page?.meta?.ogImage || parentsData.root?.site?.meta?.ogImage;
+  // merge additional meta tags from page and site
+  const additionalMetaTags: Record<string, string> = {};
+  [
+    ...(parentsData.root?.site?.meta?.additionalMetaTags || []),
+    ...(data.page?.meta?.additionalMetaTags || []),
+  ].forEach((tag) => {
+    additionalMetaTags[tag.key as string] = tag.value;
+  });
   return data && {
-    charset: "utf-8",
-    viewport: "width=device-width,initial-scale=1",
     title: data.page?.title || parentsData.root?.site?.title,
     description: data.page?.meta?.description || parentsData?.root?.site?.meta?.description,
     keywords: `${data.page?.meta?.keywords || ''} ${parentsData?.root?.site?.meta?.keywords || ''}`.trim(),
     "og:title": data.page?.meta.ogTitle || parentsData.root?.site?.meta.ogTitle,
     "og:description": data.page?.meta.ogDescription || parentsData.root?.site?.meta.ogDescription,
     "og:image": mediaUrl(image?.sizes['landscape-1280w']?.filename as string),
+    ...additionalMetaTags,
   }
 };
 

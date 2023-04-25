@@ -41,5 +41,24 @@ export const metaField = (label: Record<string, string>): Field => ({
       type: 'upload',
       relationTo: 'media',
     },
+    {
+      name: 'additionalMetaTags',
+      label: t('Additional Meta Tags'),
+      type: 'array',
+      fields: [
+        {
+          name: 'key',
+          label: t('Key'),
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'value',
+          label: t('Value'),
+          type: 'text',
+          required: true,
+        },
+      ], 
+    }
   ],
 });
