@@ -204,7 +204,6 @@ export const action: ActionFunction = async ({ request, context: { payload } }) 
 
 export function ErrorBoundary() {
   let error = useRouteError();
-  console.log("ROOT error boundary", error)
 
   if (isRouteErrorResponse(error)) {
     return (
