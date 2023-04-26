@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import classes from "./index.module.css";
 import { useNavigate } from "@remix-run/react";
 import Button from "~/components/Button";
@@ -20,7 +20,6 @@ export const Modal: React.FC<Props> = ({
     // close modal on click outside
     document.body.addEventListener('click', (e) => {
       if (modal.current && !modal.current?.contains(e.target as Node)) {
-        console.log('close modal')
         navigate(-1);
       }
     });
