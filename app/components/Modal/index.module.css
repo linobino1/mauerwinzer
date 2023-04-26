@@ -17,9 +17,15 @@
     align-items: center;
     justify-content: space-between;
     padding: 3vw;
+}
+.header,
+.title {
     font-size: var(--font-size-xxx-big);
     line-height: var(--line-height-normal);
     font-weight: var(--font-weight-bold);
+}
+.title {
+    margin-block: .7em;
 }
 .close {
     align-self: flex-end;
