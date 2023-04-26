@@ -60,7 +60,7 @@
   --letter-spacing-x-big: .11em;
   
   --border-radius: 2px;
-  --box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.15);
+  --box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.15);
 }
 @media (max-width: 768px) {
   :root {
@@ -133,15 +133,7 @@ p {
     display: none;
   }
 }
-/** Box *************************************************************/
-.box {
-  padding: 2em;
-  border-radius: var(--border-radius);
-  background-color: rgba(0,0,0,0.05);
-  margin-block: 2em;
-  box-shadow: var(--box-shadow);
-}
-/** Box *************************************************************/
+/** Cookies Banner   ************************************************/
 .cookiesWrapper {
   position: fixed; 
   bottom: 0;
@@ -156,13 +148,11 @@ p {
   margin: var(--page-margin);
   width: unset !important;
   background: rgba(255, 255, 255, 0.9) !important;
-  background: var(--color-bg-dark) !important;
   backdrop-filter: blur(10px);
   color: var(--color-font) !important;
-  color: var(--color-font-bright-2) !important;
   border-radius: .5em !important;
   align-items: flex-end !important;
-  box-shadow: 0px 0px 10px rgba(255, 255, 255, .1);
+  box-shadow: var(--box-shadow);
 }
 .cookieContent {
   max-width: 30em;
