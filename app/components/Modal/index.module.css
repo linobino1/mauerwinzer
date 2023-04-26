@@ -40,7 +40,7 @@
     padding-right: var(--page-margin);
     padding-bottom: 120px;   /* safari tab bar */
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 769px) {
     .container {
         right: 0;
         left: unset;
