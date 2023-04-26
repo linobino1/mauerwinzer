@@ -82,7 +82,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   data.site.meta?.additionalMetaTags?.forEach((tag) => {
     additionalMetaTags[tag.key as string] = tag.value;
   });
-  console.log(additionalMetaTags)
 
   return {
     charset: "utf-8",
