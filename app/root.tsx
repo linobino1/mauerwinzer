@@ -49,6 +49,7 @@ export async function loader({ request, context: { payload } }: LoaderArgs) {
     payload.findGlobal({
       slug: 'site',
       depth: 1,
+      locale,
     }),
     i18nCookie.serialize(locale),
   ]);

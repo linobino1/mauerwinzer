@@ -12,6 +12,7 @@ export const loader = async ({ request, context: { payload }}: LoaderArgs) => {
   const [site, navigations] = await Promise.all([
     payload.findGlobal({
       slug: 'site',
+      locale,
     }),
     payload.find({
       collection: 'navigations',
