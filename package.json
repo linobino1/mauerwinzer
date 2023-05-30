@@ -13,7 +13,8 @@
     "start": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js NODE_ENV=production node dist/server.js",
     "typecheck": "tsc -p tsconfig.server.json",
     "generate:types": "cross-env payload generate:types",
-    "generate:images": "cross-env ts-node ./cms/scripts/generateImageSizes"
+    "generate:images": "cross-env PAYLOAD_CONFIG_PATH=dist/payload.config.js node dist/cms/scripts/generateImageSizes.js",
+    "generate:images:dev": "cross-env ts-node ./cms/scripts/generateImageSizes"
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.8.1",

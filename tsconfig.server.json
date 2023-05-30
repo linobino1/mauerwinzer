@@ -20,6 +20,7 @@
   },
   "include": [
     "server.ts",
+    "./cms/scripts/**/*.ts",
     "payload.config.ts"
   ],
   "ts-node": {
