@@ -6,7 +6,7 @@ import type { Config } from "payload/generated-types";
 
 require('dotenv').config();
 
-const mediaDir = path.resolve(__dirname, '../../../media');
+const mediaDir = path.resolve(__dirname, '../../media');
 const mediaCollections: {
   slug: keyof Config['collections']
   relDir: string
