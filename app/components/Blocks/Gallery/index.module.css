@@ -19,7 +19,7 @@
         display: flex;
         flex-direction: column;
         margin: 0 3vw;
-        gap: 0;
+        gap: 1rem;
     }
     .image {
         width: 66vw;
