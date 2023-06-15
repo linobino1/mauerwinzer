@@ -65,6 +65,7 @@ services:
     volumes:
       - ./letsencrypt:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
+    restart: always
       
 networks:
   default:
