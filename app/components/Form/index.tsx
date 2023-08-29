@@ -54,7 +54,8 @@ export const Form: React.FC<FormProps> = (props) => {
           'data-name'?: string,
           'aria-label': string,
           type?: HTMLInputElement['type'],
-          'data-type'?: string
+          'data-type'?: string,
+          required?: string
         }>(child)) {
           return child;
         }
@@ -86,7 +87,10 @@ export const Form: React.FC<FormProps> = (props) => {
             className={classes.formElem}
           >
             { child.props['aria-label'] && (
-              <label htmlFor={name}>{child.props['aria-label']}</label>
+              <label
+                htmlFor={name}
+                className={child.props.required && classes.required}
+              >{child.props['aria-label']}</label>
             )}
             {child}
             <div className={classes.errorMessage} />

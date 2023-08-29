@@ -50,6 +50,10 @@ textarea {
 .formElem label {
     margin-block-end: .3em;
 }
+.formElem label.required::after {
+    content: '*';
+    color: red;
+}
 .formElem textarea {
     width: 100%;
 }
