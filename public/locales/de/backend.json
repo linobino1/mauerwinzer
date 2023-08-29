@@ -38,7 +38,7 @@
   "From": "Von",
   "Until": "Bis",
   "Reservation Request Mail": "Email Reservierungsanfrage",
-  "DefaultReservationRequestMail": "Liebe/r {name},\n\nvielen Dank für Deine Reservierungsanfrage. Wir werden uns so schnell wie möglich antworten. Du hast folgende Daten übermittelt:\n\nDatum: {date}\nUhrzeit: {time}\nAnzahl Personen: {partySize}\n\nMit freundlichen Grüßen,\n{restaurantName}",
+  "DefaultReservationRequestMail": "Liebe/r {name},\n\nvielen Dank für Deine Reservierungsanfrage. Wir werden uns so schnell wie möglich antworten. Du hast folgende Daten übermittelt:\n\nDatum: {date}\nUhrzeit: {time}\nAnzahl Personen: {partySize}\nTel. {phone}\nEmail: {email}\n\nMit freundlichen Grüßen,\n{restaurantName}",
   "Menu": "Weinkarte",
   "Menu in-house": "Weinkarte im Restaurant",
   "Menu take-away": "Weinkarte zum Mitnehmen",
