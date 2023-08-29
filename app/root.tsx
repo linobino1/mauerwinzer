@@ -163,7 +163,7 @@ export const action: ActionFunction = async ({ request, context: { payload } }) 
       }
 
       // validate required fields
-      const required = ['name', 'phone', 'date', 'time'];
+      const required = ['name', 'email', 'date', 'time'];
       for (const field of required) {
         if (!data.get(field)) {
           res.errors.push({

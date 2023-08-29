@@ -63,15 +63,15 @@ export const ReservationForm: React.FC<Props> = ({
         required={true}
       />
       <input
+        type='email'
+        name='email'
+        required={true}
+        aria-label={t('Email') as string}
+      />
+      <input
         type='tel'
         name='phone'
         aria-label={t('Phone') as string}
-        required={true}
-      />
-      <input
-        type='email'
-        name='email'
-        aria-label={t('Email') as string}
       />
       <textarea
         name='message'
