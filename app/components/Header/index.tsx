@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
-import type { Media } from "payload/generated-types";
+import type {
+  Media,
+  Site,
+  Navigation as NavigationType,
+} from "payload/generated-types";
 import { Navigation } from '../Navigation';
 import { Link, useNavigate, useSearchParams } from '@remix-run/react';
 import { Image } from '~/components/Image';
-import type { Site, Navigation as NavigationType } from 'payload/generated-types';
 import classes from './index.module.css';
 import Button from '../Button';
 import Modal from '../Modal';
@@ -40,6 +43,7 @@ const Header: React.FC<Props> = ({
             <Image
               className={classes.logo}
               image={site.logo as Media}
+              responsive={false}
               width={350}
               height={125}
             />
