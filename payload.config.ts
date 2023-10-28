@@ -22,12 +22,13 @@ export default buildConfig({
     cloudStorage({
       enabled: !!process.env.S3_BUCKET,
       collections: {
-        'media': {
+        media: {
           // uncomment to link to the S3 object directly:
           disablePayloadAccessControl: true,
           generateFileURL: (file) => {
             return `${process.env.S3_ENDPOINT}/media/${file.filename}`;
           },
+          prefix: 'media',
           adapter: s3Adapter({
             bucket: process.env.S3_BUCKET || '',
             config: {
