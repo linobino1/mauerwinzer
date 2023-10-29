@@ -33,6 +33,7 @@ export const CallToAction: Block = {
               value: 'external',
             },
           ],
+          required: true,
         },
         // internal link
         {

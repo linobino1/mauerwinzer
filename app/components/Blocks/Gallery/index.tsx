@@ -17,13 +17,6 @@ export const Gallery: React.FC<Type> = ({ images }) => {
           key={index}
           className={classes.image}
           image={item.image as Media}
-          srcSet={[
-            { size: 'square-360w', width: 768 },
-            { size: 'square-512w', width: 2560 },
-          ]}
-          sizes={[
-            '50vw',
-          ]}
         />
       ))}
     </div>

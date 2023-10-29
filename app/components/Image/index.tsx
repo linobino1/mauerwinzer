@@ -1,38 +1,48 @@
 import type { Media } from "payload/generated-types"
 import React from "react"
-import { mediaUrl } from "~/util/mediaUrl"
 
-export type Props = {
+export interface SrcSetItem {
+  size: keyof Required<Media>['sizes']
+  css?: string
+}
+export interface Props extends React.ImgHTMLAttributes<HTMLImageElement> {
   image: Media
-  width?: number
-  height?: number
-  className?: string
-  fill?: boolean
-  srcSet?: { size: keyof Required<Media>['sizes']; width: number }[]
-  sizes?: string[]
+  responsive?: boolean
+  srcset_?: SrcSetItem[]
 }
 
-export const Image: React.FC<Props> = ({
-  width, height, className, image, srcSet, sizes
-}) => {
-  const srcSetClean = srcSet?.map((item) => {
-    if (image.sizes === undefined || image.sizes[item.size] === undefined) {
-      return undefined;
-    }
-    return `${mediaUrl(image.sizes[item.size]?.filename as string)} ${image.sizes[item.size]?.width}w`;
+/**
+ * get srcSet string from srcSet array
+ * @param image Media
+ * @param srcSet [{ size: '2560w', css: 2560 }, { size: '1500w', css: '2x' }]
+ */
+export const getSrcSetString = (image: Media, srcset: SrcSetItem[]): string => {
+  return (srcset || []).map((item) => {
+    const cropped = image.sizes?.[item.size];
+    return cropped && cropped.url && [encodeURI(cropped.url || ''), item.css].filter(Boolean).join(' ');
   }).filter(Boolean).join(', ');
+}
 
-  return (
+export const Image: React.FC<Props> = (props) => {
+  const { image, alt } = props;
+  const responsive = props.responsive !== false;
+  const srcset_ = props.srcset_ || Object.keys(image.sizes || {}).map((key) => {
+    const item = image.sizes?.[key as keyof Required<Media>['sizes']];
+    return item?.url && {
+      size: key as keyof Required<Media>['sizes'],
+      css: `${item?.width}w`,
+    }
+  }).filter(Boolean) as SrcSetItem[];
+  const srcSet = responsive ? props.srcSet || getSrcSetString(image, srcset_) : undefined;
+
+  return image ? (
     <img
-      src={mediaUrl(image.filename as string)}
-      alt={image.alt}
-      width={width}
-      height={height}
-      className={className}
-      srcSet={srcSetClean}
-      sizes={sizes && sizes.join(', ')}
+      src={image.url}
+      alt={alt || image.alt || ''}
+      srcSet={srcSet}
+      {...props}
     />
-  )
+  ) : null;
 }
 
 export default Image;

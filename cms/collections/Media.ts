@@ -15,9 +15,7 @@ export const Media: CollectionConfig = {
     read: (): boolean => true, // Everyone can read Media
   },
   upload: {
-    adminThumbnail: 'card',
     staticDir: path.resolve(__dirname, '../../media'),
-    staticURL: '/media',
     imageSizes: [
       // Square
       {

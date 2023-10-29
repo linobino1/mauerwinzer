@@ -22,13 +22,14 @@ export default buildConfig({
       enabled: process.env.S3_ENABLED === 'true',
       collections: {
         media: {
-          // uncomment to link to the S3 object directly:
           disablePayloadAccessControl: true,
+          disableLocalStorage: true,
           generateFileURL: (file) => {
             return `${process.env.S3_BUCKET_ENDPOINT}/${file.filename}`;
           },
           adapter: s3Adapter({
             bucket: process.env.S3_BUCKET || '',
+            acl: 'public-read',
             config: {
               endpoint: process.env.S3_ENDPOINT,
               region: process.env.S3_REGION,

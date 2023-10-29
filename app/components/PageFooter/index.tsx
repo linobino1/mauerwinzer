@@ -14,16 +14,6 @@ export default function PageFooter() {
           <Image
             className={classes.footerImage}
             image={page.footerImage as Media}
-            srcSet={[
-              { size: 'landscape-2560w', width: 2560 },
-              { size: 'landscape-1920w', width: 1920 },
-              { size: 'landscape-1280w', width: 1280 },
-              { size: 'square-768w', width: 768 },
-              { size: 'square-512w', width: 512 },
-            ]}
-            sizes={[
-              '95vw',
-            ]}
           />
         </div>
       )}

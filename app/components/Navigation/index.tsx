@@ -37,6 +37,7 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
           <Image
             image={icon as Media}
             className={classes.image}
+            responsive={false}
           />
         ) : (
           <span>{name}</span>
