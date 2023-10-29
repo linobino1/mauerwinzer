@@ -24,9 +24,9 @@ export default buildConfig({
         media: {
           // uncomment to link to the S3 object directly:
           disablePayloadAccessControl: true,
-          // generateFileURL: (file) => {
-          //   return `${process.env.S3_ENDPOINT}/${file.filename}`;
-          // },
+          generateFileURL: (file) => {
+            return `${process.env.S3_BUCKET_ENDPOINT}/${file.filename}`;
+          },
           adapter: s3Adapter({
             bucket: process.env.S3_BUCKET || '',
             config: {
