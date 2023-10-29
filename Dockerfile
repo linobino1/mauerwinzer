@@ -1,4 +1,4 @@
-FROM node:18-alpine as base
+FROM node:18 as base
 
 ARG NODE_ENV
 ARG PAYLOAD_PUBLIC_SERVER_URL
