@@ -38,7 +38,7 @@ export const Site: GlobalConfig = {
           label: t('From'),
           required: true,
           validate: (value: string, { t }) => {
-            if (!value.match(/^\d{2}:\d{2}$/)) {
+            if (value === undefined || !value.match(/^\d{2}:\d{2}$/)) {
               return t('required format: {{format}}', { format: 'HH:mm' });
             }
             return true;
@@ -50,7 +50,7 @@ export const Site: GlobalConfig = {
           label: t('Until'),
           required: true,
           validate: (value: string, { t }) => {
-            if (!value.match(/^\d{2}:\d{2}$/)) {
+            if (value === undefined || !value.match(/^\d{2}:\d{2}$/)) {
               return t('required format: {{format}}', { format: 'HH:mm' });
             }
             return true;
