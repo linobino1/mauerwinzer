@@ -1,4 +1,4 @@
-FROM node:18-alpine as base
+FROM node:18 as base
 
 # cache node_modules
 FROM base as deps
