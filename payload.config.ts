@@ -19,24 +19,23 @@ export default buildConfig({
   },
   plugins: [
     cloudStorage({
-      enabled: !!process.env.S3_BUCKET,
+      enabled: process.env.S3_ENABLED === 'true',
       collections: {
         media: {
           // uncomment to link to the S3 object directly:
           disablePayloadAccessControl: true,
-          generateFileURL: (file) => {
-            return `${process.env.S3_ENDPOINT}/media/${file.filename}`;
-          },
-          prefix: 'media',
+          // generateFileURL: (file) => {
+          //   return `${process.env.S3_ENDPOINT}/${file.filename}`;
+          // },
           adapter: s3Adapter({
             bucket: process.env.S3_BUCKET || '',
             config: {
               endpoint: process.env.S3_ENDPOINT,
+              region: process.env.S3_REGION,
               credentials: {
                 accessKeyId: process.env.S3_ACCESS_KEY || '',
                 secretAccessKey: process.env.S3_SECRET_KEY || '',
               },
-              region: process.env.S3_REGION,
             },
           }),
         },
