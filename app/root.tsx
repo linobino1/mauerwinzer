@@ -72,7 +72,7 @@ export const dynamicLinks: DynamicLinksFunction<SerializeFrom<typeof loader>> = 
   return [
     {
       rel: "icon",
-      href: mediaUrl((data.site.favicon as Media)?.filename as string),
+      href: (data.site.favicon as Media)?.url as string,
       type: (data.site.logo as Media)?.mimeType,
     },
   ]
@@ -92,7 +92,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     keywords: data.site.meta?.keywords,
     "og:title": data.site.meta?.ogTitle,
     "og:description": data.site.meta?.ogDescription,
-    "og:image": mediaUrl((data.site.meta?.ogImage as Media)?.filename as string),
+    "og:image": (data.site.meta?.ogImage as Media)?.url,
     ...additionalMetaTags,
   }
 };
