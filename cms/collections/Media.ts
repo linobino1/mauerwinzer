@@ -15,7 +15,7 @@ export const Media: CollectionConfig = {
     read: (): boolean => true, // Everyone can read Media
   },
   upload: {
-    staticDir: path.resolve(__dirname, '../../media'),
+    staticDir: process.env.MEDIA_DIR ?? path.resolve(__dirname, '../../media'),
     imageSizes: [
       // Square
       {
