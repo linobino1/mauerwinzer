@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import type {
   Media,
   Site,
   Navigation as NavigationType,
 } from "payload/generated-types";
 import { Navigation } from "../Navigation";
-import { Link } from "@remix-run/react";
+import { Link, useLocation } from "@remix-run/react";
 import { Image } from "~/components/Image";
 import classes from "./index.module.css";
 import Button from "../Button";
@@ -23,7 +23,13 @@ type Props = {
 
 const Header: React.FC<Props> = ({ site, navigations }) => {
   const { t } = useTranslation();
-  const modal = useModal();
+  const { openModal, closeModal, oneModalIsOpen, closeAllModals, isModalOpen } =
+    useModal();
+  const location = useLocation();
+
+  useEffect(() => {
+    closeModal("menu");
+  }, [location, closeModal]);
 
   return (
     <>
@@ -31,12 +37,10 @@ const Header: React.FC<Props> = ({ site, navigations }) => {
         <Button
           className={classes.hamburger}
           onClick={() =>
-            modal.oneModalIsOpen
-              ? modal.closeAllModals()
-              : modal.openModal("menu")
+            oneModalIsOpen ? closeAllModals() : openModal("menu")
           }
         >
-          <Hamburger collapsed={modal.isModalOpen("menu")} />
+          <Hamburger collapsed={isModalOpen("menu")} />
         </Button>
       </header>
       <header className={classes.main}>
@@ -60,7 +64,7 @@ const Header: React.FC<Props> = ({ site, navigations }) => {
           <Button
             layout="big"
             className={classes.reservationButton}
-            onClick={() => modal.openModal("reservation")}
+            onClick={() => openModal("reservation")}
           >
             {t("Reserve a Table")}
           </Button>
@@ -70,7 +74,7 @@ const Header: React.FC<Props> = ({ site, navigations }) => {
         <Button
           className={classes.reservationButton}
           layout="big"
-          onClick={() => modal.openModal("reservation")}
+          onClick={() => openModal("reservation")}
         >
           {t("Reserve a Table")}
         </Button>
