@@ -71,20 +71,33 @@ const Header: React.FC<Props> = ({ site, navigations }) => {
         </nav>
       </header>
       <Modal slug="menu" className={`${classes.modal} ${classes.mobileMenu}`}>
-        <Button
-          className={classes.reservationButton}
-          layout="big"
-          onClick={() => openModal("reservation")}
-        >
-          {t("Reserve a Table")}
-        </Button>
-        <Navigation
-          navigation={navigations.find((x) => x.type === "mobile")}
-          className={classes.mobile}
-        />
+        <div className={classes.wrapper}>
+          <Button
+            className={classes.reservationButton}
+            layout="big"
+            onClick={() => openModal("reservation")}
+          >
+            {t("Reserve a Table")}
+          </Button>
+          <Navigation
+            navigation={navigations.find((x) => x.type === "mobile")}
+            className={classes.mobile}
+          />
+        </div>
       </Modal>
       <Modal slug="reservation" className={classes.modal}>
-        <ReservationForm site={site} />
+        <div className={classes.wrapper}>
+          <header>
+            <Button
+              onClick={() =>
+                oneModalIsOpen ? closeAllModals() : openModal("menu")
+              }
+              layout="symbol"
+              symbol="close"
+            />
+          </header>
+          <ReservationForm site={site} />
+        </div>
       </Modal>
     </>
   );
