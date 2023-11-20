@@ -13,7 +13,6 @@ require("dotenv").config();
 
 const BUILD_DIR = path.join(process.cwd(), "build");
 
-
 start();
 
 async function start() {
@@ -38,14 +37,14 @@ async function start() {
   });
 
   app.use(compression());
-  
+
   // http://expressjs.com/en/advanced/best-practice-security.html#at-a-minimum-disable-x-powered-by-header
   app.disable("x-powered-by");
 
   // Remix fingerprints its assets so we can cache forever.
   app.use(
     "/build",
-    express.static("public/build", { immutable: true, maxAge: "1y" })
+    express.static("public/build", { immutable: true, maxAge: "1y" }),
   );
 
   // Everything else (like favicon.ico) is cached for an hour. You may want to be
@@ -53,10 +52,10 @@ async function start() {
   app.use(express.static("public", { maxAge: "1h" }));
 
   app.use(morgan("tiny"));
-  
+
   // robots.txt
-  app.get('/robots.txt', function (req, res) {
-    res.type('text/plain');
+  app.get("/robots.txt", function (req, res) {
+    res.type("text/plain");
     res.send("User-agent: *\nDisallow:");
   });
 
@@ -65,16 +64,20 @@ async function start() {
     // @ts-expect-error
     const payload: Payload = req.payload;
     const menu = await payload.findGlobal({
-      slug: 'menu',
+      slug: "menu",
     });
-    
+
     switch (req.path) {
-      case '/menu-takeaway':
-        return res.redirect(((menu as Menu)?.menuTakeAway as Media).url as string);
-      case '/menu-inhouse':
-        return res.redirect(((menu as Menu)?.menuInHouse as Media).url as string);
+      case "/menu-takeaway":
+        return res.redirect(
+          ((menu as Menu)?.menuTakeAway as Media).url as string,
+        );
+      case "/menu-inhouse":
+        return res.redirect(
+          ((menu as Menu)?.menuInHouse as Media).url as string,
+        );
       default:
-        return res.status(400).send('Bad request');
+        return res.status(400).send("Bad request");
     }
   });
 
@@ -106,7 +109,7 @@ async function start() {
               res,
             };
           },
-        })
+        }),
   );
   const port = process.env.PORT || 3000;
 

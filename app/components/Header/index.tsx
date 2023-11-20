@@ -1,45 +1,43 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React from 'react';
+import React from "react";
 import type {
   Media,
   Site,
   Navigation as NavigationType,
 } from "payload/generated-types";
-import { Navigation } from '../Navigation';
-import { Link, useNavigate, useSearchParams } from '@remix-run/react';
-import { Image } from '~/components/Image';
-import classes from './index.module.css';
-import Button from '../Button';
-import Modal from '../Modal';
-import LanguageSwitch from '../LanguageSwitch';
-import { useTranslation } from 'react-i18next';
+import { Navigation } from "../Navigation";
+import { Link, useNavigate, useSearchParams } from "@remix-run/react";
+import { Image } from "~/components/Image";
+import classes from "./index.module.css";
+import Button from "../Button";
+import Modal from "../Modal";
+import LanguageSwitch from "../LanguageSwitch";
+import { useTranslation } from "react-i18next";
 
 type Props = {
-  site: Site
-  navigations: NavigationType[]
-  content?: React.ReactNode
+  site: Site;
+  navigations: NavigationType[];
+  content?: React.ReactNode;
 };
 
-const Header: React.FC<Props> = ({
-  site, navigations, content,
-}) => {
+const Header: React.FC<Props> = ({ site, navigations, content }) => {
   const navigate = useNavigate();
-  const [ searchParams ] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const { t } = useTranslation();
-  
+
   return (
     <header>
       <div className={classes.mainHeader}>
         <div className={`${classes.navMainContainer}`}>
           <div className={classes.menuBody}>
             <Navigation
-              navigation={navigations.find((x) => x.type === 'main')}
+              navigation={navigations.find((x) => x.type === "main")}
               className={classes.navMain}
             />
           </div>
         </div>
         <Link to="/" className={classes.logoContainer}>
-          {site.logo as Media && (
+          {(site.logo as Media) && (
             <Image
               className={classes.logo}
               image={site.logo as Media}
@@ -53,30 +51,38 @@ const Header: React.FC<Props> = ({
           layout="symbol"
           symbol="menu"
           className={classes.menuButton}
-          onClick={() => navigate('?modal=menu', { preventScrollReset: true })}
+          onClick={() => navigate("?modal=menu", { preventScrollReset: true })}
         />
         <div className={classes.navSecondary}>
           <LanguageSwitch />
           <Button
             layout="big"
             className={classes.reservationButton}
-            onClick={() => navigate('?modal=reservation', { preventScrollReset: true })}
-          >{t('Reserve a Table')}</Button>
+            onClick={() =>
+              navigate("?modal=reservation", { preventScrollReset: true })
+            }
+          >
+            {t("Reserve a Table")}
+          </Button>
         </div>
       </div>
       {content}
-      { searchParams.get('modal') === 'menu' && (
+      {searchParams.get("modal") === "menu" && (
         <Modal>
           <div className={classes.mobileMenu}>
             <Navigation
-              navigation={navigations.find((x) => x.type === 'mobile')}
+              navigation={navigations.find((x) => x.type === "mobile")}
               className={classes.navMobile}
             />
             <Button
               className={classes.reservationButton}
               layout="big"
-              onClick={() => navigate('?modal=reservation', { preventScrollReset: true })}
-            >{t('Reserve a Table')}</Button>
+              onClick={() =>
+                navigate("?modal=reservation", { preventScrollReset: true })
+              }
+            >
+              {t("Reserve a Table")}
+            </Button>
           </div>
         </Modal>
       )}

@@ -6,16 +6,16 @@ import Header from "~/components/Header";
 import i18next from "~/i18next.server";
 import classes from "./__main.module.css";
 
-export const loader = async ({ request, context: { payload }}: LoaderArgs) => {
+export const loader = async ({ request, context: { payload } }: LoaderArgs) => {
   const locale = await i18next.getLocale(request);
 
   const [site, navigations] = await Promise.all([
     payload.findGlobal({
-      slug: 'site',
+      slug: "site",
       locale,
     }),
     payload.find({
-      collection: 'navigations',
+      collection: "navigations",
       depth: 12,
       locale,
     }),
@@ -24,36 +24,28 @@ export const loader = async ({ request, context: { payload }}: LoaderArgs) => {
     site,
     navigations: navigations.docs,
   };
-}
+};
 
 export const handle = {
-  i18n: ['common']
+  i18n: ["common"],
 };
 
 export type Props = {
-  header: ReactNode
+  header: ReactNode;
 };
 
-export default function Layout({
-  header
-}: Props) {
+export default function Layout({ header }: Props) {
   const { site, navigations } = useLoaderData<typeof loader>();
 
   return (
     <>
       <div className={classes.aboveFooter}>
-        <Header
-          site={site}
-          navigations={navigations}
-          content={header} />
+        <Header site={site} navigations={navigations} content={header} />
 
         <Outlet />
       </div>
 
-      <Footer
-        site={site}
-        navigations={navigations}
-      />
+      <Footer site={site} navigations={navigations} />
     </>
   );
 }

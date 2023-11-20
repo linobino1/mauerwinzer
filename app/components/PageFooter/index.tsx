@@ -5,11 +5,12 @@ import type { Media } from "payload/generated-types";
 
 export default function PageFooter() {
   const data = useMatches();
-  const page = data.find((x) => x.id === 'routes/__main/$page/index')?.data.page;
+  const page = data.find((x) => x.id === "routes/__main/$page/index")?.data
+    .page;
 
   return (
     <div className={classes.pageFooter}>
-      { page?.footerImage as Media && (
+      {(page?.footerImage as Media) && (
         <div className={classes.imageFooter}>
           <Image
             className={classes.footerImage}
@@ -18,5 +19,5 @@ export default function PageFooter() {
         </div>
       )}
     </div>
-  )
+  );
 }

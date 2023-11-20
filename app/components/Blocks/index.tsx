@@ -1,43 +1,41 @@
-import React from 'react';
-import type { Page } from 'payload/generated-types';
-import { Content } from '~/components/Blocks/Content';
-import { Image } from '~/components/Blocks/Image';
-import { Gallery } from '~/components/Blocks/Gallery';
-import { Instagram } from '~/components/Blocks/Instagram';
-import { CallToAction } from '~/components/Blocks/CallToAction';
-import { GoogleMaps } from '~/components/Blocks/GoogleMaps';
+import React from "react";
+import type { Page } from "payload/generated-types";
+import { Content } from "~/components/Blocks/Content";
+import { Image } from "~/components/Blocks/Image";
+import { Gallery } from "~/components/Blocks/Gallery";
+import { Instagram } from "~/components/Blocks/Instagram";
+import { CallToAction } from "~/components/Blocks/CallToAction";
+import { GoogleMaps } from "~/components/Blocks/GoogleMaps";
 
-type Layout = Page['layout'];
+type Layout = Page["layout"];
 
 type Props = {
-  layout: Layout
-  className?: string
-}
+  layout: Layout;
+  className?: string;
+};
 
-const Blocks: React.FC<Props> = ({
-  layout, className,
-}) => (
+const Blocks: React.FC<Props> = ({ layout, className }) => (
   <div className={className}>
     {layout?.map((block, i) => (
       <section key={i} className={block.blockType}>
-        { (() => {
+        {(() => {
           switch (block.blockType) {
-            case 'content':
+            case "content":
               return <Content {...block} />;
 
-            case 'image':
+            case "image":
               return <Image {...block} />;
 
-            case 'gallery':
+            case "gallery":
               return <Gallery {...block} />;
 
-            case 'instagram':
+            case "instagram":
               return <Instagram {...block} />;
 
-            case 'callToAction':
+            case "callToAction":
               return <CallToAction {...block} />;
 
-            case 'googleMaps':
+            case "googleMaps":
               return <GoogleMaps {...block} />;
           }
         })()}

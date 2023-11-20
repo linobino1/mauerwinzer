@@ -1,31 +1,31 @@
 import type { Block } from "payload/types";
-import { t } from '../i18n';
+import { t } from "../i18n";
 
 export const Gallery: Block = {
-  slug: 'gallery',
+  slug: "gallery",
   labels: {
-    singular: t('Gallery'),
-    plural: t('Gallerie'),
+    singular: t("Gallery"),
+    plural: t("Gallerie"),
   },
   fields: [
     {
-      name: 'images',
-      type: 'array',
-      label: t('Images'),
+      name: "images",
+      type: "array",
+      label: t("Images"),
       labels: {
-        singular: t('Image'),
-        plural: t('Images'),
+        singular: t("Image"),
+        plural: t("Images"),
       },
       fields: [
         {
-          name: 'image',
-          type: 'upload',
-          relationTo: 'media',
-          label: t('Image'),
+          name: "image",
+          type: "upload",
+          relationTo: "media",
+          label: t("Image"),
         },
       ],
     },
   ],
-}
+};
 
 export default Gallery;

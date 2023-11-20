@@ -1,4 +1,10 @@
-import type { MetaFunction, SerializeFrom } from "@remix-run/node";
+import type {
+  MetaFunction,
+  SerializeFrom,
+  LinksFunction,
+  LoaderArgs,
+  ActionFunction,
+} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   Links,
@@ -12,22 +18,16 @@ import {
   useRouteError,
   useSearchParams,
 } from "@remix-run/react";
-import type { LoaderArgs } from "@remix-run/node";
 import i18next from "~/i18next.server";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-import type { LinksFunction } from "@remix-run/node";
 import { cssBundleHref } from "@remix-run/css-bundle";
-import styles from "./root.module.css";
 import { i18nCookie } from "./cookie";
 import type { DynamicLinksFunction } from "remix-utils";
-import { ExternalScripts } from "remix-utils";
-import { DynamicLinks } from "remix-utils";
-import { mediaUrl } from "./util/mediaUrl";
-import type { Media} from "payload/generated-types";
-import ReservationForm from '~/components/ReservationForm';
+import { ExternalScripts, DynamicLinks } from "remix-utils";
+import type { Media } from "payload/generated-types";
+import ReservationForm from "~/components/ReservationForm";
 import Modal from "./components/Modal";
-import type { ActionFunction } from '@remix-run/node';
 import transport, { connectedEmailAddresses, from } from "email";
 import { replaceMulti } from "./util/stringInterpolation";
 import environment from "./util/environment";
@@ -37,9 +37,7 @@ import classes from "./root.module.css";
 export const links: LinksFunction = () => {
   return [
     // use css bundling
-    ...(cssBundleHref
-      ? [{ rel: "stylesheet", href: cssBundleHref }]
-      : []),
+    ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
   ];
 };
 
@@ -47,39 +45,44 @@ export async function loader({ request, context: { payload } }: LoaderArgs) {
   let locale = await i18next.getLocale(request);
   const [site, localeCookie] = await Promise.all([
     payload.findGlobal({
-      slug: 'site',
+      slug: "site",
       depth: 1,
       locale,
     }),
     i18nCookie.serialize(locale),
   ]);
 
-  return json({
-    site,
-    locale,
-    publicKeys: {
-      PAYLOAD_PUBLIC_SERVER_URL: environment().PAYLOAD_PUBLIC_SERVER_URL,
-      HCAPTCHA_SITE_KEY: environment().HCAPTCHA_SITE_KEY,
-    }
-  }, {
-    headers: {
-      "Set-Cookie": localeCookie,
+  return json(
+    {
+      site,
+      locale,
+      publicKeys: {
+        PAYLOAD_PUBLIC_SERVER_URL: environment().PAYLOAD_PUBLIC_SERVER_URL,
+        HCAPTCHA_SITE_KEY: environment().HCAPTCHA_SITE_KEY,
+      },
     },
-  })
+    {
+      headers: {
+        "Set-Cookie": localeCookie,
+      },
+    }
+  );
 }
 
-export const dynamicLinks: DynamicLinksFunction<SerializeFrom<typeof loader>> = ({ data }) => {
+export const dynamicLinks: DynamicLinksFunction<
+  SerializeFrom<typeof loader>
+> = ({ data }) => {
   return [
     {
       rel: "icon",
       href: (data.site.favicon as Media)?.url as string,
       type: (data.site.logo as Media)?.mimeType,
     },
-  ]
-}
+  ];
+};
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const additionalMetaTags: Record<string, string> = {}
+  const additionalMetaTags: Record<string, string> = {};
   data.site.meta?.additionalMetaTags?.forEach((tag) => {
     additionalMetaTags[tag.key as string] = tag.value;
   });
@@ -94,7 +97,7 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     "og:description": data.site.meta?.ogDescription,
     "og:image": (data.site.meta?.ogImage as Media)?.url,
     ...additionalMetaTags,
-  }
+  };
 };
 
 export const handle = {
@@ -110,15 +113,15 @@ export function useChangeLanguage(locale: string) {
 }
 
 const validateCaptcha = async (token: string): Promise<boolean> => {
-  if (environment().NODE_ENV === 'development') {
-    console.log('Captcha validation skipped in development mode');
+  if (environment().NODE_ENV === "development") {
+    console.log("Captcha validation skipped in development mode");
     return true;
   }
   try {
-    const res = await fetch('https://hcaptcha.com/siteverify', {
-      method: 'POST',
+    const res = await fetch("https://hcaptcha.com/siteverify", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        "Content-Type": "application/x-www-form-urlencoded",
       },
       body: new URLSearchParams({
         secret: environment().HCAPTCHA_SECRET_KEY,
@@ -131,16 +134,19 @@ const validateCaptcha = async (token: string): Promise<boolean> => {
   } catch (error) {
     return false;
   }
-}
+};
 
 /**
  * form handler for modal forms (reservation)
  */
-export const action: ActionFunction = async ({ request, context: { payload } }) => {
+export const action: ActionFunction = async ({
+  request,
+  context: { payload },
+}) => {
   const data = await request.formData();
   const t = await i18next.getFixedT(request);
   const locale = await i18next.getLocale(request);
-  
+
   let res: {
     success?: boolean;
     message?: string;
@@ -151,70 +157,75 @@ export const action: ActionFunction = async ({ request, context: { payload } }) 
   } = {
     errors: [],
   };
-  
-  switch (data.get('action')) {
-    case 'reservation':
+
+  switch (data.get("action")) {
+    case "reservation":
       // validate captcha
-      if (!await validateCaptcha(data.get('h-captcha-response') as string)) {
+      if (!(await validateCaptcha(data.get("h-captcha-response") as string))) {
         res.errors.push({
-          message: t('please confirm the captcha'),
-          field: 'hCaptcha',
+          message: t("please confirm the captcha"),
+          field: "hCaptcha",
         });
       }
 
       // validate required fields
-      const required = ['name', 'email', 'date', 'time'];
+      const required = ["name", "email", "date", "time"];
       for (const field of required) {
         if (!data.get(field)) {
           res.errors.push({
-            message: t('field is required'),
+            message: t("field is required"),
             field,
           });
         }
       }
       // validate email, date, time on client side only
-      
+
       // send email
       if (!res.errors.length) {
         try {
           const site = await payload.findGlobal({
-            slug: 'site',
+            slug: "site",
             depth: 1,
             locale,
           });
           await transport?.sendMail({
             from,
-            to: data.get('email') as string,
+            to: data.get("email") as string,
             bcc: connectedEmailAddresses,
-            subject: t('New Reservation Request') as string,
+            subject: t("New Reservation Request") as string,
             text: replaceMulti(site.reservations.mailTemplate as string, {
-              name: data.get('name') as string,
-              date: data.get('date') as string,
-              time: data.get('time') as string,
-              partySize: data.get('partySize') as string,
-              phone: data.get('phone') as string,
-              email: data.get('email') as string,
-              message: data.get('message') as string,
+              name: data.get("name") as string,
+              date: data.get("date") as string,
+              time: data.get("time") as string,
+              partySize: data.get("partySize") as string,
+              phone: data.get("phone") as string,
+              email: data.get("email") as string,
+              message: data.get("message") as string,
             }),
           });
-          res.message = t('Your request has been sent. We will contact you shortly.') as string;
+          res.message = t(
+            "Your request has been sent. We will contact you shortly."
+          ) as string;
         } catch (err) {
           // TODO: log error
           res.errors.push({
-            message: t('Sorry, there was an error sending your request. Please try to contact us directly.'),
+            message: t(
+              "Sorry, there was an error sending your request. Please try to contact us directly."
+            ),
           });
-        };
+        }
       } else {
-        res.message = t('Please correct the errors below and try again.') as string;
+        res.message = t(
+          "Please correct the errors below and try again."
+        ) as string;
       }
 
     default:
   }
-  
-  res.success = !res.errors.length;
-  return res
-}
 
+  res.success = !res.errors.length;
+  return res;
+};
 
 export function ErrorBoundary() {
   let error = useRouteError();
@@ -229,9 +240,9 @@ export function ErrorBoundary() {
       </div>
     );
   }
-  
+
   // display info about the error in development
-  return environment().NODE_ENV === 'development' ? (
+  return environment().NODE_ENV === "development" ? (
     error instanceof Error ? (
       <div>
         <h1>Error</h1>
@@ -240,7 +251,7 @@ export function ErrorBoundary() {
         <pre>{error.stack}</pre>
       </div>
     ) : (
-      <pre>{'Unknown Error'}</pre>
+      <pre>{"Unknown Error"}</pre>
     )
   ) : (
     <h1>Something went wrong</h1>
@@ -254,9 +265,9 @@ export default function App() {
 
   // handle locale change
   useChangeLanguage(locale);
-  
+
   // use search params
-  const [ searchParams ] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   return (
     <html lang={locale} dir={i18n.dir()}>
@@ -265,15 +276,15 @@ export default function App() {
         <Links />
         <DynamicLinks />
       </head>
-      <body className={styles.body}>
+      <body className={classes.body}>
         <ExternalScripts />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.ENV = ${JSON.stringify(publicKeys)}`,
           }}
         />
-        { searchParams.get('modal') === 'reservation' && (
-          <Modal title={t('Reserve a Table') as string}>
+        {searchParams.get("modal") === "reservation" && (
+          <Modal title={t("Reserve a Table") as string}>
             <ReservationForm
               from={new Date(site.reservations.from)}
               until={new Date(site.reservations.until)}
@@ -288,8 +299,8 @@ export default function App() {
         <div className={classes.cookiesWrapper}>
           <CookieConsent
             location="bottom"
-            buttonText={t('Accept')}
-            declineButtonText={t('Decline')}
+            buttonText={t("Accept")}
+            declineButtonText={t("Decline")}
             enableDeclineButton
             containerClasses={classes.cookies}
             buttonWrapperClasses={classes.cookieButtons}
@@ -297,7 +308,7 @@ export default function App() {
             declineButtonClasses={classes.cookieButtonDecline}
             contentClasses={classes.cookieContent}
           >
-            { t('CookieBannerText')}
+            {t("CookieBannerText")}
           </CookieConsent>
         </div>
       </body>

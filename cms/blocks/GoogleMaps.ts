@@ -2,29 +2,30 @@ import type { Block } from "payload/types";
 import { t } from "../i18n";
 
 export const GoogleMaps: Block = {
-  slug: 'googleMaps',
+  slug: "googleMaps",
   labels: {
-    singular: 'Google Maps',
-    plural: 'Google Maps',
+    singular: "Google Maps",
+    plural: "Google Maps",
   },
   fields: [
     {
-      name: 'title',
-      label: t('Title'),
-      type: 'text',
+      name: "title",
+      label: t("Title"),
+      type: "text",
       localized: true,
       required: false,
     },
     {
-      name: 'src',
-      label: 'Google Maps Embed API link',
-      type: 'text',
+      name: "src",
+      label: "Google Maps Embed API link",
+      type: "text",
       required: true,
       admin: {
-        description: 'Copy the iframe src from the embed code you get at Google Maps',
+        description:
+          "Copy the iframe src from the embed code you get at Google Maps",
       },
-    }
+    },
   ],
-}
+};
 
 export default GoogleMaps;

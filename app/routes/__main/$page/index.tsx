@@ -1,25 +1,28 @@
 /* eslint-disable no-case-declarations */
-import React from 'react';
-import Blocks from '~/components/Blocks';
-import type { LoaderArgs, MetaFunction} from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
-import PageHeader from '~/components/PageHeader';
-import i18next from "~/i18next.server";
-import PageFooter from '~/components/PageFooter';
-import { action as rootAction } from '../../../root';
+import React from "react";
+import Blocks from "~/components/Blocks";
+import type { LoaderArgs, MetaFunction } from "@remix-run/node";
 import {
+  useLoaderData,
   isRouteErrorResponse,
   useRouteError,
 } from "@remix-run/react";
-import { Response } from '@remix-run/node';
-import classes from './index.module.css';
-import { mediaUrl } from '~/util/mediaUrl';
+import PageHeader from "~/components/PageHeader";
+import i18next from "~/i18next.server";
+import PageFooter from "~/components/PageFooter";
+import { action as rootAction } from "../../../root";
+import { Response } from "@remix-run/node";
+import classes from "./index.module.css";
+import { mediaUrl } from "~/util/mediaUrl";
 
-
-export const loader = async ({ request, params, context: { payload }}: LoaderArgs) => {
+export const loader = async ({
+  request,
+  params,
+  context: { payload },
+}: LoaderArgs) => {
   const locale = await i18next.getLocale(request);
   const res = await payload.find({
-    collection: 'pages',
+    collection: "pages",
     where: {
       slug: {
         equals: params?.page,
@@ -28,19 +31,20 @@ export const loader = async ({ request, params, context: { payload }}: LoaderArg
     locale,
   });
   if (!res.docs.length) {
-    throw new Response('Page not found', { status: 404 })
+    throw new Response("Page not found", { status: 404 });
   }
   return {
     page: res.docs[0],
-  }
-}
+  };
+};
 
 // not sure why root action is not automatically triggered...
 export const action = rootAction;
 
 // meta tags overrides
 export const meta: MetaFunction = ({ data, parentsData }) => {
-  const image = data.page?.meta?.ogImage || parentsData.root?.site?.meta?.ogImage;
+  const image =
+    data.page?.meta?.ogImage || parentsData.root?.site?.meta?.ogImage;
   // merge additional meta tags from page and site
   const additionalMetaTags: Record<string, string> = {};
   [
@@ -49,28 +53,34 @@ export const meta: MetaFunction = ({ data, parentsData }) => {
   ].forEach((tag) => {
     additionalMetaTags[tag.key as string] = tag.value;
   });
-  return data && {
-    title: data.page?.title || parentsData.root?.site?.title,
-    description: data.page?.meta?.description || parentsData?.root?.site?.meta?.description,
-    keywords: `${data.page?.meta?.keywords || ''} ${parentsData?.root?.site?.meta?.keywords || ''}`.trim(),
-    "og:title": data.page?.meta.ogTitle || parentsData.root?.site?.meta.ogTitle,
-    "og:description": data.page?.meta.ogDescription || parentsData.root?.site?.meta.ogDescription,
-    "og:image": mediaUrl(image?.sizes['landscape-1280w']?.filename as string),
-    ...additionalMetaTags,
-  }
+  return (
+    data && {
+      title: data.page?.title || parentsData.root?.site?.title,
+      description:
+        data.page?.meta?.description ||
+        parentsData?.root?.site?.meta?.description,
+      keywords: `${data.page?.meta?.keywords || ""} ${
+        parentsData?.root?.site?.meta?.keywords || ""
+      }`.trim(),
+      "og:title":
+        data.page?.meta.ogTitle || parentsData.root?.site?.meta.ogTitle,
+      "og:description":
+        data.page?.meta.ogDescription ||
+        parentsData.root?.site?.meta.ogDescription,
+      "og:image": mediaUrl(image?.sizes["landscape-1280w"]?.filename as string),
+      ...additionalMetaTags,
+    }
+  );
 };
-
 
 export const PageComponent: React.FC = () => {
   const { page } = useLoaderData<typeof loader>();
-  
+
   return (
     <>
       <PageHeader />
       <main>
-        <Blocks
-          layout={page?.layout}
-        />
+        <Blocks layout={page?.layout} />
       </main>
       <PageFooter />
     </>

@@ -17,7 +17,7 @@ export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
-  remixContext: EntryContext
+  remixContext: EntryContext,
 ) {
   let instance = createInstance();
   let lng = await i18next.getLocale(request);
@@ -56,7 +56,7 @@ export default async function handleRequest(
             new Response(body, {
               headers: responseHeaders,
               status: didError ? 500 : responseStatusCode,
-            })
+            }),
           );
 
           pipe(body);
@@ -69,7 +69,7 @@ export default async function handleRequest(
 
           console.error(error);
         },
-      }
+      },
     );
 
     setTimeout(abort, ABORT_DELAY);
