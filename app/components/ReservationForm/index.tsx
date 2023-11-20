@@ -72,14 +72,6 @@ export const ReservationForm: React.FC<Props> = ({ site }) => {
       <Button className={classes.submit} layout="submit" type="submit">
         {t("Send")}
       </Button>
-      <Button
-        className={classes.cancel}
-        layout="cancel"
-        type="button"
-        onClick={() => modal.closeAllModals()}
-      >
-        {t("Cancel")}
-      </Button>
     </Form>
   );
 };
