@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from "react";
 import type {
   Media,
@@ -6,13 +5,15 @@ import type {
   Navigation as NavigationType,
 } from "payload/generated-types";
 import { Navigation } from "../Navigation";
-import { Link, useNavigate, useSearchParams } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import { Image } from "~/components/Image";
 import classes from "./index.module.css";
 import Button from "../Button";
-import Modal from "../Modal";
 import LanguageSwitch from "../LanguageSwitch";
 import { useTranslation } from "react-i18next";
+import { Modal, useModal } from "@faceless-ui/modal";
+import ReservationForm from "../ReservationForm";
+import { Hamburger } from "./Hamburger";
 
 type Props = {
   site: Site;
@@ -20,23 +21,30 @@ type Props = {
   content?: React.ReactNode;
 };
 
-const Header: React.FC<Props> = ({ site, navigations, content }) => {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+const Header: React.FC<Props> = ({ site, navigations }) => {
   const { t } = useTranslation();
+  const modal = useModal();
 
   return (
-    <header>
-      <div className={classes.mainHeader}>
-        <div className={`${classes.navMainContainer}`}>
-          <div className={classes.menuBody}>
-            <Navigation
-              navigation={navigations.find((x) => x.type === "main")}
-              className={classes.navMain}
-            />
-          </div>
-        </div>
-        <Link to="/" className={classes.logoContainer}>
+    <>
+      <header className={classes.mobile}>
+        <Button
+          className={classes.hamburger}
+          onClick={() =>
+            modal.oneModalIsOpen
+              ? modal.closeAllModals()
+              : modal.openModal("menu")
+          }
+        >
+          <Hamburger collapsed={modal.isModalOpen("menu")} />
+        </Button>
+      </header>
+      <header className={classes.main}>
+        <Navigation
+          navigation={navigations.find((x) => x.type === "main")}
+          className={classes.main}
+        />
+        <Link to="/" style={{ display: "contents" }}>
           {(site.logo as Media) && (
             <Image
               className={classes.logo}
@@ -47,46 +55,34 @@ const Header: React.FC<Props> = ({ site, navigations, content }) => {
             />
           )}
         </Link>
-        <Button
-          layout="symbol"
-          symbol="menu"
-          className={classes.menuButton}
-          onClick={() => navigate("?modal=menu", { preventScrollReset: true })}
-        />
-        <div className={classes.navSecondary}>
+        <nav className={classes.secondary}>
           <LanguageSwitch />
           <Button
             layout="big"
             className={classes.reservationButton}
-            onClick={() =>
-              navigate("?modal=reservation", { preventScrollReset: true })
-            }
+            onClick={() => modal.openModal("reservation")}
           >
             {t("Reserve a Table")}
           </Button>
-        </div>
-      </div>
-      {content}
-      {searchParams.get("modal") === "menu" && (
-        <Modal>
-          <div className={classes.mobileMenu}>
-            <Navigation
-              navigation={navigations.find((x) => x.type === "mobile")}
-              className={classes.navMobile}
-            />
-            <Button
-              className={classes.reservationButton}
-              layout="big"
-              onClick={() =>
-                navigate("?modal=reservation", { preventScrollReset: true })
-              }
-            >
-              {t("Reserve a Table")}
-            </Button>
-          </div>
-        </Modal>
-      )}
-    </header>
+        </nav>
+      </header>
+      <Modal slug="menu" className={`${classes.modal} ${classes.mobileMenu}`}>
+        <Button
+          className={classes.reservationButton}
+          layout="big"
+          onClick={() => modal.openModal("reservation")}
+        >
+          {t("Reserve a Table")}
+        </Button>
+        <Navigation
+          navigation={navigations.find((x) => x.type === "mobile")}
+          className={classes.mobile}
+        />
+      </Modal>
+      <Modal slug="reservation" className={classes.modal}>
+        <ReservationForm site={site} />
+      </Modal>
+    </>
   );
 };
 

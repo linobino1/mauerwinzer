@@ -2,7 +2,7 @@
   display: flex;
 }
 .nav.socialMedia {
-  column-gap: .5rem;
+  column-gap: 0.5rem;
 }
 
 /** NAVIGATION ITEM  ***************************************/
@@ -20,9 +20,12 @@
 }
 .navItem {
   display: inline-block;
-  padding: .5rem 1rem;
   position: relative;
   overflow-wrap: anywhere;
+}
+a.navItem,
+.navItem a {
+  padding: 0.5rem 1rem;
 }
 .navItem:hover {
   color: var(--color-theme-contrast);

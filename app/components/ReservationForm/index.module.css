@@ -1,4 +1,9 @@
 .form {
-    align-self: center;
-    min-width: min(100%, 25em);
+  align-self: center;
+  min-width: min(100%, 25em);
+}
+.form h3 {
+  font-size: var(--font-size-xx-big);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-bold);
 }

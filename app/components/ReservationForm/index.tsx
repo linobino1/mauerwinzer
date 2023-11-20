@@ -1,33 +1,29 @@
 import React from "react";
 import classes from "./index.module.css";
-import { useLocation, useNavigate } from "@remix-run/react";
 import { Form } from "~/components/Form";
 import Button from "~/components/Button";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { useTranslation } from "react-i18next";
 import { useLocale } from "remix-i18next";
+import type { Site } from "payload/generated-types";
+import environment from "~/util/environment";
+import { useModal } from "@faceless-ui/modal";
 
 export type Props = {
-  from: Date;
-  until: Date;
-  hCaptchaSiteKey: string;
+  site: Site;
 };
 
-export const ReservationForm: React.FC<Props> = ({
-  from,
-  until,
-  hCaptchaSiteKey,
-}) => {
-  const location = useLocation();
-  const navigate = useNavigate();
+export const ReservationForm: React.FC<Props> = ({ site }) => {
+  const modal = useModal();
   const { t } = useTranslation();
   const locale = useLocale();
+
+  const from = new Date(site.reservations.from).toTimeString().slice(0, 5);
+  const until = new Date(site.reservations.until).toTimeString().slice(0, 5);
+
   return (
-    <Form
-      method="post"
-      action={`${location.pathname}${location.search}`}
-      className={classes.form}
-    >
+    <Form method="post" className={classes.form}>
+      <h3>{t("Reserve a table")}</h3>
       <input type="hidden" name="action" value="reservation" required={true} />
       <input
         type="date"
@@ -41,8 +37,8 @@ export const ReservationForm: React.FC<Props> = ({
         type="time"
         name="time"
         aria-label={t("Time") as string}
-        min={from?.toTimeString().slice(0, 5)}
-        max={until?.toTimeString().slice(0, 5)}
+        min={from}
+        max={until}
         defaultValue={"19:00"}
         required={true}
       />
@@ -68,7 +64,10 @@ export const ReservationForm: React.FC<Props> = ({
       <input type="tel" name="phone" aria-label={t("Phone") as string} />
       <textarea name="message" aria-label={t("Message") as string} />
       <div data-name="hCaptcha" data-type="hCaptcha">
-        <HCaptcha sitekey={hCaptchaSiteKey} languageOverride={locale} />
+        <HCaptcha
+          sitekey={environment().HCAPTCHA_SITE_KEY}
+          languageOverride={locale}
+        />
       </div>
       <Button className={classes.submit} layout="submit" type="submit">
         {t("Send")}
@@ -77,7 +76,7 @@ export const ReservationForm: React.FC<Props> = ({
         className={classes.cancel}
         layout="cancel"
         type="button"
-        onClick={() => navigate("?modal=false", { preventScrollReset: true })}
+        onClick={() => modal.closeAllModals()}
       >
         {t("Cancel")}
       </Button>

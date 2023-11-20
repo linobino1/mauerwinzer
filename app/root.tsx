@@ -16,7 +16,6 @@ import {
   isRouteErrorResponse,
   useLoaderData,
   useRouteError,
-  useSearchParams,
 } from "@remix-run/react";
 import i18next from "~/i18next.server";
 import { useTranslation } from "react-i18next";
@@ -26,12 +25,11 @@ import { i18nCookie } from "./cookie";
 import type { DynamicLinksFunction } from "remix-utils";
 import { ExternalScripts, DynamicLinks } from "remix-utils";
 import type { Media } from "payload/generated-types";
-import ReservationForm from "~/components/ReservationForm";
-import Modal from "./components/Modal";
 import transport, { connectedEmailAddresses, from } from "email";
 import { replaceMulti } from "./util/stringInterpolation";
 import environment from "./util/environment";
 import CookieConsent from "react-cookie-consent";
+import { ModalContainer, ModalProvider } from "@faceless-ui/modal";
 import classes from "./root.module.css";
 
 export const links: LinksFunction = () => {
@@ -260,14 +258,11 @@ export function ErrorBoundary() {
 
 export default function App() {
   // Get the locale from the loader
-  let { locale, publicKeys, site } = useLoaderData<typeof loader>();
+  let { locale, publicKeys } = useLoaderData<typeof loader>();
   let { t, i18n } = useTranslation();
 
   // handle locale change
   useChangeLanguage(locale);
-
-  // use search params
-  const [searchParams] = useSearchParams();
 
   return (
     <html lang={locale} dir={i18n.dir()}>
@@ -283,16 +278,10 @@ export default function App() {
             __html: `window.ENV = ${JSON.stringify(publicKeys)}`,
           }}
         />
-        {searchParams.get("modal") === "reservation" && (
-          <Modal title={t("Reserve a Table") as string}>
-            <ReservationForm
-              from={new Date(site.reservations.from)}
-              until={new Date(site.reservations.until)}
-              hCaptchaSiteKey={environment().HCAPTCHA_SITE_KEY}
-            />
-          </Modal>
-        )}
-        <Outlet />
+        <ModalProvider transTime={200} zIndex={200}>
+          <Outlet />
+          <ModalContainer />
+        </ModalProvider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
