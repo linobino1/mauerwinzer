@@ -98,7 +98,7 @@ nav.secondary {
   .modal .wrapper {
     width: 100vw;
     padding-top: calc(4rem + 2 * var(--page-margin));
-    padding-bottom: 2rem;
+    padding-bottom: 6rem;
   }
   .modal header {
     display: none;
