@@ -39,14 +39,21 @@ export const Footer: React.FC<Props> = ({ site, navigations }) => {
           color="white"
           onClick={() => window.open("/menu-inhouse", "_blank")}
         >
-          {t("Menu")}
+          {t("Wine Menu")}
+        </Button>
+        <Button
+          layout="big"
+          color="white"
+          onClick={() => window.open("/menu-food", "_blank")}
+        >
+          {t("Food Menu")}
         </Button>
         <Button
           layout="big"
           color="white"
           onClick={() => window.open("/menu-takeaway", "_blank")}
         >
-          {t("Menu take-away")}
+          {t("Wine Menu take-away")}
         </Button>
       </div>
     </footer>
