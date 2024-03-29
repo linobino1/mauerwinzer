@@ -7,14 +7,12 @@ import { useTranslation } from "react-i18next";
 import { useLocale } from "remix-i18next";
 import type { Site } from "payload/generated-types";
 import environment from "~/util/environment";
-import { useModal } from "@faceless-ui/modal";
 
 export type Props = {
   site: Site;
 };
 
 export const ReservationForm: React.FC<Props> = ({ site }) => {
-  const modal = useModal();
   const { t } = useTranslation();
   const locale = useLocale();
 
