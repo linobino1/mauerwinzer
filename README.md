@@ -16,7 +16,7 @@ docker compose up -d
     PAYLOAD_SECRET=secret
     MONGODB_URI=mongodb://localhost:27017/app
     ```
-2. run `yarn dev`
+2. run `pnpm dev`
 
 ## Production
 

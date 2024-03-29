@@ -1,5 +1,4 @@
-import type { LoaderArgs } from "@remix-run/node";
-import { redirect } from "@remix-run/router";
+import { redirect, type LoaderArgs } from "@remix-run/node";
 import type { Page } from "payload/generated-types";
 import { useTranslation } from "react-i18next";
 
