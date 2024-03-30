@@ -7,7 +7,6 @@
   "Party Size": "Personenzahl",
   "Send": "Senden",
   "Cancel": "Abbrechen",
-  "CookieBannerText": "Diese Website verwendet Cookies, um Ihnen die bestmögliche Funktionalität bieten zu können.",
   "Accept": "Akzeptieren",
   "Decline": "Ablehnen",
   "please confirm the captcha": "bitte bestätigen Sie den Captcha",
@@ -18,5 +17,10 @@
   "Please correct the errors below and try again.": "Bitte korrigieren Sie die unten aufgeführten Fehler und versuchen Sie es erneut.",
   "Wine Menu": "Weinkarte",
   "Food Menu": "Speisekarte",
-  "Wine Menu take-away": "Weinkarte außer Haus"
+  "Wine Menu take-away": "Weinkarte außer Haus",
+  "cookies": {
+    "banner": "Diese Website verwendet Cookies, um Ihnen die bestmögliche Funktionalität bieten zu können.",
+    "noConsent": "This content is blocked. To view it, please consent to the use of cookies.",
+    "resetConsent": "Reset my cookie preferences"
+  }
 }

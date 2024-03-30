@@ -11,9 +11,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  isRouteErrorResponse,
   useLoaderData,
-  useRouteError,
 } from "@remix-run/react";
 import i18next from "~/i18next.server";
 import { useTranslation } from "react-i18next";
@@ -24,18 +22,14 @@ import type { Media } from "payload/generated-types";
 import transport, { connectedEmailAddresses, from } from "email";
 import { replaceMulti } from "./util/stringInterpolation";
 import environment from "./util/environment";
-import CookieConsent from "react-cookie-consent";
-import { ModalContainer, ModalProvider } from "@faceless-ui/modal";
 import classes from "./root.module.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Cookies, { CookieConsentProvider } from "./providers/Cookies";
 
-export const links: LinksFunction = () => {
-  return [
-    // use css bundling
-    ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-  ];
-};
+export const links: LinksFunction = () => [
+  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+];
 
 export async function loader({
   request,
@@ -103,27 +97,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
       content: (data?.site.meta?.ogImage as Media)?.url,
     },
   ];
-};
-
-// export const metaOLD: MetaFunction<typeof loader> = ({ data }) => {
-//   const additionalMetaTags: Record<string, string> = {};
-//   data.site.meta?.additionalMetaTags?.forEach((tag) => {
-//     additionalMetaTags[tag.key as string] = tag.value;
-//   });
-
-//   return {
-//     title: data.site.title,
-//     description: data.site.meta?.description,
-//     keywords: data.site.meta?.keywords,
-//     "og:title": data.site.meta?.ogTitle,
-//     "og:description": data.site.meta?.ogDescription,
-//     "og:image": (data.site.meta?.ogImage as Media)?.url,
-//     ...additionalMetaTags,
-//   };
-// };
-
-export const handle = {
-  i18n: "common", // i18n namespace
 };
 
 export function useChangeLanguage(locale: string) {
@@ -248,42 +221,11 @@ export const action: ActionFunction = async ({
   return res;
 };
 
-export function ErrorBoundary() {
-  let error = useRouteError();
-
-  if (isRouteErrorResponse(error)) {
-    return (
-      <div>
-        <h1>
-          {error.status} {error.statusText}
-        </h1>
-        <p>{error.data}</p>
-      </div>
-    );
-  }
-
-  // display info about the error in development
-  return environment().NODE_ENV === "development" ? (
-    error instanceof Error ? (
-      <div>
-        <h1>Error</h1>
-        <p>{error.message}</p>
-        <p>The stack trace is:</p>
-        <pre>{error.stack}</pre>
-      </div>
-    ) : (
-      <pre>{"Unknown Error"}</pre>
-    )
-  ) : (
-    <h1>Something went wrong</h1>
-  );
-}
-
 export default function App() {
   // Get the locale from the loader
   let { locale, publicKeys, site, navigations } =
     useLoaderData<typeof loader>();
-  let { t, i18n } = useTranslation();
+  let { i18n } = useTranslation();
 
   // handle locale change
   useChangeLanguage(locale);
@@ -304,44 +246,25 @@ export default function App() {
           type={(site.favicon as Media)?.mimeType as string}
         />
       </head>
-      <body className={classes.body}>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `window.ENV = ${JSON.stringify(publicKeys)}`,
-          }}
-        />
-        <ModalProvider transTime={200} zIndex={200}>
+      <CookieConsentProvider>
+        <body className={classes.body}>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.ENV = ${JSON.stringify(publicKeys)}`,
+            }}
+          />
           <div className={classes.aboveFooter}>
-            <Header
-              site={site}
-              navigations={navigations.docs}
-              content={undefined}
-            />
+            <Header site={site} navigations={navigations.docs} />
 
             <Outlet />
           </div>
 
           <Footer site={site} navigations={navigations.docs} />
-          <ModalContainer />
-        </ModalProvider>
-        <ScrollRestoration />
-        <Scripts />
-        <div className={classes.cookiesWrapper}>
-          <CookieConsent
-            location="bottom"
-            buttonText={t("Accept")}
-            declineButtonText={t("Decline")}
-            enableDeclineButton
-            containerClasses={classes.cookies}
-            buttonWrapperClasses={classes.cookieButtons}
-            buttonClasses={classes.cookieButtonAccept}
-            declineButtonClasses={classes.cookieButtonDecline}
-            contentClasses={classes.cookieContent}
-          >
-            {t("CookieBannerText")}
-          </CookieConsent>
-        </div>
-      </body>
+          <ScrollRestoration />
+          <Scripts />
+          <Cookies />
+        </body>
+      </CookieConsentProvider>
     </html>
   );
 }

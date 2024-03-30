@@ -1,7 +1,5 @@
 import nodemailer from "nodemailer";
 
-require("dotenv").config();
-
 const port = parseInt(process.env.SMTP_PORT || "") || 587;
 export const transport =
   process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS

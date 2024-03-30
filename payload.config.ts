@@ -11,9 +11,9 @@ import en from "./public/locales/en/backend.json";
 import de from "./public/locales/de/backend.json";
 import { cloudStorage } from "@payloadcms/plugin-cloud-storage";
 import { s3Adapter } from "@payloadcms/plugin-cloud-storage/s3";
-import { webpackBundler } from "@payloadcms/bundler-webpack";
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { slateEditor } from "@payloadcms/richtext-slate";
+import { viteBundler } from "@payloadcms/bundler-vite";
 
 export default buildConfig({
   db: mongooseAdapter({
@@ -22,7 +22,14 @@ export default buildConfig({
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || "http://localhost:3000",
   admin: {
     user: Users.slug,
-    bundler: webpackBundler(),
+    bundler: viteBundler(),
+    vite: (incomingViteConfig) => ({
+      ...incomingViteConfig,
+      build: {
+        ...incomingViteConfig.build,
+        emptyOutDir: false,
+      },
+    }),
   },
   editor: slateEditor({}),
   plugins: [

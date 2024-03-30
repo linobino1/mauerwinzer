@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import type {
   Media,
   Site,
@@ -11,9 +11,9 @@ import classes from "./index.module.css";
 import Button from "../Button";
 import LanguageSwitch from "../LanguageSwitch";
 import { useTranslation } from "react-i18next";
-import { Modal, useModal } from "@faceless-ui/modal";
 import ReservationForm from "../ReservationForm";
 import { Hamburger } from "./Hamburger";
+import Modal from "../Modal";
 
 type Props = {
   site: Site;
@@ -22,24 +22,33 @@ type Props = {
 
 const Header: React.FC<Props> = ({ site, navigations }) => {
   const { t } = useTranslation();
-  const { openModal, closeModal, oneModalIsOpen, closeAllModals, isModalOpen } =
-    useModal();
   const location = useLocation();
 
   useEffect(() => {
-    closeModal("menu");
-  }, [location, closeModal]);
+    setModal(null);
+    document.body.style.overflow = "auto";
+  }, [location]);
+
+  // modals
+  const [modal, setModal] = useState<"menu" | "reservation" | null>(null);
+  const toggleModal = (slug: "menu" | "reservation" | "closeAll") => {
+    let newState = slug === "closeAll" || slug === modal ? null : slug;
+    if (newState === null) {
+      document.body.style.overflow = "auto";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+    setModal(newState);
+  };
 
   return (
     <>
       <header className={classes.mobile}>
         <Button
           className={classes.hamburger}
-          onClick={() =>
-            oneModalIsOpen ? closeAllModals() : openModal("menu")
-          }
+          onClick={() => toggleModal("menu")}
         >
-          <Hamburger collapsed={isModalOpen("menu")} />
+          <Hamburger collapsed={modal !== null} />
         </Button>
       </header>
       <header className={classes.main}>
@@ -69,18 +78,18 @@ const Header: React.FC<Props> = ({ site, navigations }) => {
           <Button
             layout="big"
             className={classes.reservationButton}
-            onClick={() => openModal("reservation")}
+            onClick={() => toggleModal("reservation")}
           >
             {t("Reserve a Table")}
           </Button>
         </nav>
       </header>
-      <Modal slug="menu" className={`${classes.modal} ${classes.mobileMenu}`}>
-        <div className={classes.wrapper}>
+      <div className={classes.modalHost}>
+        <Modal show={modal === "menu"} className={classes.mobileMenu}>
           <Button
             className={classes.reservationButton}
             layout="big"
-            onClick={() => openModal("reservation")}
+            onClick={() => toggleModal("reservation")}
           >
             {t("Reserve a Table")}
           </Button>
@@ -88,22 +97,18 @@ const Header: React.FC<Props> = ({ site, navigations }) => {
             navigation={navigations.find((x) => x.type === "mobile")}
             className={classes.mobile}
           />
-        </div>
-      </Modal>
-      <Modal slug="reservation" className={classes.modal}>
-        <div className={classes.wrapper}>
+        </Modal>
+        <Modal show={modal === "reservation"}>
           <header>
             <Button
-              onClick={() =>
-                oneModalIsOpen ? closeAllModals() : openModal("menu")
-              }
+              onClick={() => toggleModal("closeAll")}
               layout="symbol"
               symbol="close"
             />
           </header>
           <ReservationForm site={site} />
-        </div>
-      </Modal>
+        </Modal>
+      </div>
     </>
   );
 };

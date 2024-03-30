@@ -1,3 +1,7 @@
 {
-  "CookieBannerText": "This website uses cookies to ensure you get the best experience on our website."
+  "cookies": {
+    "banner": "This website uses cookies to ensure you get the best experience.",
+    "noConsent": "This content is blocked. To view it, please consent to the use of cookies.",
+    "resetConsent": "Reset my cookie preferences"
+  }
 }

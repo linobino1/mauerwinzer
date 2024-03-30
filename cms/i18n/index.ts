@@ -18,16 +18,16 @@ export type TranslationKeyDE = keyof typeof de;
  */
 export const t = (
   key: string,
-  replacers: Record<string, string> = {},
+  replacers: Record<string, string> = {}
 ): Record<string, string> => {
   return {
     en: replace(
       en.hasOwnProperty(key) ? en[key as TranslationKeyEN] : key,
-      replacers,
+      replacers
     ),
     de: replace(
       de.hasOwnProperty(key) ? de[key as TranslationKeyDE] : key,
-      replacers,
+      replacers
     ),
   };
 };
@@ -35,18 +35,18 @@ export const t = (
 export const fixedT = (
   key: string,
   locale: string,
-  replacers: Record<string, string> = {},
+  replacers: Record<string, string> = {}
 ): string => {
   switch (locale) {
     case "en":
       return replace(
         en.hasOwnProperty(key) ? en[key as TranslationKeyEN] : key,
-        replacers,
+        replacers
       );
     case "de":
       return replace(
         de.hasOwnProperty(key) ? de[key as TranslationKeyDE] : key,
-        replacers,
+        replacers
       );
   }
   return key;
@@ -60,7 +60,7 @@ export const fixedT = (
 const replace = (s: string, replacers: Record<string, string> = {}): string => {
   let res = s;
   Object.keys(replacers).forEach((key) => {
-    res = res?.replace(`{${key}}`, replacers[key]);
+    res = res?.replace(`{${key}}`, replacers[key] ?? "");
   });
   return res;
 };

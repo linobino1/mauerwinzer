@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React, { Fragment } from "react";
-import { escape } from "html-escaper";
+import escapeHTML from "escape-html";
 import { Text } from "slate";
 import { Image } from "~/components/Image";
 import type { Media, Page } from "payload/generated-types";
@@ -26,7 +26,10 @@ const serialize = (children: Children): React.ReactElement[] =>
   children.map((node, i) => {
     if (Text.isText(node)) {
       // escape text and convert line breaks to <br />
-      let escapedText = escape(node.text).replace(/(\r\n|\n|\r)/gm, "<br />");
+      let escapedText = escapeHTML(node.text).replace(
+        /(\r\n|\n|\r)/gm,
+        "<br />"
+      );
       let text = <span dangerouslySetInnerHTML={{ __html: escapedText }} />;
 
       if (node.bold) {
@@ -104,7 +107,7 @@ const serialize = (children: Children): React.ReactElement[] =>
           return <span key={i}>{serialize(node.children as Children)}</span>;
         }
         return (
-          <a key={i} href={escape(node.url ?? "")} target={target}>
+          <a key={i} href={escapeHTML(node.url ?? "")} target={target}>
             {serialize(node.children as Children)}
           </a>
         );

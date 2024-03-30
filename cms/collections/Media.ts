@@ -3,6 +3,7 @@ import { t } from "../i18n";
 
 export const Media: CollectionConfig = {
   slug: "media",
+  upload: true,
   labels: {
     singular: t("Media"),
     plural: t("Media"),

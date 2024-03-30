@@ -1,0 +1,39 @@
+/** DESKTOP MODALS ******************************************/
+.modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(30em, 100vw);
+  height: 100vh;
+  padding: 3vw;
+  background: var(--color-white);
+  border: none;
+  transform: translateX(100%);
+  transition: transform 200ms ease-in-out;
+  overflow-y: auto;
+  pointer-events: all;
+  display: flex;
+  flex-direction: column;
+}
+.modal[aria-hidden="false"] {
+  transform: translateX(0);
+  opacity: 1;
+}
+.modal header {
+  display: flex;
+  justify-content: end;
+}
+/** MOBILE MODALS *******************************************/
+@media screen and (max-width: 768px) {
+  .modal {
+    transition: opacity 200ms ease-in-out;
+  }
+  .modal {
+    width: 100vw;
+    padding-top: calc(4rem + 2 * var(--page-margin));
+    padding-bottom: 6rem;
+  }
+  .modal header {
+    display: none;
+  }
+}
