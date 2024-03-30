@@ -11,9 +11,6 @@ dependencies:
   '@aws-sdk/lib-storage':
     specifier: ^3.400.0
     version: 3.540.0(@aws-sdk/client-s3@3.540.0)
-  '@faceless-ui/modal':
-    specifier: ^2.0.1
-    version: 2.0.2(react-dom@18.2.0)(react@18.2.0)
   '@hcaptcha/react-hcaptcha':
     specifier: ^1.8.1
     version: 1.10.1(react-dom@18.2.0)(react@18.2.0)
@@ -92,9 +89,6 @@ dependencies:
   react-cookie:
     specifier: ^7.1.0
     version: 7.1.0(react@18.2.0)
-  react-cookie-consent:
-    specifier: ^8.0.1
-    version: 8.0.1(react@18.2.0)
   react-dom:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
@@ -2103,20 +2097,6 @@ packages:
 
   /@faceless-ui/modal@2.0.1(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-z1PaaLxwuX+1In4vhUxODZndGKdCY+WIqzvtnas3CaYGGCVJBSJ4jfv9UEEGZzcahmSy+71bEL89cUT6d36j1Q==}
-    peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      body-scroll-lock: 3.1.5
-      focus-trap: 6.9.4
-      qs: 6.12.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-transition-group: 4.4.5(react-dom@18.2.0)(react@18.2.0)
-    dev: false
-
-  /@faceless-ui/modal@2.0.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-CtwUn+hHEaoYUjREzQKGRbEp55VzUx7sC+hxIxmCPwg7Yd5KXkQzSfoUfRAHqT/1MFfE1B2QCHVVbhtSnFL9BA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -7450,10 +7430,6 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /js-cookie@2.2.1:
-    resolution: {integrity: sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==}
-    dev: false
-
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -9635,16 +9611,6 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
-  /react-cookie-consent@8.0.1(react@18.2.0):
-    resolution: {integrity: sha512-4A2jzPQDFfBhtxIz4hYX+vJ0QnOknGdOXpEoetXzgwUrMtxVJVow8YgBsGerNt5rJI7WhKkHwr8LmxekxgVejg==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      react: '>=16'
-    dependencies:
-      js-cookie: 2.2.1
-      react: 18.2.0
     dev: false
 
   /react-cookie@7.1.0(react@18.2.0):
