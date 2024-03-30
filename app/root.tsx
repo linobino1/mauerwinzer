@@ -1,14 +1,12 @@
 import type {
   MetaFunction,
-  SerializeFrom,
   LinksFunction,
-  LoaderArgs,
+  LoaderFunctionArgs,
   ActionFunction,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   Links,
-  LiveReload,
   Meta,
   Outlet,
   Scripts,
@@ -22,8 +20,6 @@ import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import { i18nCookie } from "./cookie";
-import type { DynamicLinksFunction } from "remix-utils";
-import { ExternalScripts, DynamicLinks } from "remix-utils";
 import type { Media } from "payload/generated-types";
 import transport, { connectedEmailAddresses, from } from "email";
 import { replaceMulti } from "./util/stringInterpolation";
@@ -31,6 +27,8 @@ import environment from "./util/environment";
 import CookieConsent from "react-cookie-consent";
 import { ModalContainer, ModalProvider } from "@faceless-ui/modal";
 import classes from "./root.module.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 export const links: LinksFunction = () => {
   return [
@@ -39,12 +37,20 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export async function loader({ request, context: { payload } }: LoaderArgs) {
+export async function loader({
+  request,
+  context: { payload },
+}: LoaderFunctionArgs) {
   let locale = await i18next.getLocale(request);
-  const [site, localeCookie] = await Promise.all([
+  const [site, navigations, localeCookie] = await Promise.all([
     payload.findGlobal({
       slug: "site",
       depth: 1,
+      locale,
+    }),
+    payload.find({
+      collection: "navigations",
+      depth: 12,
       locale,
     }),
     i18nCookie.serialize(locale),
@@ -53,10 +59,14 @@ export async function loader({ request, context: { payload } }: LoaderArgs) {
   return json(
     {
       site,
+      navigations,
       locale,
       publicKeys: {
-        PAYLOAD_PUBLIC_SERVER_URL: environment().PAYLOAD_PUBLIC_SERVER_URL,
-        HCAPTCHA_SITE_KEY: environment().HCAPTCHA_SITE_KEY,
+        PAYLOAD_PUBLIC_SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+        HCAPTCHA_SITE_KEY: process.env.HCAPTCHA_SITE_KEY,
+        CDN_CGI_IMAGE_URL: environment().CDN_CGI_IMAGE_URL,
+        USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS:
+          process.env.USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS,
       },
     },
     {
@@ -67,40 +77,53 @@ export async function loader({ request, context: { payload } }: LoaderArgs) {
   );
 }
 
-export const dynamicLinks: DynamicLinksFunction<
-  SerializeFrom<typeof loader>
-> = ({ data }) => {
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [
     {
-      rel: "icon",
-      href: (data.site.favicon as Media)?.url as string,
-      type: (data.site.logo as Media)?.mimeType,
+      title: data?.site.title,
+    },
+    {
+      name: "description",
+      content: data?.site.meta?.description,
+    },
+    {
+      name: "keywords",
+      content: data?.site.meta?.keywords,
+    },
+    {
+      property: "og:title",
+      content: data?.site.meta?.ogTitle,
+    },
+    {
+      property: "og:description",
+      content: data?.site.meta?.ogDescription,
+    },
+    {
+      property: "og:image",
+      content: (data?.site.meta?.ogImage as Media)?.url,
     },
   ];
 };
 
-export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const additionalMetaTags: Record<string, string> = {};
-  data.site.meta?.additionalMetaTags?.forEach((tag) => {
-    additionalMetaTags[tag.key as string] = tag.value;
-  });
+// export const metaOLD: MetaFunction<typeof loader> = ({ data }) => {
+//   const additionalMetaTags: Record<string, string> = {};
+//   data.site.meta?.additionalMetaTags?.forEach((tag) => {
+//     additionalMetaTags[tag.key as string] = tag.value;
+//   });
 
-  return {
-    charset: "utf-8",
-    viewport: "width=device-width,initial-scale=1",
-    title: data.site.title,
-    description: data.site.meta?.description,
-    keywords: data.site.meta?.keywords,
-    "og:title": data.site.meta?.ogTitle,
-    "og:description": data.site.meta?.ogDescription,
-    "og:image": (data.site.meta?.ogImage as Media)?.url,
-    ...additionalMetaTags,
-  };
-};
+//   return {
+//     title: data.site.title,
+//     description: data.site.meta?.description,
+//     keywords: data.site.meta?.keywords,
+//     "og:title": data.site.meta?.ogTitle,
+//     "og:description": data.site.meta?.ogDescription,
+//     "og:image": (data.site.meta?.ogImage as Media)?.url,
+//     ...additionalMetaTags,
+//   };
+// };
 
 export const handle = {
   i18n: "common", // i18n namespace
-  dynamicLinks,
 };
 
 export function useChangeLanguage(locale: string) {
@@ -258,7 +281,8 @@ export function ErrorBoundary() {
 
 export default function App() {
   // Get the locale from the loader
-  let { locale, publicKeys } = useLoaderData<typeof loader>();
+  let { locale, publicKeys, site, navigations } =
+    useLoaderData<typeof loader>();
   let { t, i18n } = useTranslation();
 
   // handle locale change
@@ -269,22 +293,39 @@ export default function App() {
       <head>
         <Meta />
         <Links />
-        <DynamicLinks />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        {site.meta?.additionalMetaTags?.map((tag) => (
+          <meta key={tag.key} name={tag.key} content={tag.value} />
+        ))}
+        <link
+          rel="icon"
+          href={(site.favicon as Media)?.url as string}
+          type={(site.favicon as Media)?.mimeType as string}
+        />
       </head>
       <body className={classes.body}>
-        <ExternalScripts />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.ENV = ${JSON.stringify(publicKeys)}`,
           }}
         />
         <ModalProvider transTime={200} zIndex={200}>
-          <Outlet />
+          <div className={classes.aboveFooter}>
+            <Header
+              site={site}
+              navigations={navigations.docs}
+              content={undefined}
+            />
+
+            <Outlet />
+          </div>
+
+          <Footer site={site} navigations={navigations.docs} />
           <ModalContainer />
         </ModalProvider>
         <ScrollRestoration />
         <Scripts />
-        <LiveReload />
         <div className={classes.cookiesWrapper}>
           <CookieConsent
             location="bottom"

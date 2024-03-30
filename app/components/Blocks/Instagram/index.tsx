@@ -3,7 +3,7 @@ import classes from "./index.module.css";
 
 export type Type = {
   blockType: "instagram";
-  blockName?: string;
+  blockName?: string | null;
   apiUrl: string;
 };
 

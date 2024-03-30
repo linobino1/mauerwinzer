@@ -5,8 +5,8 @@ import type { Media } from "payload/generated-types";
 
 export type Type = {
   blockType: "gallery";
-  blockName?: string;
-  images?: { image?: string | Media | undefined; id?: string | undefined }[];
+  blockName?: string | null;
+  images?: { image?: string | Media | null; id?: string | null }[] | null;
 };
 
 export const Gallery: React.FC<Type> = ({ images }) => {
@@ -18,7 +18,30 @@ export const Gallery: React.FC<Type> = ({ images }) => {
           <Image
             key={index}
             className={classes.image}
-            image={item.image as Media}
+            media={item.image as Media}
+            sizes="(min-width: 768px) 50vw, 100vw"
+            srcSet={[
+              {
+                options: { width: 2560 },
+                size: "2560w",
+              },
+              {
+                options: { width: 1920 },
+                size: "1920w",
+              },
+              {
+                options: { width: 1280 },
+                size: "1280w",
+              },
+              {
+                options: { width: 960 },
+                size: "960w",
+              },
+              {
+                options: { width: 640 },
+                size: "640w",
+              },
+            ]}
           />
         ))}
     </div>

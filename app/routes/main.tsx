@@ -1,12 +1,14 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
-import type { ReactNode } from "react";
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
 import i18next from "~/i18next.server";
-import classes from "./__main.module.css";
+import classes from "./main.module.css";
 
-export const loader = async ({ request, context: { payload } }: LoaderArgs) => {
+export const loader = async ({
+  request,
+  context: { payload },
+}: LoaderFunctionArgs) => {
   const locale = await i18next.getLocale(request);
 
   const [site, navigations] = await Promise.all([
@@ -26,21 +28,13 @@ export const loader = async ({ request, context: { payload } }: LoaderArgs) => {
   };
 };
 
-export const handle = {
-  i18n: ["common"],
-};
-
-export type Props = {
-  header: ReactNode;
-};
-
-export default function Layout({ header }: Props) {
+export default function Layout() {
   const { site, navigations } = useLoaderData<typeof loader>();
 
   return (
     <>
       <div className={classes.aboveFooter}>
-        <Header site={site} navigations={navigations} content={header} />
+        <Header site={site} navigations={navigations} />
 
         <Outlet />
       </div>

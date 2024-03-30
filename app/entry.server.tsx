@@ -1,6 +1,8 @@
 import { PassThrough } from "stream";
-import type { EntryContext } from "@remix-run/node";
-import { Response } from "@remix-run/node";
+import {
+  createReadableStreamFromReadable,
+  type EntryContext,
+} from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
 import isbot from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
@@ -17,7 +19,7 @@ export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
-  remixContext: EntryContext,
+  remixContext: EntryContext
 ) {
   let instance = createInstance();
   let lng = await i18next.getLocale(request);
@@ -49,14 +51,15 @@ export default async function handleRequest(
       {
         [callbackName]: () => {
           let body = new PassThrough();
+          const stream = createReadableStreamFromReadable(body);
 
           responseHeaders.set("Content-Type", "text/html");
 
           resolve(
-            new Response(body, {
+            new Response(stream, {
               headers: responseHeaders,
               status: didError ? 500 : responseStatusCode,
-            }),
+            })
           );
 
           pipe(body);
@@ -69,7 +72,7 @@ export default async function handleRequest(
 
           console.error(error);
         },
-      },
+      }
     );
 
     setTimeout(abort, ABORT_DELAY);

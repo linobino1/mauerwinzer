@@ -11,6 +11,9 @@ declare global {
     S3_BUCKET_ENDPOINT: string;
     S3_ACCESS_KEY: string;
     S3_SECRET_KEY: string;
+    MEDIA_URL: string;
+    CDN_CGI_IMAGE_URL: string;
+    USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS: string;
   }
   interface Window {
     ENV: AppEnvironment;

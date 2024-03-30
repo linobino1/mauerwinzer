@@ -24,7 +24,6 @@ async function start() {
   // Initialize Payload
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,
-    mongoURL: process.env.MONGODB_URI,
     express: app,
     email: {
       fromName: sender.name,
@@ -83,6 +82,8 @@ async function start() {
     }
   });
 
+  const build = require(BUILD_DIR);
+
   app.all(
     "*",
     process.env.NODE_ENV === "development"
@@ -90,24 +91,28 @@ async function start() {
           purgeRequireCache();
 
           return createRequestHandler({
-            build: require(BUILD_DIR),
+            build,
             mode: process.env.NODE_ENV,
             getLoadContext(req, res) {
               return {
                 // @ts-expect-error
                 payload: req.payload,
+                // @ts-expect-error
+                user: req?.user,
                 res,
               };
             },
           })(req, res, next);
         }
       : createRequestHandler({
-          build: require(BUILD_DIR),
+          build,
           mode: process.env.NODE_ENV,
           getLoadContext(req, res) {
             return {
               // @ts-expect-error
               payload: req.payload,
+              // @ts-expect-error
+              user: req?.user,
               res,
             };
           },

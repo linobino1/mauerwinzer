@@ -34,9 +34,19 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
           // image or plain text
           const inner: React.ReactNode = icon ? (
             <Image
-              image={icon as Media}
+              media={icon as Media}
               className={classes.image}
-              responsive={false}
+              sizes="2em"
+              srcSet={[
+                {
+                  options: { width: 64 },
+                  size: "64w",
+                },
+                {
+                  options: { width: 32 },
+                  size: "32w",
+                },
+              ]}
             />
           ) : (
             <span>{name}</span>
@@ -49,7 +59,7 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
                 <Navigation navigation={subnavigation as NavigationType} />
               ) : (
                 <Link
-                  to={href}
+                  to={href as string}
                   className={`${classes.navItem} ${isActive && classes.active}`}
                   target={newTab ? "_blank" : undefined}
                 >
@@ -58,7 +68,7 @@ export const Navigation: React.FC<Props> = ({ navigation, className }) => {
               )}
             </div>
           );
-        },
+        }
       )}
     </nav>
   ) : (

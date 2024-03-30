@@ -4,8 +4,8 @@ import { getCookieConsentValue } from "react-cookie-consent";
 
 export type Type = {
   blockType: "googleMaps";
-  blockName?: string;
-  title?: string;
+  blockName?: string | null;
+  title?: string | null;
   src: string;
 };
 

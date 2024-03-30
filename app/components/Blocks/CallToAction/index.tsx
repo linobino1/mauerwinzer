@@ -4,23 +4,25 @@ import type { Page } from "payload/generated-types";
 import Button from "~/components/Button";
 import { useNavigate } from "@remix-run/react";
 
-export type Type = {
+export type CallToActionProps = {
   blockType: "callToAction";
-  blockName?: string;
-  items: {
-    title: string;
-    type: "internal" | "external";
-    page?: Page | string;
-    url?: string;
-    newTab?: boolean;
-  }[];
+  blockName?: string | null;
+  items?:
+    | {
+        title: string;
+        type: "internal" | "external";
+        page?: Page | string | null;
+        url?: string | null;
+        newTab?: boolean | null;
+      }[]
+    | null;
 };
 
-export const CallToAction: React.FC<Type> = ({ items }) => {
+export const CallToAction: React.FC<CallToActionProps> = ({ items }) => {
   const navigate = useNavigate();
   return (
     <div className={classes.container}>
-      {items.map((item) => {
+      {items?.map((item) => {
         const path =
           item.type === "internal"
             ? `/${(item.page as Page).slug}`

@@ -18,7 +18,6 @@ import { Hamburger } from "./Hamburger";
 type Props = {
   site: Site;
   navigations: NavigationType[];
-  content?: React.ReactNode;
 };
 
 const Header: React.FC<Props> = ({ site, navigations }) => {
@@ -52,10 +51,16 @@ const Header: React.FC<Props> = ({ site, navigations }) => {
           {(site.logo as Media) && (
             <Image
               className={classes.logo}
-              image={site.logo as Media}
-              responsive={false}
+              media={site.logo as Media}
               width={350}
               height={125}
+              sizes="350px"
+              srcSet={[
+                {
+                  options: { width: 350 },
+                  size: "350w",
+                },
+              ]}
             />
           )}
         </Link>

@@ -4,7 +4,7 @@ import classes from "./index.module.css";
 
 export type Type = {
   blockType: "content";
-  blockName?: string;
+  blockName?: string | null;
   content?: unknown;
 };
 

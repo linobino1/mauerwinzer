@@ -111,7 +111,32 @@ const serialize = (children: Children): React.ReactElement[] =>
       case "upload":
         return (
           <div className={classes.imageWrapper} key={i}>
-            <Image image={node.value as Media} />
+            <Image
+              media={node.value as Media}
+              sizes="100vw"
+              srcSet={[
+                {
+                  options: { width: 2560 },
+                  size: "2560w",
+                },
+                {
+                  options: { width: 1920 },
+                  size: "1920w",
+                },
+                {
+                  options: { width: 1280 },
+                  size: "1280w",
+                },
+                {
+                  options: { width: 960 },
+                  size: "960w",
+                },
+                {
+                  options: { width: 640 },
+                  size: "640w",
+                },
+              ]}
+            />
           </div>
         );
 

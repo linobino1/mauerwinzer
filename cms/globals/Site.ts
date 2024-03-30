@@ -72,12 +72,6 @@ export const Site: GlobalConfig = {
       type: "richText",
       localized: true,
     },
-    {
-      name: "homePage",
-      label: t("Home"),
-      type: "relationship",
-      relationTo: "pages",
-    },
     metaField(t("Global Meta")),
   ],
 };

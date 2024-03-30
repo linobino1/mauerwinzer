@@ -11,32 +11,38 @@ import en from "./public/locales/en/backend.json";
 import de from "./public/locales/de/backend.json";
 import { cloudStorage } from "@payloadcms/plugin-cloud-storage";
 import { s3Adapter } from "@payloadcms/plugin-cloud-storage/s3";
+import { webpackBundler } from "@payloadcms/bundler-webpack";
+import { mongooseAdapter } from "@payloadcms/db-mongodb";
+import { slateEditor } from "@payloadcms/richtext-slate";
 
 export default buildConfig({
+  db: mongooseAdapter({
+    url: process.env.MONGODB_URI || "mongodb://localhost:27017/app",
+  }),
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || "http://localhost:3000",
   admin: {
     user: Users.slug,
+    bundler: webpackBundler(),
   },
+  editor: slateEditor({}),
   plugins: [
     cloudStorage({
       enabled: process.env.S3_ENABLED === "true",
       collections: {
         media: {
-          disablePayloadAccessControl: true,
-          disableLocalStorage: true,
+          disablePayloadAccessControl: true, // serve files directly from S3
           generateFileURL: (file) => {
-            return `${process.env.S3_BUCKET_ENDPOINT}/${file.filename}`;
+            return `${process.env.MEDIA_URL}/${file.filename}`;
           },
           adapter: s3Adapter({
             bucket: process.env.S3_BUCKET || "",
-            acl: "public-read",
             config: {
-              endpoint: process.env.S3_ENDPOINT,
-              region: process.env.S3_REGION,
+              endpoint: process.env.S3_ENDPOINT || undefined,
               credentials: {
                 accessKeyId: process.env.S3_ACCESS_KEY || "",
                 secretAccessKey: process.env.S3_SECRET_KEY || "",
               },
+              region: process.env.S3_REGION || "",
             },
           }),
         },
