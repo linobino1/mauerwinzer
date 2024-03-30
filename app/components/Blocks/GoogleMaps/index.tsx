@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classes from "./index.module.css";
-import { getCookieConsentValue } from "react-cookie-consent";
+import { useCookieConsent } from "~/providers/Cookies";
+import { useTranslation } from "react-i18next";
+import Button from "~/components/Button";
 
 export type Type = {
   blockType: "googleMaps";
@@ -10,10 +12,9 @@ export type Type = {
 };
 
 export const GoogleMaps: React.FC<Type> = ({ title, src }) => {
-  const [consent, setConsent] = React.useState(false);
-  useEffect(() => {
-    setConsent(!!getCookieConsentValue());
-  }, []);
+  const { consent, resetConsent } = useCookieConsent();
+  const { t } = useTranslation();
+
   return consent ? (
     <div className={classes.container}>
       {title && <h2>{title}</h2>}
@@ -29,9 +30,12 @@ export const GoogleMaps: React.FC<Type> = ({ title, src }) => {
       />
     </div>
   ) : (
-    <>
-      {/* TODO: we could show a preview here asking the user to consent to cookies */}
-    </>
+    <div className={classes.noConsent}>
+      <p>{t("cookies.noConsent")}</p>
+      {consent !== null && (
+        <Button onClick={resetConsent}>{t("cookies.resetConsent")}</Button>
+      )}
+    </div>
   );
 };
 
