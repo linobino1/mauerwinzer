@@ -1,3 +1,9 @@
+.env
+.env.server
+.env.example
+fly.toml
+.github
+media
 node_modules
 npm-debug.log
 dist
