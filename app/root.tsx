@@ -17,7 +17,6 @@ import i18next from "~/i18next.server";
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { cssBundleHref } from "@remix-run/css-bundle";
-import { i18nCookie } from "./cookie";
 import type { Media } from "payload/generated-types";
 import transport, { connectedEmailAddresses, from } from "email";
 import { replaceMulti } from "./util/stringInterpolation";
@@ -36,7 +35,7 @@ export async function loader({
   context: { payload },
 }: LoaderFunctionArgs) {
   let locale = await i18next.getLocale(request);
-  const [site, navigations, localeCookie] = await Promise.all([
+  const [site, navigations] = await Promise.all([
     payload.findGlobal({
       slug: "site",
       depth: 1,
@@ -47,28 +46,20 @@ export async function loader({
       depth: 12,
       locale,
     }),
-    i18nCookie.serialize(locale),
   ]);
 
-  return json(
-    {
-      site,
-      navigations,
-      locale,
-      publicKeys: {
-        PAYLOAD_PUBLIC_SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-        HCAPTCHA_SITE_KEY: process.env.HCAPTCHA_SITE_KEY,
-        CDN_CGI_IMAGE_URL: environment().CDN_CGI_IMAGE_URL,
-        USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS:
-          process.env.USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS,
-      },
+  return json({
+    site,
+    navigations,
+    locale,
+    publicKeys: {
+      PAYLOAD_PUBLIC_SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+      HCAPTCHA_SITE_KEY: process.env.HCAPTCHA_SITE_KEY,
+      CDN_CGI_IMAGE_URL: environment().CDN_CGI_IMAGE_URL,
+      USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS:
+        process.env.USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS,
     },
-    {
-      headers: {
-        "Set-Cookie": localeCookie,
-      },
-    }
-  );
+  });
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
@@ -103,6 +94,7 @@ export function useChangeLanguage(locale: string) {
   const { i18n } = useTranslation();
   useEffect(() => {
     i18n.changeLanguage(locale);
+    document.cookie = `i18n=${locale}; path=/; samesite=strict`;
   }, [locale, i18n]);
 }
 
