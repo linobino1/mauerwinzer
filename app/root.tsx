@@ -3,6 +3,7 @@ import type {
   LinksFunction,
   LoaderFunctionArgs,
   ActionFunction,
+  HeadersFunction,
 } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
@@ -48,19 +49,30 @@ export async function loader({
     }),
   ]);
 
-  return json({
-    site,
-    navigations,
-    locale,
-    publicKeys: {
-      PAYLOAD_PUBLIC_SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
-      HCAPTCHA_SITE_KEY: process.env.HCAPTCHA_SITE_KEY,
-      CDN_CGI_IMAGE_URL: environment().CDN_CGI_IMAGE_URL,
-      USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS:
-        process.env.USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS,
+  return json(
+    {
+      site,
+      navigations,
+      locale,
+      publicKeys: {
+        PAYLOAD_PUBLIC_SERVER_URL: process.env.PAYLOAD_PUBLIC_SERVER_URL,
+        HCAPTCHA_SITE_KEY: process.env.HCAPTCHA_SITE_KEY,
+        CDN_CGI_IMAGE_URL: environment().CDN_CGI_IMAGE_URL,
+        USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS:
+          process.env.USE_CLOUDFLARE_IMAGE_TRANSFORMATIONS,
+      },
     },
-  });
+    {
+      headers: {
+        "Content-Language": locale,
+      },
+    }
+  );
 }
+
+export const headers: HeadersFunction = ({ loaderHeaders }) => ({
+  "Content-Language": loaderHeaders.get("Content-Language") as string,
+});
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [

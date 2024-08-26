@@ -14,6 +14,9 @@ import { action as rootAction } from "../../root";
 import classes from "./index.module.css";
 import type { Media, Site } from "payload/generated-types";
 import getOptimizedImageUrl from "~/util/getOptimizedImageUrl";
+import { routeHeaders } from "~/util/routeHeaders";
+
+export const headers = routeHeaders;
 
 export const loader = async ({
   request,
