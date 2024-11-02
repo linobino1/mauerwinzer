@@ -29,6 +29,10 @@ nav.secondary {
   align-items: center;
   gap: 1em;
 }
+img.logo {
+  width: 350px;
+  height: auto;
+}
 /** bigger logo on big screens */
 @media screen and (min-width: 1450px) {
   img.logo {

@@ -54,13 +54,18 @@ const Header: React.FC<Props> = ({ site, navigations }) => {
             <Image
               className={classes.logo}
               media={site.logo as Media}
-              width={350}
-              height={125}
-              sizes="350px"
               srcSet={[
                 {
                   options: { width: 350 },
                   size: '350w',
+                },
+                {
+                  options: { width: 700 },
+                  size: '700w',
+                },
+                {
+                  options: { width: 1040 },
+                  size: '1040w',
                 },
               ]}
             />
