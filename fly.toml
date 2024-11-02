@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for herzselbst-cms on 2024-10-31T12:01:57+01:00
+# fly.toml app configuration file generated for mauerwinzer-cms on 2024-11-02T18:49:49+01:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -14,7 +14,6 @@ primary_region = 'ams'
   auto_stop_machines = 'suspend'
   auto_start_machines = true
   min_machines_running = 0
-  max_machines_running = 1
   processes = ['app']
 
 [[vm]]
