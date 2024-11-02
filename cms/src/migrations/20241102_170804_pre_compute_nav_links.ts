@@ -22,8 +22,6 @@ export async function up({ payload }: MigrateUpArgs): Promise<void> {
       }
     }),
   )
-
-  throw new Error('Migration complete')
 }
 
 export async function down(): Promise<void> {
