@@ -32,6 +32,8 @@ export const ReservationForm: React.FC<Props> = ({ site, active = false }) => {
     setIsClient(true)
   }, [])
 
+  const captchaError = fetcher.data?.errors.find((error: any) => error.field === 'captcha')
+
   return (
     <div>
       <h3 className={classes.heading}>{t('Reserve a table')}</h3>
@@ -41,6 +43,7 @@ export const ReservationForm: React.FC<Props> = ({ site, active = false }) => {
         </p>
       ) : (
         <fetcher.Form method="post" className={classes.form} action="/api/reservation">
+          {fetcher.data?.message && <p className={classes.error}>{fetcher.data.message}</p>}
           <input type="hidden" name="action" value="reservation" required={true} />
           <Label htmlFor="date" required>
             {t('Date')}
@@ -80,14 +83,16 @@ export const ReservationForm: React.FC<Props> = ({ site, active = false }) => {
           <Label htmlFor="message">{t('Message')}</Label>
           <Textarea name="message" />
           {active && isClient && (
-            <Turnstile
-              sitekey={env?.TURNSTILE_SITE_KEY ?? ''}
-              execution="render"
-              onVerify={() => setCaptchaState('verified')}
-              onError={() => setCaptchaState('error')}
-              className="mb-4"
-              theme="light"
-            />
+            <div className="mb-4">
+              <Turnstile
+                sitekey={env?.TURNSTILE_SITE_KEY ?? ''}
+                execution="render"
+                onVerify={() => setCaptchaState('verified')}
+                onError={() => setCaptchaState('error')}
+                theme="light"
+              />
+              {captchaError && <div className="text-red font-bold">{captchaError.message}</div>}
+            </div>
           )}
           <Button
             className={classes.submit}

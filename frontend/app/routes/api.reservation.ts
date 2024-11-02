@@ -56,7 +56,7 @@ export const action: ActionFunction = async ({ request }) => {
       if (!(await validateCaptcha(data.get('cf-turnstile-response') as string))) {
         res.errors.push({
           message: t('please confirm the captcha'),
-          field: 'hCaptcha',
+          field: 'captcha',
         })
       }
 
