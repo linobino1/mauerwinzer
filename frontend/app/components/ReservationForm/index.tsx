@@ -42,7 +42,9 @@ export const ReservationForm: React.FC<Props> = ({ site, active = false }) => {
       ) : (
         <fetcher.Form method="post" className={classes.form} action="/api/reservation">
           <input type="hidden" name="action" value="reservation" required={true} />
-          <Label htmlFor="date">{t('Date')}</Label>
+          <Label htmlFor="date" required>
+            {t('Date')}
+          </Label>
           <Input
             type="date"
             name="date"
@@ -50,7 +52,9 @@ export const ReservationForm: React.FC<Props> = ({ site, active = false }) => {
             min={new Date().toISOString().split('T')[0]}
             required={true}
           />
-          <Label htmlFor="time">{t('Time')}</Label>
+          <Label htmlFor="time" required>
+            {t('Time')}
+          </Label>
           <Input
             type="time"
             name="time"
@@ -59,11 +63,17 @@ export const ReservationForm: React.FC<Props> = ({ site, active = false }) => {
             defaultValue={'19:00'}
             required={true}
           />
-          <Label htmlFor="partySize">{t('Party Size')}</Label>
+          <Label htmlFor="partySize" required>
+            {t('Party Size')}
+          </Label>
           <Input type="text" name="partySize" defaultValue={'2'} required={true} />
-          <Label htmlFor="name">{t('Name')}</Label>
+          <Label htmlFor="name" required>
+            {t('Name')}
+          </Label>
           <Input type="text" name="name" required={true} />
-          <Label htmlFor="email">{t('Email')}</Label>
+          <Label htmlFor="email" required>
+            {t('Email')}
+          </Label>
           <Input type="email" name="email" required={true} />
           <Label htmlFor="phone">{t('Phone')}</Label>
           <Input type="tel" name="phone" />
@@ -75,7 +85,8 @@ export const ReservationForm: React.FC<Props> = ({ site, active = false }) => {
               execution="render"
               onVerify={() => setCaptchaState('verified')}
               onError={() => setCaptchaState('error')}
-              className="mb-2"
+              className="mb-4"
+              theme="light"
             />
           )}
           <Button
