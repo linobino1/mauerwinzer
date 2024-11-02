@@ -13,7 +13,8 @@
   text-decoration: inherit;
 }
 .navItem.active {
-  font-weight: var(--font-weight-semi-bold);
+  /* font-weight: var(--font-weight-semi-bold); */
+  border-bottom: 1px solid;
 }
 .navItem.active:hover {
   color: inherit;
@@ -28,7 +29,7 @@ a.navItem,
   padding: 0.5rem 1rem;
 }
 .navItem:hover {
-  color: var(--color-theme-contrast);
+  opacity: 0.5;
 }
 .image {
   height: 1.8rem;
