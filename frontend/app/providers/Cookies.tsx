@@ -1,6 +1,9 @@
 import { Link } from '@remix-run/react'
 import { useEffect, useState, createContext, useContext } from 'react'
 import { useCookies } from 'react-cookie'
+import Button from '~/components/Button'
+import classes from './index.module.css'
+import { useTranslation } from 'react-i18next'
 
 export type CookieConsent = boolean | null
 
@@ -59,6 +62,7 @@ export const CookieConsentProvider: React.FC<{
 }
 
 const Cookies = () => {
+  const { t } = useTranslation()
   const { consent, setConsent } = useCookieConsent()
   const onAccept = () => {
     setConsent(true)
@@ -68,22 +72,15 @@ const Cookies = () => {
   }
 
   return consent === null ? (
-    <div className="border-1 fixed bottom-4 left-4 right-4 mx-auto w-full max-w-[96vw] rounded-md bg-white p-4 shadow-lg lg:max-w-[1024px]">
-      <p className="text-sm">
-        Wir verwenden Cookies, um Ihnen ein optimales Webseiten Erlebnis zu bieten. Lesen Sie mehr
-        in unserer{' '}
-        <Link to={'/datenschutz'} prefetch="intent" target="_blank" className="underline">
-          Datenschutzerklärung
-        </Link>
-        .{' '}
-      </p>
-      <div className="font-altsans mt-4 flex justify-end gap-4 text-white underline">
-        <button onClick={onDecline} className="rounded-sm bg-red-500 px-4 py-2 hover:bg-red-600">
-          Ablehnen
-        </button>
-        <button onClick={onAccept} className="bg-key-500 hover:bg-key-600 rounded-sm px-4 py-2">
-          Akzeptieren
-        </button>
+    <div className={classes.container}>
+      <p className="text-sm">{t('cookies.banner')}</p>
+      <div className={classes.buttons}>
+        <Button onClick={onDecline} className={classes.decline}>
+          {t('Decline')}
+        </Button>
+        <Button onClick={onAccept} className={classes.accept}>
+          {t('Accept')}
+        </Button>
       </div>
     </div>
   ) : null
