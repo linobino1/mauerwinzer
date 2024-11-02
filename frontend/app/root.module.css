@@ -1,0 +1,185 @@
+:root {
+  --page-margin: 3vw;
+
+  --color-theme: #283587;
+  --color-bg: #ebebeb;
+  /* --color-bg: #FFFFFF; */
+  --color-bg-dark: #2c2a2d;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-theme-contrast: #f6cd03;
+  --color-theme-contrast-strong: #f1ff00;
+  --color-theme-contrast-light: #ff9ee6;
+  --color-theme-contrast-light-2: #62b9a6;
+  --color-theme-contrast-dark: #d63312;
+  --color-light-grey: #dcdcdc;
+  --color-light-grey-readable: #c1c1c1;
+
+  --color-font: #000000;
+  /*--color-font: #2D2A2D;  /* logo grey */
+  --color-font-light: #9a9391;
+  --color-font-bright: #ffffff;
+  --color-font-bright-2: #e8e8e8;
+  --color-font-bright-3: #9a969b;
+
+  --font-size-xxx-big: 2.5rem;
+  --font-size-xx-big: 1.9rem;
+  --font-size-x-big: 1.7rem;
+  --font-size-big: 1.3rem;
+  --font-size-normal: 1rem;
+  --font-size-small: 0.9rem;
+  --font-size-x-small: 0.8rem;
+
+  --font-family-sans-serif: 'Mulish', 'Helvetica', sans-serif;
+  --font-family-serif: 'Times', serif;
+  --font-weight-bold: 600;
+  --font-weight-semi-bold: 500;
+  --font-weight-normal: 400;
+  --font-weight-light: 200;
+
+  --line-height-xxx-big: 2em;
+  --line-height-big: 1.5em;
+  --line-height-normal: 1.4em;
+
+  --letter-spacing-big: 0.1em;
+  --letter-spacing-x-big: 0.11em;
+
+  --border-radius: 2px;
+  --box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.15);
+}
+@media (max-width: 768px) {
+  :root {
+    --font-size-xxx-big: 1.9rem;
+    --font-size-xx-big: 1.7rem;
+    --font-size-x-big: 1.3rem;
+    --font-size-big: 1.15rem;
+    --font-size-normal: 1rem;
+    --font-size-small: 0.9rem;
+    --font-size-x-small: 0.8rem;
+
+    --border-radius: 5px;
+  }
+}
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+html {
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+}
+body {
+  background-color: var(--color-bg);
+  color: var(--color-font);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-sans-serif);
+  font-weight: var(--font-weight-normal);
+  text-transform: capitalize;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.4s;
+}
+
+hr {
+  width: 100%;
+  border: 0;
+  border-top: 1px solid var(--color-white);
+  outline: 0;
+  margin-block: 3em;
+}
+.link-theme,
+.link-theme a {
+  text-decoration: none;
+  color: inherit;
+}
+/* improve readablity */
+p {
+  max-width: calc(100vw - 2 * var(--page-margin));
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (min-width: 769px) {
+  p {
+    max-width: min(70vw, 1100px);
+  }
+}
+@media screen and (min-width: 769px) {
+  *[data-mobile-only] {
+    display: none;
+  }
+}
+/** Cookies Banner   ************************************************/
+.cookiesWrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+}
+.cookies {
+  position: relative !important;
+  margin: var(--page-margin);
+  width: unset !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px);
+  color: var(--color-font) !important;
+  border-radius: 0.5em !important;
+  align-items: flex-end !important;
+  box-shadow: var(--box-shadow);
+}
+.cookieContent {
+  max-width: 30em;
+}
+.cookieButtons {
+  display: flex !important;
+  justify-content: flex-end;
+}
+.cookieButtonAccept,
+.cookieButtonDecline {
+  padding: 1em !important;
+  border-radius: 0 !important;
+  border: 1px solid !important;
+  border-radius: 0.3em !important;
+  min-width: 12em !important;
+}
+.cookieButtonAccept:hover,
+.cookieButtonDecline:hover {
+  filter: brightness(1.1);
+}
+.cookieButtonAccept {
+  background: green !important;
+  color: var(--color-white) !important;
+  border-color: green !important;
+}
+.cookieButtonDecline {
+  background: none !important;
+  color: var(--color-font-bright-3) !important;
+}
+@media screen and (max-width: 768px) {
+  .cookieButtons {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+  .cookieButtonAccept,
+  .cookieButtonDecline {
+    min-width: unset !important;
+  }
+}

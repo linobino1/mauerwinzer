@@ -1,0 +1,12 @@
+.heading {
+  font-size: var(--font-size-xx-big);
+  line-height: var(--line-height-normal);
+  font-weight: var(--font-weight-bold);
+}
+.success {
+  margin-block: 2em;
+}
+.form {
+  align-self: center;
+  min-width: min(100%, 25em);
+}

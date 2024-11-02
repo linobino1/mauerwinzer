@@ -1,28 +1,16 @@
 {
-  "include": ["env.d.ts", "**/*.ts", "**/*.tsx"],
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "target": "es2022",
-    "allowJs": true,
-    "resolveJsonModule": true,
-    "moduleDetection": "force",
-    "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "lib": ["DOM", "DOM.Iterable", "ES2022"],
-    "isolatedModules": true,
-    "noImplicitAny": true,
-    "jsx": "react-jsx",
-    "moduleResolution": "Bundler",
-    "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "~/*": ["./app/*"],
-      "payload/generated-types": ["./cms/payload-types.ts"]
-    }
-  },
-  "ts-node": {
-    "swc": true
-  }
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "cms/next-env.d.ts",
+    "cms/**/*.ts",
+    "cms/**/*.tsx",
+    ".next/types/**/*.ts",
+    "frontend/**/*.ts",
+    "frontend/**/*.tsx",
+    "frontend/**/.server/**/*.ts",
+    "frontend/**/.server/**/*.tsx",
+    "frontend/**/.client/**/*.ts",
+    "frontend/**/.client/**/*.tsx"
+  ],
+  "exclude": ["node_modules", "cms/node_modules", "frontend/node_modules"]
 }
