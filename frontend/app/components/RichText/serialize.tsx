@@ -91,7 +91,7 @@ const serialize = (children: Children): React.ReactElement[] =>
           if (node.doc.relationTo === 'pages') {
             const page: Page = node.doc.value
             return (
-              <a key={i} href={`/${page.slug}`} target={target}>
+              <a key={i} href={`/${page?.slug}`} target={target}>
                 {serialize(node.children as Children)}
               </a>
             )
