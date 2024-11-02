@@ -8,7 +8,7 @@ export const loader: LoaderFunction = async () => {
     slug: 'site',
     depth: 1,
   })
-  const url = (site.logo as Media).url
+  const url = (site.favicon as Media).url
 
   if (!url) {
     throw new Response('Not found', { status: 404 })
