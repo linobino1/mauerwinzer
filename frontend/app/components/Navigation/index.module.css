@@ -9,6 +9,7 @@
 .navItem,
 .navItem:active,
 .navItem:visited {
+  width: fit-content;
   color: inherit;
   text-decoration: inherit;
 }
@@ -26,7 +27,8 @@
 }
 a.navItem,
 .navItem a {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
+  margin-inline: 0.5rem;
 }
 .navItem:hover {
   opacity: 0.5;
