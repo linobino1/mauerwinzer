@@ -27,6 +27,7 @@
 a[href^='mailto:'],
 a[href^='tel:'] {
   text-decoration: underline;
+  text-decoration-thickness: 1px;
 }
 /** Grid Layout ************************************************************************/
 .footerContent {

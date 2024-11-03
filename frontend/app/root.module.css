@@ -79,6 +79,11 @@ body {
   color: var(--color-font);
 }
 
+*,
+body {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
 h1,
 h2,
 h3,
