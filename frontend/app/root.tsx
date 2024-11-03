@@ -1,4 +1,4 @@
-import type { LoaderFunctionArgs } from '@remix-run/node'
+import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node'
 import {
   Links,
   Meta,
@@ -24,6 +24,12 @@ import { returnLanguageIfSupported } from './util/i18n/returnLanguageIfSupported
 import { getOptimizedImageUrl } from './util/media/getOptimizedImageUrl'
 import { i18nCookie } from './cookies'
 
+export const links: LinksFunction = () => [
+  {
+    rel: 'preconnect',
+    href: 'https://fonts.gstatic.com',
+  },
+]
 export async function loader({ request }: LoaderFunctionArgs) {
   const payload = await getPayload()
   const url = new URL(request.url)
