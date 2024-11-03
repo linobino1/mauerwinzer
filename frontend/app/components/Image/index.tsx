@@ -1,5 +1,6 @@
 import type { Media } from '@/payload-types'
 import React from 'react'
+import { cn } from '~/util/cn'
 import { getMediaUrl } from '~/util/media/getMediaUrl'
 import { getOptimizedImageUrl } from '~/util/media/getOptimizedImageUrl'
 import { useEnv } from '~/util/useEnv'
@@ -13,7 +14,16 @@ export interface Props extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, '
   srcSet?: { options: object; size: string }[] | string
 }
 
-export const Image: React.FC<Props> = ({ media, srcSet, src, alt, width, height, ...props }) => {
+export const Image: React.FC<Props> = ({
+  media,
+  srcSet,
+  src,
+  alt,
+  width,
+  height,
+  className,
+  ...props
+}) => {
   const env = useEnv()
 
   if (!media) return null
@@ -35,7 +45,17 @@ export const Image: React.FC<Props> = ({ media, srcSet, src, alt, width, height,
     srcSet = undefined
   }
 
-  return <img {...props} src={src} alt={alt} width={width} height={height} srcSet={srcSet} />
+  return (
+    <img
+      {...props}
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      srcSet={srcSet}
+      className={cn('h-auto w-full', className)}
+    />
+  )
 }
 
 export default Image
