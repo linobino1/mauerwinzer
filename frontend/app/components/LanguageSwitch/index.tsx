@@ -35,7 +35,7 @@ export default function LanguageSwitch({ className }: Props) {
             {nativeNames[lang]}
             &nbsp;
           </span>
-          {lang}
+          <span className="max-md:hidden">{lang}</span>
         </Link>
       ))}
     </div>
