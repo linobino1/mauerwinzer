@@ -11,7 +11,33 @@ export const PageFooter: React.FC<PageFooterProps> = ({ page }) => {
     <div className={classes.pageFooter}>
       {(page?.footerImage as Media) && (
         <div className={classes.imageFooter}>
-          <Image className={classes.footerImage} media={page.footerImage as Media} />
+          <Image
+            className={classes.footerImage}
+            media={page.footerImage as Media}
+            sizes="100vw"
+            srcSet={[
+              {
+                options: { width: 2560 },
+                size: '2560w',
+              },
+              {
+                options: { width: 1920 },
+                size: '1920w',
+              },
+              {
+                options: { width: 1280 },
+                size: '1280w',
+              },
+              {
+                options: { width: 960 },
+                size: '960w',
+              },
+              {
+                options: { width: 640 },
+                size: '640w',
+              },
+            ]}
+          />
         </div>
       )}
     </div>
