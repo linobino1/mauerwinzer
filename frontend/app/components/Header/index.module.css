@@ -30,6 +30,7 @@ nav.secondary {
   gap: 1em;
 }
 img.logo {
+  justify-self: center;
   width: 350px;
   height: auto;
 }
@@ -53,6 +54,9 @@ img.logo {
     grid-row: 2;
     grid-column: 1 / span 2;
     justify-self: center;
+  }
+  img.logo {
+    justify-self: start;
   }
 }
 @media screen and (max-width: 768px) {
