@@ -1,6 +1,5 @@
-import { RichTextCell as RichTextCell_0b388c087d9de8c4f011dd323a130cfb } from '@payloadcms/richtext-slate/client'
-import { RichTextField as RichTextField_0b388c087d9de8c4f011dd323a130cfb } from '@payloadcms/richtext-slate/client'
-import { getGenerateComponentMap as getGenerateComponentMap_0a65140e432c6b60b6d33cb08bead39c } from '@payloadcms/richtext-slate/generateComponentMap'
+import { RscEntrySlateCell as RscEntrySlateCell_0e78253914a550fdacd75626f1dabe17 } from '@payloadcms/richtext-slate/rsc'
+import { RscEntrySlateField as RscEntrySlateField_0e78253914a550fdacd75626f1dabe17 } from '@payloadcms/richtext-slate/rsc'
 import { BoldLeafButton as BoldLeafButton_0b388c087d9de8c4f011dd323a130cfb } from '@payloadcms/richtext-slate/client'
 import { BoldLeaf as BoldLeaf_0b388c087d9de8c4f011dd323a130cfb } from '@payloadcms/richtext-slate/client'
 import { CodeLeafButton as CodeLeafButton_0b388c087d9de8c4f011dd323a130cfb } from '@payloadcms/richtext-slate/client'
@@ -49,9 +48,8 @@ import { MetaImageComponent as MetaImageComponent_a8a977ebc872c5d5ea7ee689724c08
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 
 export const importMap = {
-  "@payloadcms/richtext-slate/client#RichTextCell": RichTextCell_0b388c087d9de8c4f011dd323a130cfb,
-  "@payloadcms/richtext-slate/client#RichTextField": RichTextField_0b388c087d9de8c4f011dd323a130cfb,
-  "@payloadcms/richtext-slate/generateComponentMap#getGenerateComponentMap": getGenerateComponentMap_0a65140e432c6b60b6d33cb08bead39c,
+  "@payloadcms/richtext-slate/rsc#RscEntrySlateCell": RscEntrySlateCell_0e78253914a550fdacd75626f1dabe17,
+  "@payloadcms/richtext-slate/rsc#RscEntrySlateField": RscEntrySlateField_0e78253914a550fdacd75626f1dabe17,
   "@payloadcms/richtext-slate/client#BoldLeafButton": BoldLeafButton_0b388c087d9de8c4f011dd323a130cfb,
   "@payloadcms/richtext-slate/client#BoldLeaf": BoldLeaf_0b388c087d9de8c4f011dd323a130cfb,
   "@payloadcms/richtext-slate/client#CodeLeafButton": CodeLeafButton_0b388c087d9de8c4f011dd323a130cfb,

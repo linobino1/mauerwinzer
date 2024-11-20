@@ -76,7 +76,8 @@ export default buildConfig({
     seoPlugin({
       globals: ['site'],
       uploadsCollection: 'media',
-      fields: [
+      fields: ({ defaultFields }) => [
+        ...defaultFields,
         {
           name: 'additionalMetaTags',
           label: 'Zusätzliche Meta-Tags',
