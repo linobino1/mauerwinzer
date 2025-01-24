@@ -129,6 +129,9 @@ export interface Page {
           }
         | {
             title?: string | null;
+            /**
+             * Copy the iframe src from the embed code you get at Google Maps
+             */
             src: string;
             id?: string | null;
             blockName?: string | null;
@@ -447,6 +450,9 @@ export interface Site {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
     additionalMetaTags?:
       | {
@@ -490,11 +496,9 @@ export interface SiteSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         description?: T;
         image?: T;
-        preview?: T;
         additionalMetaTags?:
           | T
           | {

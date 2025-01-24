@@ -1,4 +1,3 @@
-import { Link } from '@remix-run/react'
 import { useEffect, useState, createContext, useContext } from 'react'
 import { useCookies } from 'react-cookie'
 import Button from '~/components/Button'

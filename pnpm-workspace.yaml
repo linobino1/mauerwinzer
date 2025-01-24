@@ -1,3 +1,31 @@
 packages:
   - 'cms'
   - 'frontend'
+
+catalog:
+  next: '^15.1.6'
+  lexical: '0.21.0'
+
+catalogs:
+  payload:
+    payload: '3.19.0'
+    '@payloadcms/db-mongodb': '3.19.0'
+    '@payloadcms/email-nodemailer': '3.19.0'
+    '@payloadcms/live-preview-react': '3.19.0'
+    '@payloadcms/next': '3.19.0'
+    '@payloadcms/plugin-seo': '3.19.0'
+    '@payloadcms/richtext-slate': '3.19.0'
+    '@payloadcms/storage-s3': '3.19.0'
+    '@payloadcms/translations': '3.19.0'
+    '@payloadcms/ui': '3.19.0'
+
+  react:
+    react: '19.0.0'
+    react-dom: '19.0.0'
+    '@types/react': '^19.0.1'
+    '@types/react-dom': '^19.0.1'
+
+  react-email:
+    'react-email': '^3.0.6'
+    '@react-email/components': '^0.0.32'
+    '@react-email/render': '^1.0.4'
