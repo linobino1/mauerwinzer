@@ -82,6 +82,18 @@
   content: '\2630';
   font-size: 1.3em;
 }
+/** link    ******************************************/
+.button[data-layout='link'] {
+  border: 0;
+  color: blue;
+  padding: 0;
+  font-weight: 400;
+  font-size: var(--font-size-small);
+}
+.button[data-layout='link']:hover {
+  background: inherit;
+  text-decoration: underline;
+}
 /** COLOR THEME    ******************************************/
 .button[data-color='white'] {
   color: var(--color-font-bright-2);

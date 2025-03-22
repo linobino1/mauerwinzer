@@ -3,7 +3,7 @@ import classes from './index.module.css'
 import { useTranslation } from 'react-i18next'
 
 export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  layout?: 'big' | 'submit' | 'cancel' | 'symbol' | undefined
+  layout?: 'big' | 'submit' | 'cancel' | 'symbol' | 'link'
   className?: string
   color?: 'white' | undefined
   children?: React.ReactNode

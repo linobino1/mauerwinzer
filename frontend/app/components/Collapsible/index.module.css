@@ -1,0 +1,19 @@
+.container {
+  position: relative;
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.overlay {
+  position: absolute;
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  max-height: 5rem;
+  background: linear-gradient(to top, var(--color-bg), rgba(255, 255, 255, 0));
+}

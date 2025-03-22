@@ -3,6 +3,7 @@ import classes from './index.module.css'
 import { useCookieConsent } from '~/providers/Cookies'
 import { useTranslation } from 'react-i18next'
 import Button from '~/components/Button'
+import { Collapsible } from '~/components/Collapsible'
 
 export type Type = {
   blockType: 'instagram'
@@ -33,15 +34,15 @@ export const Instagram: React.FC<Type> = ({ apiUrl }) => {
     loaded ? (
       <div className={classes.container}>
         {data?.posts.map((item: any) => (
-          <div
-            key={item.id}
-            className={classes.item}
-            onClick={() => window.open(item.permalink, '_blank')}
-          >
+          <div key={item.id} className={classes.item}>
             <div>
-              <img src={item.mediaUrl} alt={item.caption} />
+              <a href={item.permalink} target="_blank" rel="noreferrer">
+                <img src={item.mediaUrl} alt={item.caption} />
+              </a>
             </div>
-            <p className={classes.caption}>{item.caption}</p>
+            <Collapsible maxHeight={250}>
+              <p className={classes.caption}>{item.caption}</p>
+            </Collapsible>
           </div>
         ))}
       </div>
